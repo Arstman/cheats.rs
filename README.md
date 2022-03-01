@@ -2,28 +2,24 @@
 
 # ![Logo](/static/logo.png) Rust Language Cheat Sheet
 
-[![Read Online](/gfx/button_read-online.png)](https://cheats.rs)
-[![Cached PDF](/gfx/button_cached-pdf.png)](https://s3.eu-central-1.amazonaws.com/cheats.rs/rust_cheat_sheet.pdf)
+[cheats.rs原版](https://cheats.rs) | [中文版本在线阅读:2022-02-23](https://cheats.rs) | [阅览PDF版](https://s3.eu-central-1.amazonaws.com/cheats.rs/rust_cheat_sheet.pdf)
 
-**A single-page Rust resource for people who like high information density.**
+**为喜欢高信息密度的人提供的单页Rust资源。**
 
-Use cases, in order of priority:
-* **identification & lookup guide** for constructs encountered in code,
-* **discover** parts of the language you might not know,
-* **learn about Rust** if you have prior programming experience.
+使用案例，按优先顺序排列：
+***识别和查找指南** 用于代码中遇到的构造，
+***发现** 你可能不懂的语言部分，
+***了解Rust** 如果你有编程经验。
 
+# 构建
 
-# Building
+使用 [Zola](https://www.getzola.org/) 构建，这是一个用 Rust 编写的静态站点生成器。要在本地开发请安装Zola，然后运行：
 
-Built with [Zola](https://www.getzola.org/), the static site generator written in Rust. To develop locally install Zola, then run:
-
-```
+```bash
 zola serve
 ```
 
-
-
-# Contributing
+# 贡献
 
 Contributions are welcome and you can PR bug fixes directly. If you somehow ended up here but prefer not to use Github write to [webmaster@cheats.rs](mailto:webmaster@cheats.rs), or use the on-site buttons.
 
@@ -46,7 +42,9 @@ Also:
 * [String Conversions](https://docs.google.com/spreadsheets/d/19vSPL6z2d50JlyzwxariaYD6EU2QQUQqIDOGbiGQC7Y/pubhtml?gid=0&single=true)
 * steffahn from users.rust-lang.org (for outstanding explanations)
 
+# 关于中文翻译
+本中文（简体）翻译版本由 Asins 提供，欢迎对文档进行交流。
 
 # Legal & License
 
-Please see [here](content/legal.md) for details.
+详情请看[这里](content/legal.md)。

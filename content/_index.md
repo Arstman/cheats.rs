@@ -15,12 +15,12 @@ insert_anchor_links = "right"
 
 <symbol-legend class="short">
 
-Contains clickable links to
-**The Book** {{ book(page="") }},
-**Rust by Example** {{ ex(page="") }},
-**Std Docs** {{ std(page="std") }},
-**Nomicon** {{ nom(page="") }},
-**Reference** {{ ref(page="") }}.
+参考书：
+**Rust 程序设计语言** {{ book(page="") }}（中文）,
+**通过例子学 Rust** {{ ex(page="") }}（中文）,
+**标准库文档** {{ std(page="std") }},
+**Rust 死灵书** {{ nom(page="") }}（中文）,
+**Rust 参考手册** {{ ref(page="") }}（中文）.
 
 </symbol-legend>
 
@@ -29,29 +29,29 @@ Contains clickable links to
 <twocolumn>
 <column>
 
-**Clickable symbols** <br>
-<br> <legend-symbol> {{ book(page="") }} </legend-symbol> **The Book**.
-<br> <legend-symbol> {{ ex(page="") }} </legend-symbol> **Rust by Example**.
-<br> <legend-symbol> {{ std(page="std") }} </legend-symbol>  **Std Docs**.
-<br> <legend-symbol> {{ nom(page="") }} </legend-symbol> **Nomicon**.
-<br> <legend-symbol> {{ ref(page="") }} </legend-symbol> **Reference**.
-<br> <legend-symbol> {{ rfc(page="") }} </legend-symbol> Official **RFC** documents.
-<br> <legend-symbol> {{ link(url="https://cheats.rs") }} </legend-symbol> The **internet**.
-<br> <legend-symbol> {{ above(target="#") }} </legend-symbol> On this page, **above**.
-<br> <legend-symbol> {{ below(target="#") }} </legend-symbol> On this page, **below**.
+**可点击的符号** <br>
+<br> <legend-symbol> {{ book(page="") }} </legend-symbol> **Rust 程序设计语言**。
+<br> <legend-symbol> {{ ex(page="") }} </legend-symbol> **通过例子学 Rust**。
+<br> <legend-symbol> {{ std(page="std") }} </legend-symbol>  **标准库文档**。
+<br> <legend-symbol> {{ nom(page="") }} </legend-symbol> **Rust 死灵书**。
+<br> <legend-symbol> {{ ref(page="") }} </legend-symbol> **Rust 参考手册**。
+<br> <legend-symbol> {{ rfc(page="") }} </legend-symbol> 官方 **RFC** 文档。
+<br> <legend-symbol> {{ link(url="https://cheats.rs") }} </legend-symbol> 互联网。
+<br> <legend-symbol> {{ above(target="#") }} </legend-symbol>在这个页面上，**上面**。
+<br> <legend-symbol> {{ below(target="#") }} </legend-symbol> 在这个页面上，**下面**。
 
 </column>
 <column>
 
-**Other symbols** <br>
-<br> <legend-symbol> {{ deprecated() }}   </legend-symbol>Largely **deprecated**.
-<br> <legend-symbol> {{ edition(ed="'18") }} </legend-symbol>Has **minimum edition** requirement.
-<br> <legend-symbol> {{ experimental() }} </legend-symbol>Requires **Rust nightly** (or is incomplete).
-<br> <legend-symbol> {{ bad() }}   </legend-symbol>Intentionally **wrong example** or **pitfall**.
-<br> <legend-symbol> {{ esoteric() }}   </legend-symbol>Slightly **esoteric**, rarely used or advanced.
-<br> <legend-symbol> {{ hot() }}   </legend-symbol>Something with **outstanding utility**.
-<br> <legend-symbol> {{ todo() }} </legend-symbol> Is **missing good link** or explanation.
-<br> <legend-symbol> {{ opinionated() }} </legend-symbol> **Opinionated**.
+**其它符号** <br>
+<br> <legend-symbol> {{ deprecated() }}   </legend-symbol>很大程度上**已废弃**。
+<br> <legend-symbol> {{ edition(ed="'18") }} </legend-symbol>有**最低版本**要求。
+<br> <legend-symbol> {{ experimental() }} </legend-symbol>需要**Rust nightly**（或不完整）。
+<br> <legend-symbol> {{ bad() }}   </legend-symbol>故意的**错误示例**或**陷阱**。
+<br> <legend-symbol> {{ esoteric() }}   </legend-symbol>略显**深奥**，很少使用或高级。
+<br> <legend-symbol> {{ hot() }}   </legend-symbol>具有**出色实用性**的东西。
+<br> <legend-symbol> {{ todo() }} </legend-symbol>**缺少好的链接**或说明。
+<br> <legend-symbol> {{ opinionated() }} </legend-symbol> **固执己见的**。
 
 </column>
 </twocolumn>
@@ -69,79 +69,79 @@ Contains clickable links to
 <noprint>
 <page-controls>
     <!-- <a id="" href="" style="float: left; margin-left:5px;">X-Ray Mode 👓</a> -->
-    <a id="toggle_ligatures" href="javascript:toggle_ligatures()">Font Ligatures (<code>..=, =></code>)</a>
-    <a id="expand_everything" class="hide_on_small" href="javascript:toggle_expand_all()">Expand all the things?</a>
-    <a href="javascript:toggle_night_mode()">Night Mode &#x1f4a1;</a>
+    <a id="toggle_ligatures" href="javascript:toggle_ligatures()">字体连字 (<code>..=, =></code>)</a>
+    <a id="expand_everything" class="hide_on_small" href="javascript:toggle_expand_all()">展开所有内容？</a>
+    <a href="javascript:toggle_night_mode()">夜间模式 &#x1f4a1;</a>
 </page-controls>
 </noprint>
 
 <noprint>
 <toc><column>
 
-**Language Constructs**
-* [Data Structures](#data-structures)
-* [References & Pointers](#references-pointers)
-* [Functions & Behavior](#functions-behavior)
-* [Control Flow](#control-flow)
-* [Organizing Code](#organizing-code)
-* [Type Aliases and Casts](#type-aliases-and-casts)
-* [Macros & Attributes](#macros-attributes)
-* [Pattern Matching](#pattern-matching)
-* [Generics & Constraints](#generics-constraints)
-* [Higher-Ranked Items](#higher-ranked-items)
-* [Strings & Chars](#strings-chars)
-* [Documentation](#documentation)
-* [Miscellaneous](#miscellaneous)
+**语言结构**
+* [数据结构](#data-structures)
+* [引用 & 指针](#references-pointers)
+* [函数 & 行为](#functions-behavior)
+* [控制流程](#control-flow)
+* [代码组织](#organizing-code)
+* [类型别名和转换](#type-aliases-and-casts)
+* [宏 & 属性](#macros-attributes)
+* [模式匹配](#pattern-matching)
+* [泛型 & 约束](#generics-constraints)
+* [排名较高的项目](#higher-ranked-items)
+* [字符串 & 字符](#strings-chars)
+* [文档](#documentation)
+* [杂项](#miscellaneous)
 
-**Behind the Scenes**
-* [The Abstract Machine](#the-abstract-machine)
-* [Language Sugar](#language-sugar)
-* [Memory & Lifetimes](#memory-lifetimes)
+**增强设施(Behind the Scenes)**
+* [抽象机制](#the-abstract-machine)
+* [语法糖](#language-sugar)
+* [内存 & 生命周期](#memory-lifetimes)
 
 
-**Data Layout**
-* [Basic Types](#basic-types)
-* [Custom Types](#custom-types)
-* [References & Pointers](#references-pointers-ui)
-* [Closures](#closures-data)
-* [Standard Library Types](#standard-library-types)
+**数据布局**
+* [基本类型](#basic-types)
+* [自定义类型](#custom-types)
+* [引用 & 指针](#references-pointers-ui)
+* [闭包](#closures-data)
+* [标准库类型](#standard-library-types)
 
-**Misc**
-* [Links & Services](#links-services)
-* [Printing & PDF](#printing-pdf)
+**附录**
+* [外链 & 服务](#links-services)
+* [打印 & PDF](#printing-pdf)
 
 </column>
 
 <column>
 
-**Standard Library**
-* [One-Liners](#one-liners)
-* [Thread Safety](#thread-safety)
-* [Iterators](#iterators)
-* [Number Conversions](#number-conversions)
-* [String Conversions](#string-conversions)
-* [String Output](#string-output)
+**标准库**
+* [一行化(One-Liners)](#one-liners)
+* [线程安全](#thread-safety)
+* [迭代器](#iterators)
+* [数字转换](#number-conversions)
+* [字符串转换](#string-conversions)
+* [字符串输出](#string-output)
 
 
-**Tooling**
-* [Project Anatomy](#project-anatomy)
+**工具**
+* [项目结构](#project-anatomy)
 * [Cargo](#cargo)
-* [Cross Compilation](#cross-compilation)
-* [Tooling Directives](#tooling-directives)
+* [交叉编译](#cross-compilation)
+* [工具指令](#tooling-directives)
 
 
-**Working with Types**
-* [Types, Traits, Generics](#types-traits-generics)
-* [Type Zoo](#type-zoo)
-* [Type Conversions](#type-conversions)
+**使用类型**
+* [类型、特征、泛型](#types-traits-generics)
+* [类型乐园](#type-zoo)
+* [类型转换](#type-conversions)
 
 
-**Coding Guides**
-* [Idiomatic Rust](#idiomatic-rust)
+**编码指南**
+* [Rust 惯用法](#idiomatic-rust)
 * [Async-Await 101](#async-await-101)
-* [Closures in APIs](#closures-in-apis)
+* [闭包 API](#closures-in-apis)
 * [Unsafe, Unsound, Undefined](#unsafe-unsound-undefined)
-* [API Stability](#api-stability)
+* [API 稳定性](#api-stability)
 
 
 </column>
@@ -150,10 +150,9 @@ Contains clickable links to
 
 <noprint>
 
-## Hello, Rust!
+## 你好，Rust!
 
-If you are new to Rust, or if you want to try the things below:
-
+如果你是 Rust 新手，或者你想试点什么，可以在下面尝试运行一下：
 
 <tabs>
 
@@ -173,40 +172,40 @@ fn main() {
 
 </div>
 <div id="helloplay"></div>
-<div id="helloinfo">Service provided by <a href="https://play.rust-lang.org/" target="_blank" rel="noopener">play.rust-lang.org <sup>🔗</sup></a></div>
-<div id="helloctrl"><a href="javascript:show_playground(true);">▶️ Edit & Run</a></div>
+<div id="helloinfo">服务由 <a href="https://play.rust-lang.org/" target="_blank" rel="noopener">play.rust-lang.org <sup>🔗</sup></a> 提供</div>
+<div id="helloctrl"><a href="javascript:show_playground(true);">▶️ 编辑 & 运行</a></div>
 </div></panel></tab>
 
 
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-hello-3" name="tab-hello">
-<label for="tab-hello-3"><b>Strengths</b></label>
+<label for="tab-hello-3"><b>优势</b></label>
 <panel><div>
 
-**Things Rust does measurably really well**
+**Rust 做得非常好**
 
-- Compiled code [about same performance](https://benchmarksgame-team.pages.debian.net/benchmarksgame/box-plot-summary-charts.html) as C / C++, and excellent [memory and energy efficiency](https://dl.acm.org/doi/10.1145/3136014.3136031).
-- Can [avoid 70% of all safety issues](https://www.chromium.org/Home/chromium-security/memory-safety) present in C / C++, and most memory issues.
-- Strong type system prevents [data races](https://doc.rust-lang.org/nomicon/races.html), brings ['fearless concurrency'](https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html) (amongst others).
-- Seamless C interop, and [dozens of supported platforms](https://doc.rust-lang.org/rustc/platform-support.html) (based on LLVM).
-- ["Most loved language"](https://insights.stackoverflow.com/survey/2021#technology-most-loved-dreaded-and-wanted) for 6 years in a row.
-- Modern tooling: `cargo` (builds _just work_), `clippy` (450+ code quality lints), `rustup` (easy toolchain mgmt).
+- 编译后的代码性能与 C/C++ [差不多](https://benchmarksgame-team.pages.debian.net/benchmarksgame/box-plot-summary-charts.html)，而且[内存和能源效率](https://dl.acm.org/doi/10.1145/3136014.3136031)非常出色。
+- 可以避免 C/C++中存在的[70%的安全问题](https://www.chromium.org/Home/chromium-security/memory-safety)，以及大多数内存问题。
+- 强类型系统可防止[数据竞争](https://doc.rust-lang.org/nomicon/races.html)，带来“[无畏并发](https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html)”（等等）。
+- 无缝的 C 互操作，以及[数十个支持的平台](https://doc.rust-lang.org/rustc/platform-support.html)（基于 LLVM）。
+- 连续 6 年“[最喜爱的语言](https://insights.stackoverflow.com/survey/2021#technology-most-loved-dreaded-and-wanted)”。
+- 现代工具：cargo（构建只是工作），clippy（450+ 代码质量 Lints），rustup（简单的工具链管理）。
 
 </div></panel></tab>
 
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-hello-4" name="tab-hello">
-<label for="tab-hello-4"><b>Weaknesses</b></label>
+<label for="tab-hello-4"><b>弱点</b></label>
 <panel><div>
 
-**Points you might run into**
+**你可能会遇到的点**
 
-- Steep learning curve;<sup>1</sup> compiler enforcing (esp. memory) rules that would be "best practices" elsewhere.
-- Missing Rust-native libs in some domains, target platforms (esp. embedded), IDE features.<sup>1</sup>
-- Longer compile times than "similar" code in other languages.<sup>1</sup>
-- No formal language specification, can prevent legal use in some domains (aviation, medical, &hellip;).
+- 陡峭的学习曲<sup>1</sup>；编译器强制执行（特别是内存）规则，这在其他地方是“最佳实践”。
+- 在某些领域、目标平台（尤其是嵌入式）、IDE 功能中缺少 Rust 原生库<sup>1</sup>。
+- 与其他语言中的“类似”代码相比，编译时间更长<sup>1</sup>。
+- 没有正式的语言规范，可能会阻止在某些领域（航空、医疗等）合法使用。
 - Careless (use of `unsafe` in) libraries can secretly break safety guarantees.
 
 <sup>1</sup> Compare [Rust Survey](https://blog.rust-lang.org/2020/04/17/Rust-survey-2019.html#why-not-use-rust).
@@ -215,16 +214,16 @@ fn main() {
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-hello-5" name="tab-hello">
-<label for="tab-hello-5"><b>Installation</b></label>
+<label for="tab-hello-5"><b>安装</b></label>
 <panel><div>
 
-**Download**
-- Get installer from [**rustup.rs**](https://rustup.rs/) (highly recommended for any platform)
+**下载**
+- 从 [**rustup.rs**](https://rustup.rs/) 获取安装程序（强烈推荐用于任何平台）
 
 
-**IDEs**
-- [IntelliJ](https://www.jetbrains.com/idea/) (free) or [CLion](https://www.jetbrains.com/clion/) (paid) with [**IntelliJ Rust**](https://intellij-rust.github.io/)
-- [Visual Studio Code](https://code.visualstudio.com/) with [**rust-analyzer**](https://rust-analyzer.github.io/)
+**IDE 编辑器**
+- [IntelliJ](https://www.jetbrains.com/idea/) （免费）或者 带有 [**IntelliJ Rust**](https://intellij-rust.github.io/) 功能的 [CLion](https://www.jetbrains.com/clion/) （收费）。
+- 安装了 [**rust-analyzer**](https://rust-analyzer.github.io/) 插件的 [Visual Studio Code](https://code.visualstudio.com/)。
 
 
 </div></panel></tab>
@@ -232,7 +231,7 @@ fn main() {
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-hello-6" name="tab-hello">
-<label for="tab-hello-6"><b>First Steps</b></label>
+<label for="tab-hello-6"><b>第一步</b></label>
 <panel><div>
 
 <!-- Note - Please ONLY submit PRs linking to high-quality, "permanent" sites
@@ -242,11 +241,11 @@ fn main() {
             "the best of their kind".
              -->
 
-**Modular Beginner Resources**
-- [**Tour of Rust**](https://tourofrust.com/TOC_en.html) - Live code and explanations, side by side.
-- [**Rust in Easy English**](https://dhghomon.github.io/easy_rust/Chapter_3.html) - 60+ concepts, simple English, example-driven.
+**模块化初学者资源**
+- [**Rust 语言之旅**](https://tourofrust.com/TOC_zh-cn.html)（中文） - 并排的实时代码和解释。
+- [**用普通英文学习 Rust**](https://dhghomon.github.io/easy_rust/Chapter_3.html) - 60 多个概念，简单英语，示例驱动。
 
-In addition, have a look at the usual suspects. {{ book(page="") }} {{ ex(page="") }} {{ std(page="std") }}
+此外，have a look at the usual suspects. {{ book(page="") }} {{ ex(page="") }} {{ std(page="std") }}
 
 
 > **Opinion** {{ opinionated() }} &mdash; If you have never seen or used any Rust it might be good to visit one of the links above before continuing; the next chapter might feel a bit terse otherwise.
@@ -257,70 +256,70 @@ In addition, have a look at the usual suspects. {{ book(page="") }} {{ ex(page="
 </noprint>
 
 
-### Data Structures
+### 数据结构 {#data-structures}
 
-Data types and memory locations defined via keywords.
+数据类型和内存位置由关键字定义。
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
-| `struct S {}` | Define a **struct** {{ book(page="ch05-00-structs.html") }} {{ ex(page="custom_types/structs.html") }} {{ std(page="std/keyword.struct.html") }} {{ ref(page="expressions/struct-expr.html") }} with named fields. |
-| {{ tab() }} `struct S { x: T }` | Define struct with named field `x` of type `T`. |
-| {{ tab() }} `struct S` &#8203;`(T);` | Define "tupled" struct with numbered field `.0` of type `T`. |
-| {{ tab() }} `struct S;` | Define **zero sized** {{ nom(page="exotic-sizes.html#zero-sized-types-zsts")}} unit struct. Occupies no space, optimized away. |
-| `enum E {}` | Define an **enum**, {{ book(page="ch06-01-defining-an-enum.html") }} {{ ex(page="custom_types/enum.html#enums") }} {{ ref(page="items/enumerations.html") }} _c_. [algebraic data types](https://en.wikipedia.org/wiki/Algebraic_data_type), [tagged unions](https://en.wikipedia.org/wiki/Tagged_union). |
-| {{ tab() }}  `enum E { A, B`&#8203;`(), C {} }` | Define variants of enum; can be unit- `A`, tuple- `B` &#8203;`()` and struct-like `C{}`. |
-| {{ tab() }}  `enum E { A = 1 }` | If variants are only unit-like, allow discriminant values, e.g., for FFI. |
-| `union U {}` | Unsafe C-like **union**  {{ ref(page="items/unions.html") }} for FFI compatibility. {{ esoteric() }} |
-| `static X: T = T();`  | **Global variable** {{ book(page="ch19-01-unsafe-rust.html#accessing-or-modifying-a-mutable-static-variable") }} {{ ex(page="custom_types/constants.html#constants") }} {{ ref(page="items/static-items.html#static-items") }}  with `'static` lifetime, single memory location. |
-| `const X: T = T();`  | Defines **constant**, {{ book(page="ch03-01-variables-and-mutability.html#differences-between-variables-and-constants") }} {{ ex(page="custom_types/constants.html") }} {{ ref(page="items/constant-items.html") }} copied into a temporary when used. |
-| `let x: T;`  | Allocate `T` bytes on stack{{ note( note="1") }} bound as `x`. Assignable once, not mutable.  |
-| `let mut x: T;`  | Like `let`, but allow for **mutability** {{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings/mut.html") }} and mutable borrow.{{ note( note="2") }} |
-| {{ tab() }} `x = y;` | Moves `y` to `x`, invalidating `y` if `T` is not **`Copy`**, {{ std(page="std/marker/trait.Copy.html") }} and copying `y` otherwise. |
+| `struct S {}` | 定义包含命名字段的**结构体**{{ book(page="ch05-00-structs.html") }} {{ ex(page="custom_types/structs.html") }} {{ std(page="std/keyword.struct.html") }} {{ ref(page="expressions/struct-expr.html") }}。 |
+| {{ tab() }} `struct S { x: T }` | 定义包含 `T` 类型命名字段 `x` 的结构体。 |
+| {{ tab() }} `struct S` &#8203;`(T);` | 定义 `T` 类型数字字段 `.0` 的“元组”结构体。 |
+| {{ tab() }} `struct S;` | 定义一个**零大小**{{ nom(page="exotic-sizes.html#zero-sized-types-zsts")}}的单元结构体。不占用任何空间，并进行了优化。 |
+| `enum E {}` | 定义**枚举**，{{ book(page="ch06-01-defining-an-enum.html") }} {{ ex(page="custom_types/enum.html#enums") }} {{ ref(page="items/enumerations.html") }} _c_. [数字数据类型](https://en.wikipedia.org/wiki/Algebraic_data_type), [标签联合](https://en.wikipedia.org/wiki/Tagged_union). |
+| {{ tab() }}  `enum E { A, B`&#8203;`(), C {} }` | 定义变体枚举；可以是单元- `A`，元组- `B` &#8203;`()` 或则结构体风格的 `C{}`。 |
+| {{ tab() }}  `enum E { A = 1 }` | 如果所有变体都是单元值，则允许判别式值，例如用于 FFI。 |
+| `union U {}` | 不安全的 C 风格**联合体**{{ ref(page="items/unions.html") }}，用于兼容 FFI。 {{ esoteric() }} |
+| `static X: T = T();`  | 有 `'static` 生命周期的**全局变量** {{ book(page="ch19-01-unsafe-rust.html#accessing-or-modifying-a-mutable-static-variable") }} {{ ex(page="custom_types/constants.html#constants") }} {{ ref(page="items/static-items.html#static-items") }}，内存位置独立。 |
+| `const X: T = T();`  | 定义**常量**{{ book(page="ch03-01-variables-and-mutability.html#differences-between-variables-and-constants") }} {{ ex(page="custom_types/constants.html") }} {{ ref(page="items/constant-items.html") }}，使用时会临时复制一份。 |
+| `let x: T;`  | 在栈{{ note( note="1") }}上分配 `T` 大小的字节并命名为 `x`。 一旦分配不可修改。 |
+| `let mut x: T;`  | 类似于 `let`，但允许**修改**{{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings/mut.html") }}以及可变借用{{ note( note="2") }}。 |
+| {{ tab() }} `x = y;` | 将 `y` 移动到 `x`，如果 `T` 不能 **`Copy`**{{ std(page="std/marker/trait.Copy.html") }}，`y` 将不再可用，否则 `y` 会复制一份。 |
 
 </fixed-2-column>
 
 <footnotes>
 
-<sup>1</sup> **Bound variables** {{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings.html") }} {{ ref(page="variables.html") }} live on stack for synchronous code. In `async {}` they become part of async's state machine, may reside on heap.<br>
-<sup>2</sup> Technically _mutable_ and _immutable_ are misnomer. Immutable binding or shared reference may still contain Cell {{ std(page="std/cell/index.html") }}, giving _interior mutability_.
+<sup>1</sup> **绑定变量** {{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings.html") }} {{ ref(page="variables.html") }}生存在栈上的同步代码。在`async{}`中，这些变量将成为异步状态机的一部分，最终驻留在堆上。<br>
+<sup>2</sup> 严密地来说_可变_和_不可变_并不准确。不可变绑定或共享引用可能仍然包含 Cell {{ std(page="std/cell/index.html") }}，从而提供_内部可变性_。
 
 </footnotes>
 
 
 {{ tablesep() }}
 
-Creating and accessing data structures; and some more _sigilic_ types.
+下面列出了如何构建和访问数据结构；以及一些_神奇的_类型。
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
-| `S { x: y }` | Create `struct S {}` or `use`'ed `enum E::S {}` with field `x` set to `y`. |
-| `S { x }` | Same, but use local variable `x` for field `x`. |
-| `S { ..s }` | Fill remaining fields from `s`, esp. useful with [Default](https://doc.rust-lang.org/std/default/trait.Default.html). |
-| `S { 0: x }` | Like `S` &#8203;`(x)` below, but set field `.0` with struct syntax.  |
-| `S`&#8203; `(x)` | Create `struct S` &#8203;`(T)` or `use`'ed `enum E::S`&#8203; `()` with field `.0` set to `x`. |
-| `S` | If `S` is unit `struct S;` or `use`'ed `enum E::S` create value of `S`. |
-| `E::C { x: y }` | Create enum variant `C`. Other methods above also work. |
-| `()` | Empty tuple, both literal and type, aka **unit**. {{ std(page="std/primitive.unit.html") }} |
-| `(x)` | Parenthesized expression. |
-| `(x,)` | Single-element **tuple** expression. {{ ex(page="primitives/tuples.html") }} {{ std(page="std/primitive.tuple.html") }} {{ ref(page="expressions/tuple-expr.html") }} |
-| `(S,)` | Single-element tuple type. |
-| `[S]` | Array type of unspecified length, i.e., **slice**. {{ ex(page="primitives/array.html") }} {{ std(page="std/primitive.slice.html") }}   {{ ref(page="types.html#array-and-slice-types") }} Can't live on stack. {{ note( note="*") }} |
-| `[S; n]` | **Array type** {{ ex(page="primitives/array.html") }}  {{ std(page="std/primitive.array.html") }} of fixed length `n` holding elements of type `S`. |
-| `[x; n]` | Array instance with `n` copies of `x`. {{ ref(page="expressions/array-expr.html") }} |
-| `[x, y]` | Array instance with given elements `x` and `y`. |
-| `x[0]` | Collection indexing, here w. `usize`. Implementable with [**Index**](https://doc.rust-lang.org/std/ops/trait.Index.html), [**IndexMut**](https://doc.rust-lang.org/std/ops/trait.IndexMut.html). |
-| {{ tab() }} `x[..]` | Same, via range (here _full range_), also `x[a..b]`, `x[a..=b]`, ... _c_. below.  |
-| `a..b` | **Right-exclusive range** {{ std(page="std/ops/struct.Range.html") }} {{ ref(page="expressions/range-expr.html") }} creation, e.g., `1..3` means `1, 2`.  |
-| `..b` | Right-exclusive **range to** {{ std(page="std/ops/struct.RangeTo.html") }} without starting point.  |
-| `a..=b` | **Inclusive range**, {{ std(page="std/ops/struct.RangeInclusive.html") }} `1..=3` means `1, 2, 3`. |
-| `..=b` | Inclusive **range from** {{ std(page="std/ops/struct.RangeFrom.html") }} without starting point.  |
-| `..` | **Full range**, {{ std(page="std/ops/struct.RangeFull.html") }} usually means _the whole collection_.   |
-| `s.x` | Named **field access**, {{ ref(page="expressions/field-expr.html") }} might try to [Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html) if `x` not part of type `S`. |
-| `s.0` | Numbered field access, used for tuple types `S` &#8203;`(T)`. |
+| `S { x: y }` | 构建 `struct S {}` 或者 `use`'ed `enum E::S {}` 字段 `x` 设置为 `y`。 |
+| `S { x }` | 同上，但字段 `x` 会被设置为局部变量 `x`。 |
+| `S { ..s }` | 用 `s` 填充剩余字段，常配合 [Default](https://doc.rust-lang.org/std/default/trait.Default.html) 一起使用。 |
+| `S { 0: x }` | 类似于下面的 `S` &#8203;`(x)`，但是用结构体语法设置字段 `.0`。 |
+| `S`&#8203; `(x)` | 构建 `struct S` &#8203;`(T)` 或者 `use`'ed `enum E::S`&#8203; `()` 其中字段 `.0` 设置为 `x`。 |
+| `S` | 如果 `S` 是单元 `struct S`；或以 `S` 为值构建 `use`'ed `enum E::S`。 |
+| `E::C { x: y }` | 构建枚举变体 `C`。 上面的其他方法依然有效。 |
+| `()` | 空元组，既是字面量也是类型，又称**单元**。{{ std(page="std/primitive.unit.html") }} |
+| `(x)` | 括号表达式。 |
+| `(x,)` | 单元素**元组**表达式。{{ ex(page="primitives/tuples.html") }} {{ std(page="std/primitive.tuple.html") }} {{ ref(page="expressions/tuple-expr.html") }} |
+| `(S,)` | 单元素元组类型。 |
+| `[S]` | 未指明长度的的数组类型，如**切片**。{{ ex(page="primitives/array.html") }} {{ std(page="std/primitive.slice.html") }} {{ ref(page="types.html#array-and-slice-types") }} 不能生存在栈上。{{ note( note="*") }} |
+| `[S; n]` | 元素类型为 `S`，固定长度为 `n` 的**数组类型** {{ ex(page="primitives/array.html") }}  {{ std(page="std/primitive.array.html") }}。 |
+| `[x; n]` | 由 `n` 个 `x` 副本构建的数组实例。{{ ref(page="expressions/array-expr.html") }} |
+| `[x, y]` | 由给定元素 `x` 和 `y`构成的数据实例。 |
+| `x[0]` | 组合的索引，返回结果是 `usize` 类型。可重载 [**Index**](https://doc.rust-lang.org/std/ops/trait.Index.html), [**IndexMut**](https://doc.rust-lang.org/std/ops/trait.IndexMut.html)。 |
+| {{ tab() }} `x[..]` | 同样，通过范围（这里是_全部范围_），下面的 `x[a..b]`, `x[a..=b]`, ..._c_ 也一样。  |
+| `a..b` | 构建**左闭右开区间** {{ std(page="std/ops/struct.Range.html") }} {{ ref(page="expressions/range-expr.html") }}，例如 `1..3` 表示 `1, 2`。  |
+| `..b` | 无起点到**右开区间** {{ std(page="std/ops/struct.RangeTo.html") }}。 |
+| `a..=b` | **全闭合区间**, {{ std(page="std/ops/struct.RangeInclusive.html") }} `1..=3` 表示 `1, 2, 3`。 |
+| `..=b` | 无起点到**右闭合区间** {{ std(page="std/ops/struct.RangeFrom.html") }}。 |
+| `..` | **全包含区间**{{ std(page="std/ops/struct.RangeFull.html") }}，通常表示_整个组合_。 |
+| `s.x` | 命名 **字段访问**{{ ref(page="expressions/field-expr.html") }}，如果 `x` 不是 `s` 的一部分的话则会尝试 [Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html)。 |
+| `s.0` | 数字字段访问，用于元组类型 `S` &#8203;`(T)`。 |
 
 </fixed-2-column>
 
@@ -331,14 +330,14 @@ Creating and accessing data structures; and some more _sigilic_ types.
 </footnotes>
 
 
-### References & Pointers
+### 引用 & 指针 {#references-pointers}
 
-Granting access to un-owned memory. Also see section on Generics & Constraints.
+为非所有者内存赋予访问权限。另请参见 [泛型 & 约束](#generics-constraints)部分。
 
 
 <fixed-2-column>
 
-| Example | Explanation |
+|  示例   |     说明    |
 |---------|-------------|
 | `&S` | Shared **reference** {{ book(page="ch04-02-references-and-borrowing.html") }} {{ std(page="std/primitive.reference.html") }} {{ nom(page="references.html")}} {{ ref(page="types.html#pointer-types")}} (space for holding _any_ `&s`). |
 | {{ tab() }} `&[S]` | Special slice reference that contains (`address`, `length`). |
@@ -378,7 +377,7 @@ Define units of code and their abstractions.
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
 | `trait T {}`  | Define a **trait**; {{ book(page="ch10-02-traits.html") }} {{ ex(page="trait.html") }} {{ ref(page="items/traits.html") }} common behavior others can implement. |
 | `trait T : R {}` | `T` is subtrait of **supertrait** {{ ref(page="items/traits.html#supertraits") }} `R`. Any `S` must `impl R` before it can `impl T`. |
@@ -414,7 +413,7 @@ Control execution within a function.
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
 | `while x {}`  | **Loop**, {{ ref(page="expressions/loop-expr.html#predicate-loops") }} run while expression `x` is true. |
 | `loop {}`  | **Loop indefinitely** {{ ref(page="expressions/loop-expr.html#infinite-loops") }} until `break`. Can yield value with `break x`. |
@@ -450,7 +449,7 @@ Segment projects into smaller units and minimize dependencies.
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
 | `mod m {}`  | Define a **module**, {{ book(page="ch07-02-defining-modules-to-control-scope-and-privacy.html") }} {{ ex(page="mod.html#modules") }} {{ ref(page="items/modules.html#modules") }} get definition from inside `{}`. {{ below(target="#project-anatomy") }} |
 | `mod m;`  | Define a module, get definition from `m.rs` or `m/mod.rs`. {{ below(target="#project-anatomy") }}|
@@ -489,7 +488,7 @@ Short-hand names of types, and methods to convert one type to another.
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
 | `type T = S;`  | Create a **type alias**, {{ book(page="ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases") }} {{ ref(page="items/type-aliases.html#type-aliases") }} i.e., another name for `S`. |
 | `Self`  | Type alias for **implementing type**, {{ ref(page="types.html#self-types") }} e.g. `fn new() -> Self`. |
@@ -550,7 +549,7 @@ Constructs found in `match` or `let` expressions, or function parameters.
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
 | `match m {}` | Initiate **pattern matching**, {{ book(page="ch06-02-match.html") }} {{ ex(page="flow_control/match.html") }} {{ ref(page="expressions/match-expr.html") }} then use match arms, _c_. next table. |
 | `let S(x) = get();`  | Notably, `let` also **destructures** {{ ex(page="flow_control/match/destructuring.html") }} similar to the table below. |
@@ -626,7 +625,7 @@ Generics combine with type constructors, traits and functions to give your users
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
 | `S<T>`  | A **generic** {{ book(page="ch10-01-syntax.html") }} {{ ex(page="generics.html") }} type with a type parameter (`T` is placeholder name here). |
 | `S<T: R>`  | Type short hand **trait bound** {{ book(page="ch10-02-traits.html#using-trait-bounds-to-conditionally-implement-methods") }} {{ ex(page="generics/bounds.html") }} specification  (`R` _must_ be actual trait). |
@@ -670,7 +669,7 @@ _Actual_ types and traits, abstract over something, usually lifetimes.
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
 | `for<'a>` | Marker for **higher-ranked bounds.** {{ nom(page="hrtb.html")}} {{ ref(page="trait-bounds.html#higher-ranked-trait-bounds")}} {{ esoteric() }} |
 | {{ tab() }} `trait T: for<'a> R<'a> {}` | Any `S` that `impl T` would also have to fulfill `R` for any lifetime. |
@@ -710,7 +709,7 @@ Rust has several ways to create textual values.
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |--------|-------------|
 | `"..."` | **String literal**, {{ ref(page="tokens.html#string-literals")}}<sup>, 1</sup> UTF-8, will interpret `\n` as _line break_ `0xA`, &hellip;  |
 | `r"..."` | **Raw string literal**. {{ ref(page="tokens.html#raw-string-literals")}}<sup>, 1</sup> UTF-8, won't interpret `\n`, &hellip; |
@@ -736,7 +735,7 @@ Debuggers hate him. Avoid bugs with this one weird trick.
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |--------|-------------|
 | `///` | Outer line **doc comment**, {{ book(page="ch14-02-publishing-to-crates-io.html#making-useful-documentation-comments") }} {{ ex(page="meta/doc.html#documentation") }} {{ ref(page="comments.html#doc-comments")}} use these on types, traits, functions, &hellip; |
 | `//!` | Inner line doc comment, mostly used at start of file to document module. |
@@ -761,7 +760,7 @@ These sigils did not fit any other category but are good to know nonetheless.
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
 | `!` | Always empty **never type**. {{ experimental() }} {{ book(page="ch19-04-advanced-types.html#the-never-type-that-never-returns") }} {{ ex(page="fn/diverging.html#diverging-functions") }} {{ std(page="std/primitive.never.html") }} {{ ref(page="types.html#never-type") }} |
 | `_` | Unnamed variable binding, e.g., <code>&vert;x, _&vert; {}</code>.|
@@ -4086,7 +4085,7 @@ These **sum types** hold a value of one of their sub types:
 
 
 
-## References & Pointers {#references-pointers-ui}
+## 引用 & 指针 {#references-pointers-ui}
 
 References give safe access to other memory, raw pointers `unsafe` access.
 The respective `mut` types are identical.
@@ -7898,7 +7897,7 @@ Like examples above, in particular trait author assumes:
 
 <div class="color-header sized cheats">
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
 | `struct A { x: u8 }` | Type `A` is sized, i.e., `impl Sized for A` holds, this is a 'regular' type. |
 | `struct B { x: [u8] }` | Since `[u8]` is a DST, `B` in turn becomes DST, i.e., does not `impl Sized`. |
@@ -8446,7 +8445,7 @@ fn f(x: A) -> B {
 Convert types **with keyword `as`** if conversion _relatively obvious_ but **might cause issues**. {{ nom(page="casts.html") }}
 
 
-|  A | B | Example | Explanation |
+|  A | B | 示例 | 说明 |
 |----|----| ----| -----------|
 | `Ptr` | `Ptr` | `device_ptr as *const u8` | If `*A`, `*B` are `Sized`. |
 | `Ptr` | `Integer` | `device_ptr as usize` |  |
