@@ -92,8 +92,8 @@ insert_anchor_links = "right"
 * [注释](#documentation)
 * [杂项](#miscellaneous)
 
-**增强设施(Behind the Scenes)**
-* [抽象机制](#the-abstract-machine)
+**增强设施**
+* [机器抽象](#the-abstract-machine)
 * [语法糖](#language-sugar)
 * [内存 & 生命周期](#memory-lifetimes)
 
@@ -114,7 +114,7 @@ insert_anchor_links = "right"
 <column>
 
 **标准库**
-* [一行化(One-Liners)](#one-liners)
+* [One-Liners](#one-liners)
 * [线程安全](#thread-safety)
 * [迭代器](#iterators)
 * [数字转换](#number-conversions)
@@ -324,7 +324,7 @@ fn main() {
 
 <footnotes>
 
-<sup>*</sup> 目前, 可以参考{{ rfc( page ="1909-unsized-rvalues.html") }}中的[已知问题](https://github.com/rust-lang/rust/issues/48055).
+<sup>*</sup> 目前, 可以参考{{ rfc( page ="1909-unsized-rvalues.html") }}中的[已知问题](https://github.com/rust-lang/rust/issues/48055)。
 
 </footnotes>
 
@@ -369,7 +369,7 @@ fn main() {
 
 
 
-###  函数和行为 {#functions-behavior}
+###  函数 & 行为 {#functions-behavior}
 
 定义代码单元及其抽象。
 
@@ -443,7 +443,7 @@ fn main() {
 
 ### 代码组织 {#organizing-code}
 
-将项目分割成小的单元并最小化相关依赖。
+将项目分割成更小的单元并最大限度地减少依赖关系。
 
 <fixed-2-column>
 
@@ -502,13 +502,13 @@ fn main() {
 
 <footnotes>
 
-<sup>1</sup> 类型之间转换的办法参见下文[类型转换](#type-conversions)。
+<sup>1</sup> 关于在类型之间转换的所有方法，请参见下面的[类型转换](#type-conversions)。
 
 </footnotes>
 
 
 
-### 宏和属性 {#macros-attributes}
+### 宏 & 属性 {#macros-attributes}
 
 实际编译前的代码预展开。
 
@@ -516,9 +516,9 @@ fn main() {
 
 | 示例 |  说明 |
 |---------|---------|
-| `m!()` |  **宏** {{book(page="ch19-06-macros.html")}} {{std(page="std/index.html#macros")}} {{ref(page="macros.html")}} 咒语. 也作 `m!{}` 或 `m![]`(取决于宏本身). |
-| `#[attr]`  | 外部**属性**{{ex(page="attribute.html")}} {{ref(page="attributes.html")}}. 注解接下来的内容. |
-| `#![attr]` | 内部属性, 注解 _上级_ 和周边内容. |
+| `m!()` |  **宏** {{book(page="ch19-06-macros.html")}} {{std(page="std/index.html#macros")}} {{ref(page="macros.html")}} 咒语，也作 `m!{}`、`m![]`（取决于宏本身） |
+| `#[attr]`  | 外部**属性**{{ex(page="attribute.html")}} {{ref(page="attributes.html")}}，注解接下来的内容。 |
+| `#![attr]` | 内部属性，注解_上部_，周边的内容。 |
 
 </fixed-2-column>
 
@@ -575,7 +575,7 @@ fn main() {
 
 {{ tablesep() }}
 
-`match` 表达式的模式匹配分支. 左列的分支也可用于 `let` 表达式.
+`match` 表达式的模式匹配分支。左列的分支也可用于 `let` 表达式。
 
 <fixed-2-column class="color-header special_example">
 
@@ -726,9 +726,9 @@ Rust 提供了若干种创建字符串和字符字面量的办法。
 </footnotes>
 
 
-### Documentation
+### 注释 {#documentation}
 
-Debuggers hate him. Avoid bugs with this one weird trick.
+调试人员讨厌他。用这个奇怪的技巧来避免错误。
 
 
 <fixed-2-column>
@@ -776,9 +776,9 @@ Debuggers hate him. Avoid bugs with this one weird trick.
 
 
 
-### 通用操作符
+### 通用运算符 {#common-operators}
 
-Rust 支持大部分其他语言也有的通用操作符(`+`, `*`, `%`, `=`, `==`...).因为这在 Rust 里没什么太大差别所以这里不列出来了.Rust 也支持**运算符重载**.{{ std(page="std/ops/index.html")}}
+Rust 支持大部分其他语言也有的通用操作符（`+`, `*`, `%`, `=`, `==`, &hellip;），包含**运算符重载**{{ std(page="std/ops/index.html")}}。因为这在 Rust 里没什么太大差别所以这里不列出来了。
 
 
 ---
@@ -787,11 +787,11 @@ Rust 支持大部分其他语言也有的通用操作符(`+`, `*`, `%`, `=`, `==
 
 # 增强设施
 
-Arcane knowledge that may do terrible things to your mind, highly recommended.
+强烈推荐那些可能会对你的思想造成可怕影响的神秘知识。
 
-## The Abstract Machine
+## 机器抽象 {#the-abstract-machine}
 
-Like `C` and `C++`, Rust is based on an _abstract machine_.
+与`C`和`C++`一样，Rust 也是基于机器抽象的。
 
 
 <tabs>
@@ -799,7 +799,7 @@ Like `C` and `C++`, Rust is based on an _abstract machine_.
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-abstract-machine-1" name="tab-group-abstract-machine" checked>
-<label for="tab-abstract-machine-1"><b>Overview</b></label>
+<label for="tab-abstract-machine-1"><b>概述</b></label>
 <panel><div>
 
 
@@ -814,7 +814,7 @@ Like `C` and `C++`, Rust is based on an _abstract machine_.
         <machine class="bad">CPU</machine>
     </entry>
     <br/>
-    <note>{{bad()}} Less correctish.</note>
+    <note>{{bad()}} 不那么准确。</note>
 </mini-zoo>
 
 <mini-zoo class="zoo" style="text-align: center; margin-left: 80px;">
@@ -823,14 +823,14 @@ Like `C` and `C++`, Rust is based on an _abstract machine_.
     </entry>
     <code style="text-align:center">→</code>
     <entry style="width: 120px;">
-        <machine class="good">Abstract Machine</machine>
+        <machine class="good">机器抽象</machine>
     </entry>
     <code style="text-align:center">→</code>
     <entry>
         <machine class="good">CPU</machine>
     </entry>
     <br/>
-    <note>More correctish.</note>
+    <note>更正。</note>
 </mini-zoo>
 
 </div>
@@ -839,12 +839,12 @@ Like `C` and `C++`, Rust is based on an _abstract machine_.
 {{ tablesep() }}
 
 
-The abstract machine
-- is not a runtime, and does not have any runtime overhead, but is a _computing model abstraction_,
-- contains concepts such as memory regions (_stack_, ...), execution semantics, ...
-- _knows_ and _sees_ things your CPU might not care about,
-- forms a contract between programmer and machine,
-- and **exploits all of the above for optimizations**.
+机器抽象
+- 不是运行时，也没有任何运行时的开销，而是_计算模型的抽象_，
+- 包含诸如内存区域（堆栈，...），执行语义等概念，
+- _知道_和_看到_可能是CPU不关心的事情。
+- 在程序员和机器之间形成契约，
+- 并且**利用上述所有内容进行优化**。
 
 
 </div></panel></tab>
@@ -854,12 +854,13 @@ The abstract machine
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-abstract-machine-2" name="tab-group-abstract-machine">
-<label for="tab-abstract-machine-2"><b>Misconceptions</b></label>
+<label for="tab-abstract-machine-2"><b>误解</b></label>
 <panel><div>
 
 <div class="color-header abstract-machine">
 
 Things people may incorrectly assume they _should get away with_ if Rust targeted CPU directly, and _more correct_ counterparts:
+如果 Rust 直接针对 CPU，人们可能会错误地认为他们可以_肆无忌惮_，而_更正确_的做法是：
 
 {{ tablesep() }}
 
@@ -886,7 +887,8 @@ Things people may incorrectly assume they _should get away with_ if Rust targete
 
 ## 语法糖 {#language-sugar}
 
-如果有什么东西让你觉得, “不该能用的啊”, 那可能就是这里的原因。
+如果有什么东西让你觉得，“不该能用的啊”，那可能就是这里的原因。
+
 
 
 <div class="color-header language-sugar">
@@ -908,13 +910,13 @@ Things people may incorrectly assume they _should get away with_ if Rust targete
 
 {{ tablesep() }}
 
-> **Opinion** {{ opinionated() }} &mdash; The features above will make your life easier, but might hinder your understanding. If any (type-related) operation ever feels _inconsistent_ it might be worth revisiting this list.
+> **意见** {{ opinionated() }} &mdash; 尽管上面的特性将使简化了开发工作，但它们也会对理解当前发生了什么造成可能的妨碍。如果你对 Rust 还不太了解，想要搞明白到底发生了什么，你应该更详细地阅读相关资料。
 
 
-## Memory & Lifetimes
+## 内存 & 生命周期 {#memory-lifetimes}
 
 
-Why moves, references and lifetimes are how they are.
+为什么移动、引用和生命周期是这样的。
 
 
 <tabs class="lifetimes">
@@ -922,14 +924,14 @@ Why moves, references and lifetimes are how they are.
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-lt-1" name="tab-lt" checked>
-<label for="tab-lt-1"><b>Types & Moves</b></label>
+<label for="tab-lt-1"><b>类型 & 移动</b></label>
 <panel>
 <div>
 
 
 <lifetime-section>
 <lifetime-example>
-    <section-header>Application Memory</section-header>
+    <section-header>应用程序内存</section-header>
     <memory-row>
         <memory-backdrop>
             <byte></byte>
@@ -980,22 +982,22 @@ Why moves, references and lifetimes are how they are.
         <labels>
             <label class="" style="right: 10px;">&nbsp;</label>
         </labels>
-        <subtext>Application Memory</subtext>
+        <subtext>应用程序内存</subtext>
     </memory-row>
 </lifetime-example>
 <explanation>
 
-- Application memory is just array of bytes on low level.
-- Operating environment usually segments that, amongst others, into:
-    - **stack** (small, low-overhead memory,<sup>1</sup> most _variables_ go here),
-    - **heap** (large, flexible memory, but always handled via stack proxy like `Box<T>`),
-    - **static** (most commonly used as resting place for `str` part of `&str`),
-    - **code** (where bitcode of your functions reside).
-- Most tricky part is tied to **how stack evolves**, which is **our focus**.
+- 应用程序内存只是低级别的字节数组。
+- 操作环境通常分为以下几个部分：
+    - **栈(Stack)**（小，低开销内存<sup>1</sup>，大多数_变量_都放在这里），
+    - **堆(Heap)**（大而灵活的内存，但总是通过栈代理处理，如 `Box<T>`），
+    - **静态(static)**（最常用作 `&str` 的 `str` 部分来使用），
+    - **代码(code)**（函数的位码所在的位置）。
+- 最棘手的部分与**栈如何演变**有关，这是**我们的重点**。
 
 <footnotes>
 
-<sup>1</sup> For fixed-size values stack is trivially managable: _take a few bytes more while you need them, discarded once you leave_. However, giving out pointers to these _transient_ locations form the very essence of why _lifetimes_ exist; and are the subject of the rest of this chapter.
+<sup>1</sup> 对于固定大小的值，栈很容易管理：_在需要时多占用几个字符，离开后丢弃_。然而，给出指向这些_瞬态_位置的指针构成了_生命周期_存在的本质；并且是本章其余部分的主题。
 
 </footnotes>
 
@@ -1006,7 +1008,7 @@ Why moves, references and lifetimes are how they are.
 
 <lifetime-section>
 <lifetime-example class="not-first">
-    <section-header>Variables</section-header>
+    <section-header>变量</section-header>
     <memory-row>
         <memory-backdrop>
             <byte></byte>
@@ -1059,7 +1061,7 @@ Why moves, references and lifetimes are how they are.
             <label class="byte2 hide" style="left: 57px;"><code>a</code></label>
             <label class="byte2" style="left: 97.5px;"><code>t</code></label>
         </labels>
-        <subtext>Variables</subtext>
+        <subtext>变量</subtext>
         <!-- <subtext><code>let t = S(1);</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -3562,7 +3564,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
         <byte style="border-color: #aaa;"><code></code></byte>
     </visual>
     <zoom>
-        与平台的 <code>ptr</code> 一致
+        与平台的 <code>ptr</code> 一致。
     </zoom>
 </datum>
 
@@ -3588,7 +3590,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 
 
-|类型|最大值|
+| 类型 | 最大值 |
 |---|---|
 |`u8`| `255` |
 |`u16` | `65_535` |
@@ -3604,12 +3606,12 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-numeric-3" name="tab-group-numeric">
-<label for="tab-numeric-3"><b>Signed Types</b></label>
+<label for="tab-numeric-3"><b>有符号类型</b></label>
 <panel><div>
 
 
 
-|类型|最大值|
+| 类型 | 最大值 |
 |---|---|
 |`i8`| `127` |
 |`i16` | `32_767` |
@@ -3620,7 +3622,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 {{ tablesep() }}
 
-|类型|最小值|
+| 类型 | 最小值 |
 |---|---|
 |`i8`| `-128` |
 |`i16` | `-32_768` |
@@ -3700,7 +3702,8 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 {{ tablesep() }}
 
-类似地，<code>f64</code> 如下: 
+同样，对于 <code>f64</code> 类型，这将类似于：
+
 
 | f64 | S (1) | E (11) | F (52) | 值 |
 |------| ---------| ---------| ---------| ---------|
@@ -3711,7 +3714,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 | NaN | ± | 2047 | 非零 | NaN  |
 
 <footnotes>
-    <sup>*</sup> 浮点类型遵循 <a href="https://en.wikipedia.org/wiki/IEEE_754-2008_revision">IEEE 754-2008</a> 规范, 并取决于平台大小端序.
+    <sup>*</sup> 浮点类型遵循 <a href="https://en.wikipedia.org/wiki/IEEE_754-2008_revision">IEEE 754-2008</a> 规范，并取决于平台大小端序。
 </footnotes>
 
 </div></panel></tab>
@@ -3728,10 +3731,10 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 | Cast<sup>1</sup> | Gives | Note |
 | --- | --- | --- |
 | `3.9_f32 as u8` | `3` | Truncates, consider `x.round()` first. |
-| `314_f32 as u8` | `255` | Takes closest available number. |
+| `314_f32 as u8` | `255` | 采用最接近的可用数字。 |
 | `f32::INFINITY as u8` | `255` | Same, treats `INFINITY` as _really_ large number.|
 | `f32::NAN as u8` | `0` | - |
-| `_314 as u8` | `58` | Truncates excess bits. |
+| `_314 as u8` | `58` | 截断多余的位。 |
 | `_200 as i8` | `56` | - |
 | `_257 as i8` | `-1` | - |
 
@@ -3772,9 +3775,9 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 <footnotes>
 
-<sup>1</sup> Expression `_100` means anything that might contain the value `100`, e.g., `100_i32`, but is opaque to compiler.<br/>
-<sup>d</sup> Debug build.<br/>
-<sup>r</sup> Release build.<br/>
+<sup>1</sup>表达式`_100`表示可能包含`100`值的任何内容，例如`100_i32`，但对编译器是不透明的。<br/>
+<sup>d</sup> 调试版本。<br/>
+<sup>r</sup> 发布版本。<br/>
 
 </footnotes>
 
@@ -3795,7 +3798,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
         <byte><code></code></byte>
         <byte><code></code></byte>
     </visual>
-    <description>任意 UTF-8 标量</description>
+    <description>任意 UTF-8 标量。</description>
 </datum>
 
 
@@ -3810,9 +3813,9 @@ let a = c;          // <- But here, no more use of `r` or `s`.
         <byte class="bytes"><code>F</code></byte>
         <byte class="bytes"><code>-</code></byte>
         <byte class="bytes"><code>8</code></byte>
-        <note>... 未指明条目</note>
+        <note>...未指明条目</note>
     </visual>
-    <description>很少单独见到, 常用 <code>&str</code> 代替</description>
+    <description>很少单独见到，常用 <code>&str</code> 代替。</description>
 </datum>
 
 
@@ -3823,13 +3826,13 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-textual-3" name="tab-group-textual" checked>
-<label for="tab-textual-3"><b>Basics</b></label>
+<label for="tab-textual-3"><b>基本</b></label>
 <panel><div>
 
-| Type | Description |
+| 类型 | 描述 |
 |---------|-------------|
-| `char` | Always 4 bytes and only holds a single Unicode **scalar value** {{ link(url="https://www.unicode.org/glossary/#unicode_scalar_value") }}. |
-| `str` | An `u8`-array of unknown length guaranteed to hold **UTF-8 encoded code points**. |
+| `char` | 总是为 4 字节，且仅包含一个 Unicode **标量值**{{ link(url="https://www.unicode.org/glossary/#unicode_scalar_value") }}。 |
+| `str` | 未知长度的 `u8` 数组保证保存 **UTF-8 编码的码位**。 |
 
 </div></panel></tab>
 
@@ -3837,7 +3840,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-textual-1" name="tab-group-textual">
-<label for="tab-textual-1"><b>Usage</b></label>
+<label for="tab-textual-1"><b>用法</b></label>
 <panel><div>
 
 
@@ -3848,7 +3851,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 - `str` is a byte-array of unknown length guaranteed to hold **UTF-8 encoded code points** (but harder to index).
  -->
 
-| Chars | Description |
+| 字符 | 描述 |
 |---------|-------------|
 | `let c = 'a';` | Often a `char` (unicode scalar) can coincide with your intuition of _character_. |
 | `let c = '❤';` | It can also hold many Unicode symbols. |
@@ -3862,7 +3865,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 {{ tablesep() }}
 
-| Strings | Description |
+| 字符串 | 描述 |
 |---------|-------------|
 | `let s = "a";` | A `str` is usually never held directly, but as `&str`, like `s` here. |
 | `let s = "❤❤️";` | It can hold arbitrary text, has variable length per _c._, and is hard to index. |
@@ -3918,7 +3921,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 ## 自定义类型 {#custom-types}
 
-用户定义的基本类型.它实际的<b>内存布局</b>{{ ref(page="type-layout.html") }}取决于<b>表示法</b>{{ ref(page="type-layout.html#representations") }}, 还有对齐.
+用户定义的基本类型。它实际的<b>内存布局</b>{{ ref(page="type-layout.html") }}取决于<b>表示法</b>{{ ref(page="type-layout.html#representations") }}，还有对齐。
 
 
 <!-- NEW ENTRY -->
@@ -3937,7 +3940,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
     <visual>
        <framed class="any unsized"><code>T</code></framed>
     </visual>
-    <description>Maybe DST {{ below(target = "#sized-types") }} </description>
+    <description>也许是 DST {{ below(target = "#sized-types") }} </description>
 </datum>
 
 
@@ -3948,9 +3951,9 @@ let a = c;          // <- But here, no more use of `r` or `s`.
        <framed class="any t"><code>T</code></framed>
        <framed class="any t"><code>T</code></framed>
        <framed class="any t"><code>T</code></framed>
-       <note>... n times</note>
+       <note>... n 次</note>
     </visual>
-    <description>Fixed array of <code>n</code> elements.</description>
+    <description>固定的 <code>n</code> 个元素的数组。</description>
 </datum>
 
 
@@ -3962,9 +3965,9 @@ let a = c;          // <- But here, no more use of `r` or `s`.
        <framed class="any t"><code>T</code></framed>
        <framed class="any t"><code>T</code></framed>
        <framed class="any t"><code>T</code></framed>
-       <note>... unspecified times</note>
+       <note>...未指定条目</note>
     </visual>
-    <description><b>Slice type</b> of unknown-many elements. Neither <br> <code>Sized</code> (nor carries <code>len</code> information), and most<br> often lives behind reference as <code>&[T]</code>. {{ below(target="#references-pointers-ui") }}</description>
+    <description>未知多元素的<b>切片类型</b>。Neither <br> <code>Sized</code> （不携带 <code>len</code> 信息），<br>而且大多数情况下都是以<code>&[T]</code>为参照。{{ below(target="#references-pointers-ui") }}</description>
 </datum>
 
 <!-- NEW ENTRY -->
@@ -3992,7 +3995,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
        <framed class="any"><code>A</code></framed>
        <framed class="any" style="width: 50px;"><code>C</code></framed>
     </visual>
-    <description>Unless a representation is forced <br>(e.g., via <code>#[repr(C)]</code>), type layout<br> unspecified.</description>
+    <description>除非强制表示（例如通过 <code>#[repr(C)]</code>）<br>否则类型布局未指定。</description>
 </datum>
 
 
@@ -4003,13 +4006,13 @@ let a = c;          // <- But here, no more use of `r` or `s`.
        <framed class="any" style="width: 100px;"><code>B</code></framed>
        <framed class="any" style="width: 50px;"><code>C</code></framed>
     </visual>
-    <andor>or maybe</andor>
+    <andor>或者也许</andor>
     <visual>
        <framed class="any" style="width: 50px;"><code>C</code></framed>
        <pad><code style="">↦</code></pad>
        <framed class="any" style="width: 100px;"><code>B</code></framed>
     </visual>
-    <description>Compiler may also add padding.</description>
+    <description>编译器还可以添加填充。</description>
 </datum>
 
 
@@ -4017,7 +4020,8 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 <blockquote>
 <footnotes>
 
-Also note, two types `A(X, Y)` and `B(X, Y)` with exactly the same fields can still have differing layout; never `transmute()` without representation guarantees.
+还需注意，具有完全相同字段的两种类型 `A(X, Y)` 和 `B(X, Y)` 仍然可以具有不同的布局；如果没有表示保证，则决不能使用 `transmute()`。
+
 
 </footnotes>
 </blockquote>
@@ -4026,7 +4030,8 @@ Also note, two types `A(X, Y)` and `B(X, Y)` with exactly the same fields can st
 
 {{ tablesep() }}
 
-这些**合并类型**存有其一种子类型的值: 
+这些**合并类型**存有其一种子类型的值：
+
 
 <!-- NEW ENTRY -->
 <datum class="spaced">
@@ -4052,7 +4057,7 @@ Also note, two types `A(X, Y)` and `B(X, Y)` with exactly the same fields can st
         </framed>
     </visual>
     <description>
-        安全地保存 A, B 或 C.<br>又名「标签联合」, 尽管编译器会忽略标签.
+        安全地保存 A、B 或 C。<br>又名“标签联合”，尽管编译器会忽略标签。
     </description>
 </datum>
 
@@ -4078,7 +4083,7 @@ Also note, two types `A(X, Y)` and `B(X, Y)` with exactly the same fields can st
         </framed>
     </visual>
     <description>
-        不安全地以多种方式解释同一块内存.<br>结果可能是未定义的.
+        不安全地以多种方式解释同一块内存。<br>结果可能是未定义的。
     </description>
 </datum>
 
@@ -4086,8 +4091,9 @@ Also note, two types `A(X, Y)` and `B(X, Y)` with exactly the same fields can st
 
 ## 引用 & 指针 {#references-pointers-ui}
 
-References give safe access to other memory, raw pointers `unsafe` access.
-The respective `mut` types are identical.
+引用授权了对其他内存空间的安全访问。裸指针则是不安全 `unsafe` 的访问。
+各自的 `mut` 类型是相同的。
+
 
 
 <!-- NEW ENTRY -->
@@ -4107,7 +4113,8 @@ The respective `mut` types are identical.
             <framed class="any unsized"><code>T</code></framed>
         </memory>
     </memory-entry>
-    <description>Must target some valid <code>t</code> of <code>T</code>, <br> and any such target must exist for <br> at least <code>'a</code>.</description>
+    <description>必须定位一些有效 <code>t</code> 的 <code>T</code>，<br> 并且任何这样的目标必须
+至少存在<code>'a</code>。</description>
 </datum>
 
 
@@ -4123,17 +4130,17 @@ The respective `mut` types are identical.
         </payload>
     </visual>
     <zoom>
-        没有任何保证.
+        没有任何保证。
     </zoom>
 </datum>
 
 <br/>
 
 
-### Pointer Meta {#pointer-meta}
+### 元指针 {#pointer-meta}
 
-Many reference and pointer types can carry an extra field, **pointer metadata**. {{ std(page="nightly/std/ptr/trait.Pointee.html#pointer-metadata") }}
-It can be the element- or byte-length of the target, or a pointer to a <i>vtable</i>. Pointers with meta are called **fat**, otherwise **thin**.
+许多引用和指针类型可以携带一个额外的字段，**元数据指针**{{ std(page="nightly/std/ptr/trait.Pointee.html#pointer-metadata") }}。
+它可以是目标的元素长度或字节长度，也可以是指向<i>vtable</i>的指针。带有 meta 的指针称为**胖指针(fat)**，否则称为**细指针(thin)**。
 
 <!-- NEW ENTRY -->
 <datum class="spaced">
@@ -4149,7 +4156,7 @@ It can be the element- or byte-length of the target, or a pointer to a <i>vtable
             <framed class="any t"><code>T</code></framed>
         </memory>
     </memory-entry>
-    <description>No meta for <br>sized target.<br>(pointer is thin).</description>
+    <description>没有大小目标的元（细指针）。</description>
 </datum>
 
 
@@ -4264,7 +4271,7 @@ It can be the element- or byte-length of the target, or a pointer to a <i>vtable
 
 ## 闭包 {#closures-data}
 
-闭包是一个临时函数, 定义闭包时, 它会自动管理数据**捕获**{{ ref(page="types/closure.html#capture-modes") }}环境中访问的内容.例如: 
+闭包是一个临时函数，定义闭包时，它会自动管理数据**捕获**{{ ref(page="types/closure.html#capture-modes") }}环境中访问的内容。例如：
 
 <!-- NEW ENTRY -->
 <datum class="spaced">
@@ -4337,7 +4344,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
     <visual class="cell">
            <framed class="any unsized"><code>T</code></framed>
     </visual>
-    <description>魔术类型, 允许<br>别名可变性.</description>
+    <description>魔术类型, 允许<br>别名可变性。</description>
 </datum>
 
 
@@ -4347,7 +4354,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
     <visual>
            <framed class="any unsized celled"><code>T</code></framed>
     </visual>
-    <description>允许 <code>T</code> 的<br>移动进出.</description>
+    <description>允许 <code>T</code> 的<br>移动进出。</description>
 </datum>
 
 
@@ -4536,7 +4543,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
             </div>
         </memory>
     </memory-entry>
-    <description>以空字符结束, 但中间没有空字符.</description>
+    <description>以空字符结束, 但中间没有空字符。</description>
 </datum>
 
 
@@ -4966,7 +4973,7 @@ In addition, you might want to add convenience methods:
 <div class="color-header number">
 
 
-## Number Conversions
+## 数字转换 {#number-conversions}
 
 
 As-<b style="">correct</b>-as-it-currently-gets number conversions.
@@ -4994,7 +5001,7 @@ As-<b style="">correct</b>-as-it-currently-gets number conversions.
 
 
 
-## String Conversions
+## 字符串转换 {#string-conversions}
 
 
 If you **want** a string of type &hellip;
@@ -5263,7 +5270,7 @@ CString::new(bytes)?
 </footnotes>
 
 
-## String Output
+## 字符串输出 {#string-output}
 
 How to convert types into a `String`, or output them.
 

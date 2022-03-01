@@ -1,24 +1,23 @@
 # ![Logo](/static/logo.png) Rust 语言备忘清单(中文翻译)
 
-[cheats.rs原版](https://cheats.rs) | [中文版本在线阅读:2022-02-23](https://cheats.rs) | [阅览PDF版](https://s3.eu-central-1.amazonaws.com/cheats.rs/rust_cheat_sheet.pdf)
+[cheats.rs 原版](https://cheats.rs) | [中文版本在线阅读:2022-02-23](https://nootn.com/rust-language-cheat-sheet/) | [阅览 PDF 版](https://s3.eu-central-1.amazonaws.com/cheats.rs/rust_cheat_sheet.pdf)
 
-**为喜欢高信息密度的人提供的单页Rust资源。**
+**为喜欢高信息密度的人提供的单页 Rust 资源。**
 
 使用案例，按优先顺序排列：
 ***识别和查找指南** 用于代码中遇到的构造，
 ***发现** 你可能不懂的语言部分，
-***了解Rust** 如果你有编程经验。
+***了解 Rust** 如果你有编程经验。
 
 # 构建
 
-使用 [Zola](https://www.getzola.org/) 构建，这是一个用 Rust 编写的静态站点生成器。要在本地开发请安装Zola，然后运行：
+使用 [Zola](https://www.getzola.org/) 构建，这是一个用 Rust 编写的静态站点生成器。要在本地开发请安装 Zola，然后运行：
 
 ```bash
 zola serve
 ```
 
 # 贡献
-# Contributing
 
 Contributions are welcome and you can PR bug fixes directly. If you somehow ended up here but prefer not to use Github write to [webmaster@cheats.rs](mailto:webmaster@cheats.rs), or use the on-site buttons.
 
