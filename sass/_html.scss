@@ -1,3 +1,4 @@
+// All rules that modify existing VANILLA HTML tags
 
 * {
     box-sizing: border-box;
@@ -7,10 +8,11 @@
 body,
 html {
     height: 100%;
-    overflow: hidden;
-    overflow-y: auto;
+    // overflow: hidden;
+    // overflow-y: auto;
 
 }
+
 body {
     text-rendering: optimizeLegibility;
     font-family: "Open Sans", sans-serif;
@@ -23,6 +25,30 @@ body {
             font-family: 'Times New Roman', Times, '仿宋', serif;
         }
     }
+}
+
+// Preliminary background until day-mode / night-mode class is added by Javascript.
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: white;
+        color: black;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #222;
+        color: white;
+    }
+}
+
+body.day-mode {
+    background-color: white;
+    color: black;
+}
+
+body.night-mode {
+    background-color: #222;
+    color: white;
 }
 
 
@@ -48,8 +74,4 @@ footer::after {
     display: block;
     width: 1px;
     height: 20px;
-}
-
-sup {
-    padding: -5px;
 }
