@@ -38,6 +38,7 @@ Big shout-out to [all the contributors](https://github.com/ralfbiedert/cheats.rs
 * [Rust container cheat sheet](https://docs.google.com/presentation/d/1q-c7UAyrUlM-eZyTo1pd8SZ0qwA_wYxmPZVOQkoDmH4/edit#slide=id.p) (for data layout; Raph Levien)
 * That one IEEE 754-2008 Powerpoint deck I can't find anymore ...
 * [String Conversions](https://docs.google.com/spreadsheets/d/19vSPL6z2d50JlyzwxariaYD6EU2QQUQqIDOGbiGQC7Y/pubhtml?gid=0&single=true)
+* steffahn from users.rust-lang.org (for outstanding explanations)
 
 # 关于中文翻译
 简体翻译版本翻译参与人员：
