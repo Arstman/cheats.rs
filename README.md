@@ -14,6 +14,9 @@
 使用 [Zola](https://www.getzola.org/) 构建，这是一个用 Rust 编写的静态站点生成器。要在本地开发请安装 Zola，然后运行：
 
 ```bash
+# 安装node的依赖包
+pnpm i
+# 开启自动更新的构建服务
 zola serve
 ```
 
