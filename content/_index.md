@@ -87,15 +87,15 @@ insert_anchor_links = "right"
 * [宏和属性](#macros-attributes)
 * [模式匹配](#pattern-matching)
 * [泛型和约束](#generics-constraints)
-* [Higher-Ranked Items](#higher-ranked-items)
+* [高阶项目](#higher-ranked-items)
 * [字符串和字符](#strings-chars)
-* [Documentation](#documentation)
+* [文档](#documentation)
 * [其他](#miscellaneous)
 
 **增强设施**
-* [The Abstract Machine](#the-abstract-machine)
+* [抽象层](#the-abstract-machine)
 * [语法糖](#language-sugar)
-* [Memory & Lifetimes](#memory-lifetimes)
+* [内存和生命周期](#memory-lifetimes)
 
 
 **数据类型**
@@ -146,7 +146,7 @@ insert_anchor_links = "right"
 
 </toc>
 
-<noprint>
+</noprint>
 
 ## 你好, Rust！
 
@@ -668,17 +668,17 @@ _实际的_ 类型和 trait, 某些事物的抽象以及常用生命周期.
 |---------|-------------|
 | `for<'a>` | **高阶绑定**{{ nom(page="hrtb.html")}} {{ ref(page="trait-bounds.html#higher-ranked-trait-bounds")}}标识. {{ esoteric() }} |
 | {{ tab() }} `trait T: for<'a> R<'a> {}` | 在任意生命周期下, 任意实现了 `impl T` 的 `S` 都应满足 `R`. |
-| `fn(&'a u8)` | _Fn. ptr._ type holding fn callable with **specific** lifetime `'a`. |
-| `for<'a> fn(&'a u8)` | **Higher-ranked type**<sup>1</sup> {{ link(url="https://github.com/rust-lang/rust/issues/56105") }} holding fn callable with **any** _lt._; subtype of above. |
-| {{ tab() }} `fn(&'_ u8)` | Same; automatically expanded to type `for<'a> fn(&'a u8)`. |
-| {{ tab() }} `fn(&u8)` | Same; automatically expanded to type `for<'a> fn(&'a u8)`. |
-| `dyn for<'a> Fn(&'a u8)` | Higher-ranked (trait-object) type, works like `fn` above. |
-| {{ tab() }} `dyn Fn(&'_ u8)` | Same; automatically expanded to type `dyn for<'a> Fn(&'a u8)`. |
-| {{ tab() }} `dyn Fn(&u8)` | Same; automatically expanded to type `dyn for<'a> Fn(&'a u8)`. |
+| `fn(&'a u8)` | _函数指针_ 类型, 持有可调用 fn 以及**指定的**生命周期 `'a`. |
+| `for<'a> fn(&'a u8)` | **高阶类型**<sup>1</sup> {{ link(url="https://github.com/rust-lang/rust/issues/56105") }} 持有可调用 fn  **任意** _小于_ 上述生命周期的参数; 上面的子类型. |
+| {{ tab() }} `fn(&'_ u8)` | 同上, 自动展开为类型 `for<'a> fn(&'a u8)`. |
+| {{ tab() }} `fn(&u8)` | 同上, 自动展开为类型 `for<'a> fn(&'a u8)`. |
+| `dyn for<'a> Fn(&'a u8)` | 高阶 (trait 对象) 类型, 行为如上 `fn`. |
+| {{ tab() }} `dyn Fn(&'_ u8)` | 同上, 自动展开为类型 `dyn for<'a> Fn(&'a u8)`. |
+| {{ tab() }} `dyn Fn(&u8)` | 同上, 自动展开为类型 `dyn for<'a> Fn(&'a u8)`. |
 
 <footnotes>
 
- <sup>1</sup> Yes, the `for<>` is part of the type, which is why you write `impl T for for<'a> fn(&'a u8)` below.
+ <sup>1</sup> 没错, `for<>` 是类型的一部分, 这会导致你下面会写出来 `impl T for for<'a> fn(&'a u8)` 这样的代码.
 
 </footnotes>
 
@@ -690,8 +690,8 @@ _实际的_ 类型和 trait, 某些事物的抽象以及常用生命周期.
 
 | Trait 实现 | 说明 |
 |---------|-------------|
-| `impl<'a> T for fn(&'a u8) {}` | For fn. pointer, where call accepts **specific** _lt._ `'a`, impl trait `T`.|
-| `impl T for for<'a> fn(&'a u8) {}` | For fn. pointer, where call accepts **any** _lt._, impl trait `T`. |
+| `impl<'a> T for fn(&'a u8) {}` | For fn 指针, 调用接受**指定** _小于_ `'a` 的参数, impl trait `T`.|
+| `impl T for for<'a> fn(&'a u8) {}` | For fn 指针, 调用接受**任意** _小于_ 的参数, impl trait `T`. |
 | {{ tab() }} `impl T for fn(&u8) {}` | 同上, 简写. |
 
 </div>
@@ -706,34 +706,34 @@ Rust 提供了若干种创建字符串和字符字面量的办法.
 
 | 示例 | 说明 |
 |--------|-------------|
-| `"..."` | UTF-8 **字符串字面量**{{ ref(page="tokens.html#string-literals")}}.会将 `\n` 等看作换行 `0xA` 等. |
-| `r"..."` | UTF-8 **裸字符串字面量**{{ ref(page="tokens.html#raw-string-literals")}}.不会处理 `\n` 等. |
-| `r#"..."#` 等 | UTF-8 裸字符串字面量.但可以包含 `"`. |
-| `b"..."` | **字节串字面量**{{ ref(page="tokens.html#byte-and-byte-string-literals")}}, 由 ASCII `[u8]` 组成.不是字符串. |
-| `br"..."`, `br#"..."#` 等 | 裸字节串字面量, ASCII `[u8]`.说明见上. |
-| `'🦀'` | **字符字面量**{{ ref(page="tokens.html#character-and-string-literals")}}, 固定的 4 字节 Unicode 「**字符**」.{{ std(page="std/primitive.char.html") }} |
+| `"..."` | UTF-8 **字符串字面量**{{ ref(page="tokens.html#string-literals")}}<sup>, 1</sup>.会将 `\n` 等看作换行 `0xA` 等. |
+| `r"..."` | UTF-8 **裸字符串字面量**{{ ref(page="tokens.html#raw-string-literals")}}<sup>, 1</sup>. 不会处理 `\n` 等. |
+| `r#"..."#` 等 | UTF-8 裸字符串字面量. 但可以包含 `"`. |
+| `b"..."` | **字节串字面量**{{ ref(page="tokens.html#byte-and-byte-string-literals")}}<sup>, 1</sup>, 由 ASCII `[u8]` 组成. 并不是字 _符_ 串. |
+| `br"..."`, `br#"..."#` 等 | 裸字节串字面量, ASCII `[u8]`. 说明见上. |
+| `'🦀'` | **字符字面量**{{ ref(page="tokens.html#character-and-string-literals")}}, 固定的 4 字节 Unicode '**字符**'.{{ std(page="std/primitive.char.html") }} |
 | `b'x'` | ASCII **字节字面量**.{{ ref(page="tokens.html#byte-literals")}} |
 </fixed-2-column>
 
 <footnotes>
 
-<sup>1</sup> Supports multiple lines out of the box. Just keep in mind `Debug`{{ below(target="#string-output") }} (e.g., `dbg!(x)` and `println!("{x:?}")`) might render them as `\n`, while `Display`{{ below(target="#string-output") }} (e.g., `println!("{x}")`) renders them _proper_.
+<sup>1</sup> 均支持多行字符串. 但要注意 `Debug`{{ below(target="#string-output") }} (例如 `dbg!(x)` 和 `println!("{x:?}")`) 会将换行符渲染成 `\n`, 而 `Display`{{ below(target="#string-output") }} (例如 `println!("{x}")`) 则会输出换行.
 
 </footnotes>
 
 
-### Documentation
+### 文档 {#documentation}
 
-Debuggers hate him. Avoid bugs with this one weird trick.
+调试器的天敌. 这玩意儿能避免 Bug.
 
 
 <fixed-2-column>
 
 | 示例 | 说明 |
 |--------|-------------|
-| `///` | Outer line **doc comment**, {{ book(page="ch14-02-publishing-to-crates-io.html#making-useful-documentation-comments") }} {{ ex(page="meta/doc.html#documentation") }} {{ ref(page="comments.html#doc-comments")}} use these on types, traits, functions, &hellip; |
-| `//!` | Inner line doc comment, mostly used at start of file to document module. |
-| `//` | 行内注释.用于文档代码流内或_内部组件_. |
+| `///` | 外部行级**文档注释**, {{ book(page="ch14-02-publishing-to-crates-io.html#making-useful-documentation-comments") }} {{ ex(page="meta/doc.html#documentation") }} {{ ref(page="comments.html#doc-comments")}} 用于类型, trait, 函数等. |
+| `//!` | 内部行级文档注释, 多用于文档模块的文件头部. |
+| `//` | 行内注释. 用于文档代码流内或 _内部组件_. |
 | `/*...*/` | 块级注释. |
 | `/**...*/` | 外部块级文档注释. |
 | `/*!...*/` | 内部块级文档注释. |
@@ -742,7 +742,7 @@ Debuggers hate him. Avoid bugs with this one weird trick.
 
 <footnotes>
 
-工具链命令 {{ below(target="#tooling-directives") }} outlines what you can do inside doc comments.
+工具链命令{{ below(target="#tooling-directives") }}告诉你可以在文档注释中做什么.
 
 </footnotes>
 
@@ -758,13 +758,13 @@ Debuggers hate him. Avoid bugs with this one weird trick.
 |---------|-------------|
 | `!` | 永远为空的 **never 类型**.{{ experimental() }} {{ book(page="ch19-04-advanced-types.html#the-never-type-that-never-returns") }} {{ ex(page="fn/diverging.html#diverging-functions") }} {{ std(page="std/primitive.never.html") }} {{ ref(page="types.html#never-type") }} |
 | `_` | 无名变量绑定.如 <code>&vert;x, _&vert; {}</code>.|
-| {{ tab() }} `let _ = x;`  | Unnamed assignment is no-op, does **not** {{ bad() }} move out `x` or preserve scope! |
+| {{ tab() }} `let _ = x;`  | 匿名赋值等于无操作 (no-op), **不会**{{ bad() }}将 `x` 移出当前作用域! |
 | `_x` | 变量绑定, 明确标记该变量未使用. |
 | `1_234_567` | 为了易读加入的数字分隔符. |
-| `1_u8` | **数字字面量**的类型说明符.{{ ex(page="types/literals.html#literals") }} {{ ref(page="tokens.html#number-literals") }}(又见 `i8`, `u16`等). |
+| `1_u8` | **数字字面量**的类型说明符.{{ ex(page="types/literals.html#literals") }} {{ ref(page="tokens.html#number-literals") }} (又见 `i8`, `u16`等). |
 | `0xBEEF`, `0o777`, `0b1001`  | 十六进制(`0x`), 八进制(`0o`)和二进制(`0b`) 整型字面量. |
-| `r#foo` | **原始标识符** {{ book(page="appendix-01-keywords.html#raw-identifiers") }} {{ ex(page="compatibility/raw_identifiers.html#raw-identifiers") }}.用于版本兼容. {{ esoteric() }} |
-| `x;` | **语句**{{ ref(page="statements.html")}}终止符.见**表达式**{{ ex(page="expression.html") }} {{ ref(page="expressions.html")}}. |
+| `r#foo` | **原始标识符** {{ book(page="appendix-01-keywords.html#raw-identifiers") }} {{ ex(page="compatibility/raw_identifiers.html#raw-identifiers") }}. 用于版本兼容. {{ esoteric() }} |
+| `x;` | **语句**{{ ref(page="statements.html")}}终止符. 见**表达式**{{ ex(page="expression.html") }} {{ ref(page="expressions.html")}}. |
 
 </fixed-2-column>
 
@@ -773,7 +773,7 @@ Debuggers hate him. Avoid bugs with this one weird trick.
 
 ### 通用操作符
 
-Rust 支持大部分其他语言也有的通用操作符(`+`, `*`, `%`, `=`, `==`...).因为这在 Rust 里没什么太大差别所以这里不列出来了.Rust 也支持**运算符重载**.{{ std(page="std/ops/index.html")}}
+Rust 支持大部分其他语言也有的通用操作符(`+`, `*`, `%`, `=`, `==`...). 因为这在 Rust 里没什么太大差别所以这里不列出来了. Rust 也支持**运算符重载**.{{ std(page="std/ops/index.html")}}
 
 
 ---
@@ -782,11 +782,10 @@ Rust 支持大部分其他语言也有的通用操作符(`+`, `*`, `%`, `=`, `==
 
 # 增强设施
 
-Arcane knowledge that may do terrible things to your mind, highly recommended.
+可能会导致你的脑子爆炸的神秘知识点, 超级推荐.
+## 抽象层 {#the-abstract-machine}
 
-## The Abstract Machine
-
-Like `C` and `C++`, Rust is based on an _abstract machine_.
+同 `C`/`C++`, Rust 基于一个 _抽象层_.
 
 
 <tabs>
@@ -794,7 +793,7 @@ Like `C` and `C++`, Rust is based on an _abstract machine_.
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-abstract-machine-1" name="tab-group-abstract-machine" checked>
-<label for="tab-abstract-machine-1"><b>Overview</b></label>
+<label for="tab-abstract-machine-1"><b>概览</b></label>
 <panel><div>
 
 
@@ -809,7 +808,7 @@ Like `C` and `C++`, Rust is based on an _abstract machine_.
         <machine class="bad">CPU</machine>
     </entry>
     <br/>
-    <note>{{bad()}} Less correctish.</note>
+    <note>{{bad()}} 不太优雅</note>
 </mini-zoo>
 
 <mini-zoo class="zoo" style="text-align: center; margin-left: 80px;">
@@ -818,14 +817,14 @@ Like `C` and `C++`, Rust is based on an _abstract machine_.
     </entry>
     <code style="text-align:center">→</code>
     <entry style="width: 120px;">
-        <machine class="good">Abstract Machine</machine>
+        <machine class="good">抽象层</machine>
     </entry>
     <code style="text-align:center">→</code>
     <entry>
         <machine class="good">CPU</machine>
     </entry>
     <br/>
-    <note>More correctish.</note>
+    <note>优雅</note>
 </mini-zoo>
 
 </div>
@@ -834,12 +833,12 @@ Like `C` and `C++`, Rust is based on an _abstract machine_.
 {{ tablesep() }}
 
 
-The abstract machine
-- is not a runtime, and does not have any runtime overhead, but is a _computing model abstraction_,
-- contains concepts such as memory regions (_stack_, ...), execution semantics, ...
-- _knows_ and _sees_ things your CPU might not care about,
-- forms a contract between programmer and machine,
-- and **exploits all of the above for optimizations**.
+抽象层 (AM)
+- 并非运行时, 并不会有任何运行时开销, 但它是一个 _计算模型的抽象_,
+- 包含如内存分配(_栈_, ...)和运行语义等概念,
+- _了解_ 和 _看到_ 你 CPU 并不关心的东西,
+- 构建了程序员到机器之间的一道契约,
+- 并且**综合上述内容进行优化**.
 
 
 </div></panel></tab>
@@ -848,21 +847,21 @@ The abstract machine
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-abstract-machine-2" name="tab-group-abstract-machine">
-<label for="tab-abstract-machine-2"><b>Misconceptions</b></label>
+<label for="tab-abstract-machine-2"><b>杂项</b></label>
 <panel><div>
 
 <div class="color-header abstract-machine">
 
-Things people may incorrectly assume they _should get away with_ if Rust targeted CPU directly, and _more correct_ counterparts:
+如果 Rust 直接发送给 CPU, 人们可能会错误地认为他们 _应该逃脱惩罚_ , 然而 _更加正确_ 的做法是:
 
 {{ tablesep() }}
 
-| Without AM | With AM |
+| 无抽象层 | 有抽象层 |
 |---------|-------------|
-| `0xffff_ffff` would make a valid `char`. {{ bad() }} | Memory more than just bits.  |
-| `0xff` and `0xff` are same pointer. {{ bad() }} | Pointers can come from different _domains_.  |
-| Any r/w pointer on `0xff` always fine. {{ bad() }} | Read and write reference may not exist same time.  |
-| Null reference is just `0x0` in some register. {{ bad() }} | Holding `0x0` in reference summons Cthulhu.  |
+| `0xffff_ffff` 会产生一个有效的 `char`. {{ bad() }} | 只是内存中的一段比特.  |
+| `0xff` 和 `0xff` 是相同的指针. {{ bad() }} | 指针可以来自不同的 _域_.  |
+| 在 `0xff` 的任意读写都是可行的. {{ bad() }} | 不能同时读写同一引用.  |
+| 某些寄存器直接把 `0x0` 当做 null. {{ bad() }} | 在引用中保存 `0x0` 简直是克苏鲁.  |
 
 </div>
 </div></panel></tab>
@@ -888,27 +887,26 @@ Things people may incorrectly assume they _should get away with_ if Rust targete
 
 | 名称 | 说明 |
 |--------| -----------|
-| **Coercions** {{ nom(page="coercions.html") }} | _Weakens_ types to match signature, e.g., `&mut T` to `&T`; _c_. _type conversions_. {{ below(target="#type-conversions") }}  |
-| **Deref** {{ nom(page="vec-deref.html") }} {{ link(url="https://stackoverflow.com/questions/28519997/what-are-rusts-exact-auto-dereferencing-rules") }} | [Derefs](https://doc.rust-lang.org/std/ops/trait.Deref.html) `x: T` until `*x`, `**x`, &hellip; compatible with some target `S`. |
-| **Prelude** {{ std(page="std/prelude/index.html") }} | Automatic import of basic items, e.g., `Option`, `drop`, ...
+| **强转** {{ nom(page="coercions.html") }} | _隐式转换_ 类型以匹配签名, 如 `&mut T` 转为 `&T`. 见 _类型转换_. {{ below(target="#type-conversions") }}  |
+| **解引用** {{ nom(page="vec-deref.html") }} {{ link(url="https://stackoverflow.com/questions/28519997/what-are-rusts-exact-auto-dereferencing-rules") }} | 连续[解引用](https://doc.rust-lang.org/std/ops/trait.Deref.html) `x: T` 直到 `*x`, `**x`, &hellip; 满足目标类型 `S`. |
+| **Prelude** {{ std(page="std/prelude/index.html") }} | 自动导入基本项目, 如 `Option`, `drop`, ...
 | **重新借用** | 即便 `x: &mut T` 不能复制, 也可以移动一个新的 `&mut *x` 代替. |
-| **Lifetime Elision** {{ book(page="ch10-03-lifetime-syntax.html#lifetime-elision") }} {{ nom(page="lifetime-elision.html#lifetime-elision") }} {{ ref(page="lifetime-elision.html#lifetime-elision") }} | Automatically annotates `f(x: &T)` to `f<'a>(x: &'a T)`.|
-| **Method Resolution** {{ ref(page="expressions/method-call-expr.html") }} | Derefs or borrow `x` until `x.f()` works. |
-| **Match Ergonomics** {{ rfc(page="2005-match-ergonomics.html") }} | Repeatedly dereferences [scrutinee](https://doc.rust-lang.org/stable/reference/glossary.html#scrutinee) and adds `ref` and `ref mut` to bindings. |
-| **Rvalue Static Promotion** {{ rfc(page="1414-rvalue_static_promotion.html") }} | Makes references to constants `'static`, e.g., `&42`, `&None`, `&mut []`. |
+| **生命周期省略** {{ book(page="ch10-03-lifetime-syntax.html#lifetime-elision") }} {{ nom(page="lifetime-elision.html#lifetime-elision") }} {{ ref(page="lifetime-elision.html#lifetime-elision") }} | 自动将 `f(x: &T)` 标注为 `f<'a>(x: &'a T)`.|
+| **方法重解析** {{ ref(page="expressions/method-call-expr.html") }} | 解引用或借用 `x` 直到 `x.f()` 可用. |
+| **匹配引用简写** {{ rfc(page="2005-match-ergonomics.html") }} | 重复应用解引用到各个[选择肢](https://doc.rust-lang.org/stable/reference/glossary.html#scrutinee)上并添加 `ref` 和 `ref mut` 到绑定. |
+| **右值静态提升** {{ rfc(page="1414-rvalue_static_promotion.html") }} | 使引用满足 `'static`, 如 `&42`, `&None`, `&mut []`. |
 
 
 </div>
 
 {{ tablesep() }}
 
-> **作者按** {{ opinionated() }} &mdash; The features above will make your life easier, but might hinder your understanding. If any (type-related) operation ever feels _inconsistent_ it might be worth revisiting this list.
+> **作者按** {{ opinionated() }} &mdash; 上述功能会让你活得轻松些, 但却会扰乱你的理解. 如果任意有类型相关的操作让你觉得 _有些反常_, 那可能就是这里的语法糖在作怪了.
+
+## 内存和生命周期 {#memory-lifetimes}
 
 
-## Memory & Lifetimes
-
-
-Why moves, references and lifetimes are how they are.
+移动, 引用和生命周期到底是咋回事.
 
 
 <tabs class="lifetimes">
@@ -916,14 +914,14 @@ Why moves, references and lifetimes are how they are.
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-lt-1" name="tab-lt" checked>
-<label for="tab-lt-1"><b>Types & Moves</b></label>
+<label for="tab-lt-1"><b>类型 & 移动</b></label>
 <panel>
 <div>
 
 
 <lifetime-section>
 <lifetime-example>
-    <section-header>Application Memory</section-header>
+    <section-header>应用程序内存</section-header>
     <memory-row>
         <memory-backdrop>
             <byte></byte>
@@ -974,22 +972,22 @@ Why moves, references and lifetimes are how they are.
         <labels>
             <label class="" style="right: 10px;">&nbsp;</label>
         </labels>
-        <subtext>Application Memory</subtext>
+        <subtext>应用程序内存</subtext>
     </memory-row>
 </lifetime-example>
 <explanation>
 
-- Application memory is just array of bytes on low level.
-- Operating environment usually segments that, amongst others, into:
-    - **stack** (small, low-overhead memory,<sup>1</sup> most _variables_ go here),
-    - **heap** (large, flexible memory, but always handled via stack proxy like `Box<T>`),
-    - **static** (most commonly used as resting place for `str` part of `&str`),
-    - **code** (where bitcode of your functions reside).
-- Most tricky part is tied to **how stack evolves**, which is **our focus**.
+- 应用程序内存在底层就是一个字节数组.
+- 操作系统经常将其划分为若干分区:
+    - **栈区** (空间小, 低成本内存,<sup>1</sup> 多数 _变量_ 都在这里),
+    - **堆区** (空间大, 可扩展内存, 但总会由类似 `Box<T>` 的栈代理来指向),
+    - **静态区** (多用于存储组成 `&str` 的字符串 `str`),
+    - **代码区** (你的函数二进制代码的存储区域).
+- 这里面最富挑战的莫过于**栈的增长**, 这是我们关注的**重点**.
 
 <footnotes>
 
-<sup>1</sup> For fixed-size values stack is trivially managable: _take a few bytes more while you need them, discarded once you leave_. However, giving out pointers to these _transient_ locations form the very essence of why _lifetimes_ exist; and are the subject of the rest of this chapter.
+<sup>1</sup> 对于固定大小的值, 栈的管理非常细致: _你需要的时候马上生成, 不需要的时候马上离开_. 然而这些 _短暂_ 分配的指针却是导致生命周期存在的 _本质_ 原因, 也是主导了本章后续所有内容.
 
 </footnotes>
 
@@ -1000,7 +998,7 @@ Why moves, references and lifetimes are how they are.
 
 <lifetime-section>
 <lifetime-example class="not-first">
-    <section-header>Variables</section-header>
+    <section-header>变量</section-header>
     <memory-row>
         <memory-backdrop>
             <byte></byte>
@@ -1053,7 +1051,7 @@ Why moves, references and lifetimes are how they are.
             <label class="byte2 hide" style="left: 57px;"><code>a</code></label>
             <label class="byte2" style="left: 97.5px;"><code>t</code></label>
         </labels>
-        <subtext>Variables</subtext>
+        <subtext>变量</subtext>
         <!-- <subtext><code>let t = S(1);</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1063,17 +1061,17 @@ Why moves, references and lifetimes are how they are.
 let t = S(1);
 ```
 
-- Reserves memory location with name `t` of type `S` and the value `S(1)` stored inside.
-- If declared with `let` that location lives on stack. <sup>1</sup>
-- Note the **linguistic ambiguity**,<sup>2</sup> in the term **_variable_**, it can mean the:
-    1. **name** of the location in the source file ("rename that variable"),
-    1. **location** in a compiled app, `0x7` ("tell me the address of that variable"),
-    1. **value** contained within, `S(1)` ("increment that variable").
-- Specifically towards the compiler `t` can mean **location of** `t`, here `0x7`, and **value within** `t`, here `S(1)`.
+- 分配内存空间, 名为 `t`, 类型为 `S`, 里面存储的值为 `S(1)`.
+- 如果声明了 `let` 那空间将会分配在栈上. <sup>1</sup>
+- 注意**语义歧义**,<sup>2</sup> 术语**变量**可能指的是:
+    1. 源文件中定义的**名称** (“重命名某变量”),
+    1. 已编译程序中的**位置**, `0x7` (“告诉我某变量的地址”),
+    1. 里面包含的**值**, `S(1)` (“增加某变量”).
+- 特别地, 对于编译器来说 `t` 指的是 `t` 的**位置** (这里是 `0x7`) 和 `t` 里面的 **值** (这里是 `S(1)`).
 
 <footnotes>
 
-<sup>1</sup> Compare above,{{ above(target="#data-structures" ) }} true for fully synchronous code, but `async` stack frame might placed it on heap via runtime.
+<sup>1</sup> 上述{{ above(target="#data-structures" ) }}比较中仅针对于同步代码, 而 `async` 异步栈帧有可能被运行时放在堆上.
 
 </footnotes>
 
@@ -1084,7 +1082,7 @@ let t = S(1);
 
 <lifetime-section>
 <lifetime-example class="not-first">
-    <section-header>Move Semantics</section-header>
+    <section-header>移动语义</section-header>
     <memory-row>
         <memory-backdrop>
             <byte></byte>
@@ -1136,7 +1134,7 @@ let t = S(1);
             <label class="byte2" style="left: 57px;"><code>a</code></label>
             <label class="byte2" style="left: 97.5px;"><code>t</code></label>
         </labels>
-        <subtext>Moves</subtext>
+        <subtext>移动</subtext>
         <!-- <subtext><code>let a = t;</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1147,14 +1145,14 @@ let t = S(1);
 let a = t;
 ```
 
-- This will **move** value within `t` to location of `a`, or copy it, if `S` is `Copy`.
-- After move location `t` is **invalid** and cannot be read anymore.
-    - Technically the bits at that location are not really _empty_, but _undefined_.
-    - If you still had access to `t` (via `unsafe`) they might still _look_ like valid `S`, but
-    any attempt to use them as valid `S` is undefined behavior. {{ below(target="#unsafe-unsound-undefined") }}
-- We do not cover `Copy` types explicitly here. They change the rules a bit, but not much:
-    - They won't be dropped.
-    - They never leave behind an 'empty' variable location.
+- 操作将**移动** `t` 里面的值到 `a` 的位置, 如果 `S` 是可 `Copy` 的则复制一份.
+- `t` 的位置移动后将会**失效**且不能再被读取.
+    - 技术上该位置的比特位并非完全置为 _空_, 但 _未定义_.
+    - 如果你仍然通过 `unsafe` 访问 `t` 的话它仍有可能 _看起来_ 像是个有效的 `S`, 
+    但任何把它当成有效 `S` 的操作都是未定义行为 (UB). {{ below(target="#unsafe-unsound-undefined") }}
+- 这里没有提到 `Copy` 的影响, 虽然它会轻微影响上述规则:
+    - 它们不会被析构.
+    - '空'变量的位置永远不会离开作用域.
 
 </explanation>
 </lifetime-section>
@@ -1163,7 +1161,7 @@ let a = t;
 
 <lifetime-section>
 <lifetime-example class="not-first">
-    <section-header>Type Safety</section-header>
+    <section-header>类型安全</section-header>
     <memory-row>
         <memory-backdrop>
             <byte></byte>
@@ -1216,7 +1214,7 @@ let a = t;
             <label class="byte2" style="left: 57px;"><code></code></label>
             <label class="byte2" style="left: 170px;"><code>c</code></label>
         </labels>
-        <subtext>Type Safety</subtext>
+        <subtext>类型安全</subtext>
         <!-- <subtext><code>let c: S = M::new();</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1227,12 +1225,12 @@ let a = t;
 let c: S = M::new();
 ```
 
-- The **type of a variable** serves multiple important purposes, it:
-    1. dictates how the underlying bits are to be interpreted,
-    1. allows only well-defined operations on these bits
-    1. prevents random other values or bits from being written to that location.
-- Here assignment fails to compile since the bytes of `M::new()` cannot be converted to form of type `S`.
-- **Conversions between types will _always_ fail** in general, **unless explicit rule allows it** (coercion, cast, &hellip;).
+- **变量的类型**指出了许多重要的期望, 它:
+    1. 规定了如何解释底层的比特位,
+    1. 仅允许被友好定义的操作去操作这些比特位,
+    1. 防止其他随机变量或比特写到这个位置.
+- 这里赋值语句将会编译失败, 因为 `M::new()` 的字节无法被有效地转换为 `S` 类型.
+- **类型之间的直接转换 _总会_ 失败.** 通常情况下, **有一些例外会被允许** (强转或 `as` 转换等).
 
 </explanation>
 </lifetime-section>
@@ -1240,7 +1238,7 @@ let c: S = M::new();
 
 <lifetime-section>
 <lifetime-example class="not-first">
-    <section-header>Scope & Drop</section-header>
+    <section-header>域 & 析构</section-header>
     <memory-row>
         <memory-backdrop>
             <byte></byte>
@@ -1296,7 +1294,7 @@ let c: S = M::new();
             <label class="byte2" style="left: 97.5px;"><code>t</code></label>
             <!-- <label class="byte2" style="left: 136.5px;"><code>c</code></label> -->
         </labels>
-        <subtext>Scope & Drop</subtext>
+        <subtext>作用域 & 析构</subtext>
         <!-- <subtext><code>{ let a = ...; }</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1305,10 +1303,10 @@ let c: S = M::new();
 ```
 {
     let mut c = S(2);
-    c = S(3);  // <- Drop called on `c` before assignment.
+    c = S(3);  // <- 赋值前将会对 `c` 进行析构.
     let t = S(1);
     let a = t;
-}   // <- Scope of `a`, `t`, `c` ends here, drop called on `a`, `c`.
+}   // <- 这里退出了 `a`, `t`, `c` 的作用域, 将调用 `a`, `c` 的析构方法.
 ```
 
 - Once the 'name' of a non-vacated variable goes out of (drop-)**scope**, the contained value is **dropped**.
@@ -1330,12 +1328,12 @@ let c: S = M::new();
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-lt-2" name="tab-lt">
-<label for="tab-lt-2"><b>Call Stack</b></label>
+<label for="tab-lt-2"><b>调用栈</b></label>
 <panel><div>
 
 <lifetime-section>
 <lifetime-example>
-    <section-header>Stack Frame</section-header>
+    <section-header>栈帧</section-header>
     <memory-row>
         <memory-backdrop>
             <byte></byte>
@@ -9109,12 +9107,12 @@ When updating an API, these changes can break client code.{{ rfc(page="1105-api-
     significant not found elsewhere? -->
 | 备忘清单 | 说明 |
 |--------| -----------|
-| [Rust Learning⭐](https://github.com/ctjhoa/rust-learning) | 可能是学习 Rust 最好的链接合集. |
-| [Functional Jargon in Rust](https://github.com/JasonShin/functional-programming-jargon.rs) | Rust 的函数编程术语解释合集. |
+| [Rust Learning⭐](https://github.com/ctjhoa/rust-learning) ([中文](https://github.com/ctjhoa/rust-learning/blob/master/zh_CN.md)) | 可能是学习 Rust 最好的链接合集. |
+| [Functional Jargon in Rust](https://github.com/JasonShin/functional-programming-jargon.rs) | Rust 的函数式编程术语解释合集. |
 | [Periodic Table of Types](http://cosmic.mearie.org/2014/01/periodic-table-of-rust-types) | 解释各种类型和引用是如何联系在一起的. |
 | [Futures](https://rufflewind.com/img/rust-futures-cheatsheet.html) | 如何使用 Future. |
-| [Rust Iterator Cheat Sheet](https://danielkeep.github.io/itercheat_baked.html) | `std::iter` 和 `itertools` 的迭代器相关方法总结 |
-| [Type-Based Rust Cheat Sheet](https://upsuper.github.io/rust-cheatsheet/) | 常见类型和转换方法. |
+| [Rust Iterator Cheat Sheet](https://danielkeep.github.io/itercheat_baked.html) | `std::iter` 和 `itertools` 的迭代器相关方法总结. |
+| [Type-Based Rust Cheat Sheet](https://upsuper.github.io/rust-cheatsheet/) | 常见类型和方法表. 可以打印下来挂墙上. |
 
 </div>
 
@@ -9129,37 +9127,37 @@ When updating an API, these changes can break client code.{{ rfc(page="1105-api-
 
 <!-- Official Rust online "books" about Rust itself or major components (e.g., WebAssembly, Embedded, ...). Good test
     for inclusion can be official community involvement, +1k Github stars, ... -->
-| Books&nbsp;️📚  | Description |
+| 书记&nbsp;️📚  | 说明 |
 |--------| -----------|
-| [The Rust Programming Language](https://doc.rust-lang.org/stable/book/) | Standard introduction to Rust, **start here if you are new**. |
-| {{ tab() }} [API Guidelines](https://rust-lang.github.io/api-guidelines/) | How to write idiomatic and re-usable Rust. |
-| {{ tab() }} [Asynchronous Programming](https://rust-lang.github.io/async-book/)  {{ experimental() }} | Explains `async` code, `Futures`, ... |
-| {{ tab() }} [Design Patterns](https://rust-unofficial.github.io/patterns//) | Idioms, Patterns, Anti-Patterns. |
-| {{ tab() }} [Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/) | Working with Rust 2015, Rust 2018, and beyond.  |
-| {{ tab() }} [Guide to Rustc Development](https://rustc-dev-guide.rust-lang.org/index.html) | Explains how the compiler works internally. |
-| {{ tab() }} [Little Book of Rust Macros](https://veykril.github.io/tlborm/introduction.html) | Community's collective knowledge of Rust macros. |
-| {{ tab() }} [Reference](https://doc.rust-lang.org/stable/reference/) {{ experimental() }}  | Reference of the Rust language.  |
-| {{ tab() }} [RFC Book](https://rust-lang.github.io/rfcs/) | Look up accepted RFCs and how they change the language. |
-| {{ tab() }} [Performance Book](https://nnethercote.github.io/perf-book/) | Techniques to improve the speed and memory usage. |
-| {{ tab() }} [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | Collection of simple examples that demonstrate good practices. |
-| {{ tab() }} [Rust in Easy English](https://dhghomon.github.io/easy_rust/Chapter_3.html) | Explains concepts in simplified English, **good alternative start**. |
-| {{ tab() }} [Rust for the Polyglot Programmer](https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/index.html) | A guide for the experienced programmer. |
-| {{ tab() }} [Rustdoc Book](https://doc.rust-lang.org/stable/rustdoc/) | Tips how to customize `cargo doc` and `rustdoc`. |
-| {{ tab() }} [Rustonomicon](https://doc.rust-lang.org/nomicon/) | Dark Arts of Advanced and Unsafe Rust Programming. |
-| {{ tab() }} [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)  {{ experimental() }} | Concise information about writing `unsafe` code. |
-| {{ tab() }} [Unstable Book](https://doc.rust-lang.org/unstable-book/index.html) | Information about unstable items, e.g, `#![feature(...)]`.  |
-| [The Cargo Book](https://doc.rust-lang.org/cargo/) | How to use `cargo` and write `Cargo.toml`. |
-| [The CLI Book](https://rust-lang-nursery.github.io/cli-wg/) | Information about creating CLI tools. |
-| [The Embedded Book](https://docs.rust-embedded.org/book/intro/index.html) | Working with embedded and `#![no_std]` devices. |
-| {{ tab() }} [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) | First `#![no_std]` from scratch on a Cortex-M. |
-| [The WebAssembly Book](https://rustwasm.github.io/docs/book/) | Working with the web and producing `.wasm` files. |
-| {{ tab() }} [The `wasm-bindgen` Guide](https://rustwasm.github.io/docs/wasm-bindgen/) | How to bind Rust and JavaScript APIs in particular. |
+| [The Rust Programming Language](https://doc.rust-lang.org/stable/book/) ([中文](https://kaisery.github.io/trpl-zh-cn/)) | 《Rust 程序设计语言》, **入门必备**. |
+| {{ tab() }} [API Guidelines](https://rust-lang.github.io/api-guidelines/) | 如何编写符合惯例可复用的 Rust. |
+| {{ tab() }} [Asynchronous Programming](https://rust-lang.github.io/async-book/)  {{ experimental() }} | 解释 `async` 代码, `Futures`, ... |
+| {{ tab() }} [Design Patterns](https://rust-unofficial.github.io/patterns//) | 惯例, 模式和反模式. |
+| {{ tab() }} [Edition Guide](https://doc.rust-lang.org/nightly/edition-guide/) | 与 Rust 2015, Rust 2018 等各版本打交道.  |
+| {{ tab() }} [Guide to Rustc Development](https://rustc-dev-guide.rust-lang.org/index.html) | 解释编译器内部如何工作. |
+| {{ tab() }} [Little Book of Rust Macros](https://veykril.github.io/tlborm/introduction.html) | 社区对 Rust 宏的经验总结. |
+| {{ tab() }} [Reference](https://doc.rust-lang.org/stable/reference/) {{ experimental() }} ([中文](https://rustwiki.org/zh-CN/reference/))  | 《Rust 参考手册》.  |
+| {{ tab() }} [RFC Book](https://rust-lang.github.io/rfcs/) | 已接受的 RFC 文档, 可以看到它们是如何影响语言的. |
+| {{ tab() }} [Performance Book](https://nnethercote.github.io/perf-book/) | 改进速度与内存使用的技术. |
+| {{ tab() }} [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | 已被证明是良好实践的例程集. |
+| {{ tab() }} [Rust in Easy English](https://dhghomon.github.io/easy_rust/Chapter_3.html) | 用入门级的英语讲的 Rust, **适合入门**, 也适合英语初学者. |
+| {{ tab() }} [Rust for the Polyglot Programmer](https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/index.html) | 经验者的指南. |
+| {{ tab() }} [Rustdoc Book](https://doc.rust-lang.org/stable/rustdoc/) | 如何自定义 `cargo doc` 和 `rustdoc`. |
+| {{ tab() }} [Rustonomicon](https://doc.rust-lang.org/nomicon/) ([中文](https://nomicon.purewhite.io/)) | 《Rust 秘典》, 旧称《死灵书》, 讲述 Rust unsafe 编程的暗黑艺术. |
+| {{ tab() }} [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)  {{ experimental() }} | 编写 `unsafe` 代码的简要指南. |
+| {{ tab() }} [Unstable Book](https://doc.rust-lang.org/unstable-book/index.html) | 关于 unstable 的信息, 如 `#![feature(...)]`.  |
+| [The Cargo Book](https://doc.rust-lang.org/cargo/) | 如何使用 `cargo` 以及修改 `Cargo.toml`. |
+| [The CLI Book](https://rust-lang-nursery.github.io/cli-wg/) | 如何创建 CLI 工具. |
+| [The Embedded Book](https://docs.rust-embedded.org/book/intro/index.html) | 在嵌入式和 `#![no_std]` 下工作. |
+| {{ tab() }} [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) | 运行在 Cortex-M 的首个 `#![no_std]` 指南. |
+| [The WebAssembly Book](https://rustwasm.github.io/docs/book/) | 和 Web 以及 `.wasm` 打交道. |
+| {{ tab() }} [The `wasm-bindgen` Guide](https://rustwasm.github.io/docs/wasm-bindgen/) | 如何生产 Rust 和 JavaScript API 的绑定. |
 
 </div>
 
 <footnotes>
 
-For more inofficial books see [Little Book of Rust Books](https://lborb.github.io/book/title-page.html).
+其他非官方书籍参见 [Little Book of Rust Books](https://lborb.github.io/book/title-page.html).
 
 </footnotes>
 
@@ -9174,15 +9172,15 @@ For more inofficial books see [Little Book of Rust Books](https://lborb.github.i
 <div class="color-header lavender">
 
 <!-- Table-like sites, often auto-generated. -->
-| Tables&nbsp;📋| Description |
+| 列表&nbsp;📋| 说明 |
 |--------| -----------|
-| [Rust Changelog](https://github.com/rust-lang/rust/blob/master/RELEASES.md) | See all the things that changed in a particular version. |
-| [Rust Forge](https://forge.rust-lang.org/) | Lists release train and links for people working on the compiler. |
-| {{ tab() }} [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) | All supported platforms and their Tier. |
-| {{ tab() }} [Rust Component History](https://rust-lang.github.io/rustup-components-history/) | Check **nightly** status of various Rust tools for a platform. |
-| [ALL the Clippy Lints](https://rust-lang.github.io/rust-clippy/master/) | All the [**clippy**](https://github.com/rust-lang/rust-clippy) lints you might be interested in. |
-| [Configuring Rustfmt](https://rust-lang.github.io/rustfmt/) | All [**rustfmt**](https://github.com/rust-lang/rustfmt) options you can use in `.rustfmt.toml`. |
-| [Compiler Error Index](https://doc.rust-lang.org/error-index.html) | Ever wondered what `E0404` means? |
+| [Rust Changelog](https://github.com/rust-lang/rust/blob/master/RELEASES.md) | 查找某个特定版本的变更记录. |
+| [Rust Forge](https://forge.rust-lang.org/) | 列出了为编译器奋斗的组织和贡献者. |
+| {{ tab() }} [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) | 所有支持的平台和优先级 (Tier). |
+| {{ tab() }} [Rust Component History](https://rust-lang.github.io/rustup-components-history/) | 检查某个平台上 Rust 工具链在 **nightly** 能否正常工作. |
+| [ALL the Clippy Lints](https://rust-lang.github.io/rust-clippy/master/) | 列出了所有你可能感兴趣的 [**clippy**](https://github.com/rust-lang/rust-clippy) lints. |
+| [Configuring Rustfmt](https://rust-lang.github.io/rustfmt/) | 列出了所有你可以在 `.rustfmt.toml` 中设置的 [**rustfmt**](https://github.com/rust-lang/rustfmt) 选项. |
+| [Compiler Error Index](https://doc.rust-lang.org/error-index.html) | 想要知道 `E0404` 什么意思吗? |
 </div>
 
 {{ tablesep() }}
@@ -9195,15 +9193,15 @@ For more inofficial books see [Little Book of Rust Books](https://lborb.github.i
 <!-- Other online web services related to Rust. As a heuristic, things here should
     be essential (or at least address a major concern as "best of class") and be
     a self-contained, user-facing web site. -->
-| Services&nbsp;⚙️ | Description |
+| 服务&nbsp;⚙️ | 说明 |
 |--------| -----------|
-| [crates.io](https://crates.io/) | All 3<sup>rd</sup> party libraries for Rust. |
-| [std.rs](https://std.rs/) | Shortcut to `std` documentation. |
-| [docs.rs](https://docs.rs/) | Documentation for 3<sup>rd</sup> party libraries, automatically generated from source. |
-| [lib.rs](https://lib.rs/) | Unofficial overview of quality Rust libraries and applications. |
-| [caniuse.rs](https://caniuse.rs/) | Check which Rust version introduced or stabilized a feature. |
-| [Rust Playground](https://play.rust-lang.org/) | Try and share snippets of Rust code. |
-| [Rust Search Extension](https://rust.extension.sh/) | Browser extension to search docs, crates, attributes, books, &hellip;|
+| [crates.io](https://crates.io/) | Rust 的所有第三方库. |
+| [std.rs](https://std.rs/) | 标准库 `std` 文档短链接. |
+| [docs.rs](https://docs.rs/) | 第三方库文档, 都是自动从源码构建的. |
+| [lib.rs](https://lib.rs/) | Rust 非官方的库和应用. |
+| [caniuse.rs](https://caniuse.rs/) | 检查某个特性在哪个 Rust 版本引入或稳定. |
+| [Rust Playground](https://play.rust-lang.org/) | 分享一些 Rust 代码片段. |
+| [Rust Search Extension](https://rust.extension.sh/) | 用于搜索文档, crate, 属性和书籍的浏览器插件. |
 
 </div>
 
