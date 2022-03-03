@@ -1,4 +1,4 @@
-# ![Logo](/static/logo.png) Rust 语言备忘清单（中文翻译）
+# ![Logo](/static/logo.png) Rust 语言备忘清单(中文翻译)
 
 [英文原版](https://cheats.rs)
 [在线阅读](https://cheats.rs.kingfree.moe)
@@ -34,7 +34,7 @@ Constructive feedback would be most actionable, but if you just want to vent you
 Big shout-out to [all the contributors](https://github.com/ralfbiedert/cheats.rs/graphs/contributors) and people filing [issues](https://github.com/ralfbiedert/cheats.rs/issues) and [pull requests](https://github.com/ralfbiedert/cheats.rs/pulls) for being awesome!
 
 
-参见：
+参见: 
 
 * The Bronshtein and Semendyayev _Handbook of Mathematics_, the mother of all cheat sheets
 * [The Book](https://doc.rust-lang.org/stable/book/) (some tables)
@@ -46,4 +46,4 @@ Big shout-out to [all the contributors](https://github.com/ralfbiedert/cheats.rs
 
 # 许可证
 
-参见[这里](content/legal.md)。
+参见[这里](content/legal.md).

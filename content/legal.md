@@ -8,13 +8,13 @@ weight = 100
 
 ## 关于中文翻译
 
-本译文一般遵循原作者意图，如有差异以原文为准。中文版翻译由 [Kingfree](https://github.com/kingfree) 提供，不对译文的完全正确性作保证。
+本译文一般遵循原作者意图, 如有差异以原文为准. 中文版翻译由 [Kingfree](https://github.com/kingfree) 提供, 不对译文的完全正确性作保证.
 
-本译文托管在 [cheats.rs.kingfree.moe](https://cheats.rs.kingfree.moe)，若地址有变化，恕不另行通知。
+本译文托管在 [cheats.rs.kingfree.moe](https://cheats.rs.kingfree.moe), 若地址有变化, 恕不另行通知.
 
 ### 原文信息
 
-英文原文托管在 [cheats.rs](https://cheats.rs)。作者是
+英文原文托管在 [cheats.rs](https://cheats.rs). 作者是
 Ralf Biedert <sup><a href="mailto:webmaster@cheats.rs">📧</a></sup> <sup><a href="https://xr.io">🔗</a></sup>
 
 ### Privacy, GDPR

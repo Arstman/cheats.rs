@@ -73,12 +73,12 @@ function show_playground(state) {
         area_static.style.display = "none";
         area_info.style.display = "block";
         area_play.innerHTML = "<iframe src='https://play.rust-lang.org/' style='width:100%; height:500px;'></iframe>";
-        area_ctrl.innerHTML = "<a href='javascript:show_playground(false);'>⏹️ 关闭编辑器</a>";
+        area_ctrl.innerHTML = "<a href='javascript:show_playground(false);'>⏹️ 收起</a>";
     } else {
         area_static.style.display = "block";
         area_info.style.display = "none";
         area_play.innerHTML = "";
-        area_ctrl.innerHTML = "<a href='javascript:show_playground(true);'>▶️ 编辑 & 运行</a>";
+        area_ctrl.innerHTML = "<a href='javascript:show_playground(true);'>▶️ 编译运行</a>";
     }
 }
 
@@ -201,7 +201,7 @@ function toggle_expand_all() {
         }
 
         storage_set("expand_everything", "true");
-        toggle_button.innerHTML = "Expanded ALL the things! <flip>🧹</flip>";
+        toggle_button.innerHTML = "全部收起 <flip>🧹</flip>";
         all_tabs_expanded = true;
     } else {
         //
@@ -249,7 +249,7 @@ function toggle_expand_all() {
         }
 
         storage_set("expand_everything", "false");
-        toggle_button.innerHTML = "Expand all the things?";
+        toggle_button.innerHTML = "全部展开";
         all_tabs_expanded = false;
     }
 
