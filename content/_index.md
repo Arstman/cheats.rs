@@ -531,7 +531,7 @@ fn main() {
 | `$(x),*` | 宏重复“零次或若干次”. |
 | {{ tab() }} `$(x),?` | 宏重复“零次或一次”. |
 | {{ tab() }} `$(x),+` | 宏重复“一次或若干次”. |
-| {{ tab() }} `$(x)<<+` | 分隔符可以不是 `,`. 比如这里用 `<<` 作为分割符. |
+| {{ tab() }} `$(x)<<+` | 分隔符可以不是逗号“`,`”. 比如这里用 `<<` 作为分割符. |
 
 
 </fixed-2-column>
@@ -552,13 +552,12 @@ fn main() {
 |  {{ tab() }} `let S { x } = s;` | 仅将 `x` 绑定到值 `s.x`. |
 |  {{ tab() }} `let (_, b, _) = abc;` | 仅将 `b` 绑定到值 `abc.1`. |
 |  {{ tab() }} `let (a, ..) = abc;` | 也可以将「剩余的」都忽略掉. |
-|  {{ tab() }} `let (.., a, b) = (1, 2);` | Specific bindings take precedence over 'the rest', here `a` is `1`, `b` is `2`. |
-|  {{ tab() }} `let s @ S { x } = get();`  | Bind `s` to `S` while `x` is bound to `s.x`, **pattern binding**, {{ book(page="ch18-03-pattern-syntax.html#-bindings") }} {{ ex(page="flow_control/match/binding.html#binding") }} {{ ref(page="patterns.html#identifier-patterns") }} _c_. below {{ esoteric() }} |
-|  {{ tab() }} `let w @ t @ f = get();`  | Stores 3 copies of `get()` result in each `w`, `t`, `f`. {{ esoteric() }} |
-|  {{ tab() }} `let Some(x) = get();` | **Won't** work {{ bad() }} if pattern can be **refuted**, {{ ref(page="expressions/if-expr.html#if-let-expressions") }} use `if let` instead. |
-|  {{ tab() }} `let Some(x) = get();` | **不可用** {{ bad() }}, 因为模式可能会 **不匹配** {{ ref(page="expressions/if-expr.html#if-let-expressions") }}.换用 `if let`. |
-| `if let Some(x) = get() {}`  | 如果模式匹配则执行该分支(如某个 `enum` 变体).语法糖<sup>*</sup>. |
-| `fn f(S { x }: S)`  | 类似于 `let`, 模式匹配也可用在函数参数上.这里, `f(s)` 的 `x` 被绑定到 `s.x`.{{ esoteric() }}|
+|  {{ tab() }} `let (.., a, b) = (1, 2);` | 忽略前面「剩余的」, 这里 `a` 是 `1`, `b` 是 `2`. |
+|  {{ tab() }} `let s @ S { x } = get();`  | 将 `s` 绑定到 `S` 并将 `x` 绑定到 `s.x`, **模式绑定**, {{ book(page="ch18-03-pattern-syntax.html#-bindings") }} {{ ex(page="flow_control/match/binding.html#binding") }} {{ ref(page="patterns.html#identifier-patterns") }} 见下 {{ esoteric() }} |
+|  {{ tab() }} `let w @ t @ f = get();`  | 存储 3 份 `get()` 结果的拷贝分别到 `w`, `t`, `f`. {{ esoteric() }} |
+|  {{ tab() }} `let Some(x) = get();` | **不可用**{{ bad() }}, 因为模式可能会**不匹配**{{ ref(page="expressions/if-expr.html#if-let-expressions") }}. 换用 `if let`. |
+| `if let Some(x) = get() {}`  | 如果模式匹配则执行该分支(如某个 `enum` 变体). 语法糖<sup>*</sup>. |
+| `fn f(S { x }: S)`  | 类似于 `let`, 模式匹配也可用在函数参数上. 这里 `f(s)` 的 `x` 被绑定到 `s.x`.{{ esoteric() }}|
 
 </fixed-2-column>
 
@@ -573,13 +572,13 @@ fn main() {
 
 {{ tablesep() }}
 
-`match` 表达式的模式匹配分支.左列的分支也可用于 `let` 表达式.
+`match` 表达式的模式匹配分支. 左列的分支也可用于 `let` 表达式.
 
 <fixed-2-column class="color-header special_example">
 
 | 匹配分支 | 说明 |
 |---------|-------------|
-|  `E::A => {}` | 匹配枚举变体 `A`.参见**模式匹配**.{{ book(page="ch06-02-match.html") }} {{ ex(page="flow_control/match.html") }} {{ ref(page="expressions/match-expr.html") }} |
+|  `E::A => {}` | 匹配枚举变体 `A`. 参见**模式匹配**.{{ book(page="ch06-02-match.html") }} {{ ex(page="flow_control/match.html") }} {{ ref(page="expressions/match-expr.html") }} |
 |  `E::B ( .. ) => {}` | 匹配枚举元组变体 `B`, 通配所有下标. |
 |  `E::C { .. } => {}` | 匹配枚举结构变体 `C`, 通配所有字段. |
 |  `S { x: 0, y: 1 } => {}` | 匹配含特定值的结构体(仅匹配 `s` 的 `s.x` 为 `0` 且 `s.y` 为 `1` 的情况). |
@@ -589,22 +588,22 @@ fn main() {
 |  `D => {}` | 匹配枚举变体 `E::D`.仅当 `D` 已由 `use` 引入. |
 |  `D => {}` | 匹配任意事物并绑定到 `D`.如果 `D` 没被 `use` 进来, 怕不是个 `E::D` 的假朋友.{{ bad() }} |
 |  `_ => {}` | 通配所有, 或者所有剩下的. |
-| <code>0 &vert; 1 => {}</code> | Pattern alternatives, **or-patterns**. {{ rfc( page ="2535-or-patterns.html") }}|
-| {{ tab() }}  <code>E::A &vert; E::Z </code> | Same, but on enum variants. |
-| {{ tab() }}  <code>E::C {x} &vert; E::D {x}</code> | Same, but bind `x` if all variants have it. |
-| {{ tab() }}  <code>Some(A &vert; B)</code> | Same, can also match alternatives deeply nested. |
+| <code>0 &vert; 1 => {}</code> | 可选模式列表, **或模式**. {{ rfc( page ="2535-or-patterns.html") }}|
+| {{ tab() }}  <code>E::A &vert; E::Z </code> | 同上, 但为枚举变体. |
+| {{ tab() }}  <code>E::C {x} &vert; E::D {x}</code> | 同上, 但如果所有变体都有 `x` 则绑定. |
+| {{ tab() }}  <code>Some(A &vert; B)</code> | 同上, 可以嵌套匹配. |
 |  `(a, 0) => {}` | 匹配元组, 绑定第一个值到 `a`, 要求第二个是 `0`. |
-|  `[a, 0] => {}` | **切片模式**{{ ref(page="patterns.html?highlight=slice,pattern#slice-patterns") }} {{ link(url="https://doc.rust-lang.org/edition-guide/rust-2018/slice-patterns.html") }}.绑定第一个值到 `a`, 要求第二个是 `0`. |
-|  {{ tab() }} `[1, ..] => {}` | 匹配以 `1` 开始的数组, 剩下的不管.**子切片模式**.{{ todo() }} |
+|  `[a, 0] => {}` | **切片模式**{{ ref(page="patterns.html?highlight=slice,pattern#slice-patterns") }} {{ link(url="https://doc.rust-lang.org/edition-guide/rust-2018/slice-patterns.html") }}. 绑定第一个值到 `a`, 要求第二个是 `0`. |
+|  {{ tab() }} `[1, ..] => {}` | 匹配以 `1` 开始的数组, 剩下的不管. **子切片模式**.{{ todo() }} |
 |  {{ tab() }} `[1, .., 5] => {}` | 匹配以 `1` 开始以 `5` 结束的数组. |
 |  {{ tab() }} `[1, x @ .., 5] => {}` | 同上, 但将 `x` 绑定到中间部分的切片上(见匹配绑定)  |
-|  {{ tab() }} `[a, x @ .., b] => {}` | Same, but match any first, last, bound as `a`, `b` respectively.  |
-|  `1 .. 3 => {}` | **Range pattern**, {{ book(page="ch18-03-pattern-syntax.html#matching-ranges-of-values-with-") }} {{ ref(page="patterns.html#range-patterns") }} here matches `1` and `2`; partially unstable. {{ experimental() }} |
-|  {{ tab() }} `1 ..= 3 => {}` | Inclusive range pattern, matches `1`, `2` and `3`. |
-|  {{ tab() }} `1 .. => {}` | Open range pattern, matches `1` and any larger number.  |
-| `x @ 1..=5 => {}` | 绑定匹配到 `x`, 即**模式绑定**{{ book(page="ch18-03-pattern-syntax.html#-bindings") }} {{ ex(page="flow_control/match/binding.html#binding") }} {{ ref(page="patterns.html#identifier-patterns") }}.这里 `x` 可以是 `1`, `2` 直到 `5`.  |
-| {{ tab() }} `Err(x @ Error {..}) => {}` | Also works nested, here `x` binds to `Error`, esp. useful with `if` below. |
-| `S { x } if x > 10 => {}`  | 模式**匹配条件**{{ book(page="ch18-03-pattern-syntax.html#extra-conditionals-with-match-guards")}} {{ ex(page="flow_control/match/guard.html#guards")}} {{ ref(page="expressions/match-expr.html#match-guards") }}.该匹配会要求这个条件也为真. |
+|  {{ tab() }} `[a, x @ .., b] => {}` | 同上, 但可以指定任意上下界 `a`, `b`.  |
+|  `1 .. 3 => {}` | **范围模式**, {{ book(page="ch18-03-pattern-syntax.html#matching-ranges-of-values-with-") }} {{ ref(page="patterns.html#range-patterns") }} 这里匹配 `1` 和 `2`. 尚不稳定. {{ experimental() }} |
+|  {{ tab() }} `1 ..= 3 => {}` | 闭区间范围模式, 匹配 `1`, `2` 和 `3`. |
+|  {{ tab() }} `1 .. => {}` | 开区间范围模式, 匹配 `1` 和更大的数字.  |
+| `x @ 1..=5 => {}` | 绑定匹配到 `x`, 即**模式绑定**{{ book(page="ch18-03-pattern-syntax.html#-bindings") }} {{ ex(page="flow_control/match/binding.html#binding") }} {{ ref(page="patterns.html#identifier-patterns") }}. 这里 `x` 可以是 `1`, `2` 直到 `5`.  |
+| {{ tab() }} `Err(x @ Error {..}) => {}` | 嵌套使用, 这里 `x` 绑定到 `Error`, 下常跟 `if`. |
+| `S { x } if x > 10 => {}`  | 模式**匹配条件**{{ book(page="ch18-03-pattern-syntax.html#extra-conditionals-with-match-guards")}} {{ ex(page="flow_control/match/guard.html#guards")}} {{ ref(page="expressions/match-expr.html#match-guards") }}. 该匹配会要求这个条件也为真. |
 
 </fixed-2-column>
 
@@ -617,58 +616,58 @@ fn main() {
 
 ### 泛型和约束 {#generics-constraints}
 
-Generics combine with type constructors, traits and functions to give your users more flexibility.
+泛型使得类型构造、trait 和函数更加可扩展.
 
 <fixed-2-column>
 
 | 示例 | 说明 |
 |---------|-------------|
 | `S<T>`  | **泛型**{{ book(page="ch10-01-syntax.html") }} {{ ex(page="generics.html") }}, 类型参数 `T` 是占位符. |
-| `S<T: R>`  | 类型短 **trait 约束**{{ book(page="ch10-02-traits.html#using-trait-bounds-to-conditionally-implement-methods") }} {{ ex(page="generics/bounds.html") }}说明.(`R` _必须_是个实际的 trait). |
+| `S<T: R>`  | 类型短 **trait 约束**{{ book(page="ch10-02-traits.html#using-trait-bounds-to-conditionally-implement-methods") }} {{ ex(page="generics/bounds.html") }}说明. (`R` _必须_ 是个实际的 trait). |
 | {{ tab() }} `T: R, P: S`  | **独立 trait 约束**(这里一个对 `T`, 一个对 `P`). |
-| {{ tab() }} `T: R, S`  | 编译错误{{ bad() }}.可以用下面的 `R + S` 代替. |
-| {{ tab() }} `T: R + S`  | **合并 trait 约束**{{ book(page="ch10-02-traits.html#specifying-multiple-trait-bounds-with-the--syntax") }} {{ ex(page="generics/multi_bounds.html") }}.`T` 必须同时满足 `R` 和 `S`. |
-| {{ tab() }} `T: R + 'a`  | 同上, 但有生命周期.`T` 必须满足 `R`；如果 `T` 有生命周期, 则必须长于 `'a`. |
-| {{ tab() }} `T: ?Sized` | Opt out of a pre-defined trait bound, here `Sized`. {{ todo() }} |
-| {{ tab() }} `T: 'a` | 类型**生命周期约束**{{ ex(page="scope/lifetime/lifetime_bounds.html") }}.`T` 应长于 `'a`. |
-| {{ tab() }} `T: 'static` | Same; does esp. _not_ mean value `t` _will_ {{ bad() }} live `'static`, only that it could. |
-| {{ tab() }} `'b: 'a` | Lifetime `'b` must live at least as long as (i.e., _outlive_) `'a` bound. |
-| `S<const N: usize>` | **Generic const bound**; {{ todo() }} user of type `S` can provide constant value `N`. |
-| {{ tab() }} `S<10>` | Where used, const bounds can be provided as primitive values. |
-| {{ tab() }} `S<{5+5}>` | Expressions must be put in curly brackets. |
-| `S<T> where T: R`  | Almost same as `S<T: R>` but more pleasant to read for longer bounds. |
+| {{ tab() }} `T: R, S`  | 编译错误{{ bad() }}. 可以用下面的 `R + S` 代替. |
+| {{ tab() }} `T: R + S`  | **合并 trait 约束**{{ book(page="ch10-02-traits.html#specifying-multiple-trait-bounds-with-the--syntax") }} {{ ex(page="generics/multi_bounds.html") }}. `T` 必须同时满足 `R` 和 `S`. |
+| {{ tab() }} `T: R + 'a`  | 同上, 但有生命周期. `T` 必须满足 `R`；如果 `T` 有生命周期, 则必须长于 `'a`. |
+| {{ tab() }} `T: ?Sized` | 指定一个预定义的 trait 绑定, 如这里是 `Sized`. {{ todo() }} |
+| {{ tab() }} `T: 'a` | 类型**生命周期约束**{{ ex(page="scope/lifetime/lifetime_bounds.html") }}. `T` 应长于 `'a`. |
+| {{ tab() }} `T: 'static` | 同上. 但 _不_ 意味着值 `t` _会_ {{ bad() }} 活在 `'static` 上, 仅在它可以的时候才行. |
+| {{ tab() }} `'b: 'a` | 生命周期 `'b` 必须至少活得和 `'a` 一样长. |
+| `S<const N: usize>` | **泛型常量绑定**. {{ todo() }} 使用类型 `S` 可提供常量值 `N`. |
+| {{ tab() }} `S<10>` | 可以指定字面量. |
+| {{ tab() }} `S<{5+5}>` | 表达式需要用花括号包起来. |
+| `S<T> where T: R`  | 几乎等同于 `S<T: R>`, 但对于比较长的约束更容易阅读. |
 | {{ tab() }} `S<T> where u8: R<T>`  | Also allows you to make conditional statements involving _other_ types. |
-| `S<T = R>` | **Default parameters**; {{ book(page="ch19-03-advanced-traits.html#default-generic-type-parameters-and-operator-overloading") }} bit easier to use, but still flexible. |
-| {{ tab() }} `S<const N: u8 = 0>` | Default parameter for constants; e.g., in `f(x: S) {}` param `N` is `0`. |
-| {{ tab() }} `S<T = u8>` | Default parameter for types, e.g., in `f(x: S) {}` param `T` is `u8`. |
-| `S<'_>` | Inferred **anonymous lifetime**; asks compiler to _'figure it out'_ if obvious.  |
-| `S<_>` | Inferred **anonymous type**, e.g., as `let x: Vec<_> = iter.collect()`  |
-| `S::<T>` | **Turbofish** {{ std(page="std/iter/trait.Iterator.html#method.collect")}} 消歧义类型调用.如 `f::<u32>()` |
+| `S<T = R>` | **默认参数**. {{ book(page="ch19-03-advanced-traits.html#default-generic-type-parameters-and-operator-overloading") }} 保持扩展性的同时更易于使用. |
+| {{ tab() }} `S<const N: u8 = 0>` | 常量默认参数. 如 `f(x: S) {}` 中参数 `N` 为 `0`. |
+| {{ tab() }} `S<T = u8>` | 类型默认参数. 如 `f(x: S) {}` 中参数 `T` 为 `u8`. |
+| `S<'_>` | 推断**匿名生命周期**. 让编译器 _“想办法”_ 明确生命周期.  |
+| `S<_>` | 推断**匿名类型**. 比如 `let x: Vec<_> = iter.collect()`  |
+| `S::<T>` | **Turbofish**{{ std(page="std/iter/trait.Iterator.html#method.collect")}} 消歧义类型调用. 如 `f::<u32>()` |
 | `trait T<X> {}`  | `X` 的 trait 泛型.可以有多个 `impl T for S`(每个 `X` 一个). |
-| `trait T { type X; }`  | 定义**关联类型**{{ book(page="ch19-03-advanced-traits.html#specifying-placeholder-types-in-trait-definitions-with-associated-types") }} {{ ref(page="items/associated-items.html#associated-types") }} `X`.仅可有一个 `impl T for S` . |
-| {{ tab() }} `type X = R;`  | 设置关联类型.仅在 `impl T for S { type X = R; }` 内. |
+| `trait T { type X; }`  | 定义**关联类型**{{ book(page="ch19-03-advanced-traits.html#specifying-placeholder-types-in-trait-definitions-with-associated-types") }} {{ ref(page="items/associated-items.html#associated-types") }} `X`. 仅可有一个 `impl T for S` . |
+| {{ tab() }} `type X = R;`  | 设置关联类型. 仅在 `impl T for S { type X = R; }` 内. |
 | `impl<T> S<T> {}`  | 实现 `S<T>` 任意类型 `T` 的功能. |
-| `impl S<T> {}`  | 实现确定 `S<T>` 的功能.如 `S<u32>`. |
-| `fn f() -> impl T`  | **Existential 类型** {{ book(page="ch10-02-traits.html#returning-types-that-implement-traits") }}.返回一个对调用者未知的但 `impl T`的 `S`. |
+| `impl S<T> {}`  | 实现确定 `S<T>` 的功能. 如 `S<u32>`. |
+| `fn f() -> impl T`  | **Existential 类型** {{ book(page="ch10-02-traits.html#returning-types-that-implement-traits") }}. 返回一个对调用者未知的但 `impl T`的 `S`. |
 | `fn f(x: &impl T)`  | Trait 约束, 「**impl trait**」{{ book(page="ch10-02-traits.html#trait-bound-syntax") }}.和 `fn f<S:T>(x: &S)` 有点类似. |
-| `fn f(x: &dyn T)`  | **动态分发**标记{{ book(page="ch17-02-trait-objects.html#using-trait-objects-that-allow-for-values-of-different-types") }} {{ ref(page="types.html#trait-objects") }}.`f` 不再单态. |
+| `fn f(x: &dyn T)`  | **动态分发**标记{{ book(page="ch17-02-trait-objects.html#using-trait-objects-that-allow-for-values-of-different-types") }} {{ ref(page="types.html#trait-objects") }}. `f` 不再单态. |
 | `fn f() where Self: R`  | 在 `trait T {}` 中标记 `f` 仅可由实现了 `impl R` 的类型访问. |
-| {{ tab() }} `fn f() where Self: Sized;`  | Using `Sized` can opt `f` out of `dyn T` trait object vtable, enabling trait obj. |
+| {{ tab() }} `fn f() where Self: Sized;`  | 使用 `Sized` 可以指定 `f` 对于 `dyn T` 的 trait 对象对应的虚表. |
 | {{ tab() }} `fn f() where Self: R {}`  | Other `R` useful w. dflt. methods (non dflt. would need be impl'ed anyway). |
 </fixed-2-column>
 
 
 
-### Higher-Ranked Items {{ esoteric() }} {#higher-ranked-items}
+### 高阶项目 {{ esoteric() }} {#higher-ranked-items}
 
-_Actual_ types and traits, abstract over something, usually lifetimes.
+_实际的_ 类型和 trait, 某些事物的抽象以及常用生命周期.
 
 <fixed-2-column>
 
-| Example | Explanation |
+| 示例 | 说明 |
 |---------|-------------|
-| `for<'a>` | Marker for **higher-ranked bounds.** {{ nom(page="hrtb.html")}} {{ ref(page="trait-bounds.html#higher-ranked-trait-bounds")}} {{ esoteric() }} |
-| {{ tab() }} `trait T: for<'a> R<'a> {}` | Any `S` that `impl T` would also have to fulfill `R` for any lifetime. |
+| `for<'a>` | **高阶绑定**{{ nom(page="hrtb.html")}} {{ ref(page="trait-bounds.html#higher-ranked-trait-bounds")}}标识. {{ esoteric() }} |
+| {{ tab() }} `trait T: for<'a> R<'a> {}` | 在任意生命周期下, 任意实现了 `impl T` 的 `S` 都应满足 `R`. |
 | `fn(&'a u8)` | _Fn. ptr._ type holding fn callable with **specific** lifetime `'a`. |
 | `for<'a> fn(&'a u8)` | **Higher-ranked type**<sup>1</sup> {{ link(url="https://github.com/rust-lang/rust/issues/56105") }} holding fn callable with **any** _lt._; subtype of above. |
 | {{ tab() }} `fn(&'_ u8)` | Same; automatically expanded to type `for<'a> fn(&'a u8)`. |
@@ -689,11 +688,11 @@ _Actual_ types and traits, abstract over something, usually lifetimes.
 <div class="color-header special_example">
 {{ tablesep() }}
 
-| Implementing Traits | Explanation |
+| Trait 实现 | 说明 |
 |---------|-------------|
 | `impl<'a> T for fn(&'a u8) {}` | For fn. pointer, where call accepts **specific** _lt._ `'a`, impl trait `T`.|
 | `impl T for for<'a> fn(&'a u8) {}` | For fn. pointer, where call accepts **any** _lt._, impl trait `T`. |
-| {{ tab() }} `impl T for fn(&u8) {}` | Same, short version. |
+| {{ tab() }} `impl T for fn(&u8) {}` | 同上, 简写. |
 
 </div>
 
