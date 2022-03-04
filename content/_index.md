@@ -666,7 +666,7 @@ _实际的_ 类型和 trait, 某些事物的抽象以及常用生命周期.
 
 | 示例 | 说明 |
 |---------|-------------|
-| `for<'a>` | **高阶绑定**{{ nom(page="hrtb.html")}} {{ ref(page="trait-bounds.html#higher-ranked-trait-bounds")}}标识. {{ esoteric() }} |
+| `for<'a>` | **高阶绑定**{{ nom(page="hrtb.html")}} {{ ref(page="trait-bounds.html#higher-ranked-trait-bounds")}}表记. {{ esoteric() }} |
 | {{ tab() }} `trait T: for<'a> R<'a> {}` | 在任意生命周期下, 任意实现了 `impl T` 的 `S` 都应满足 `R`. |
 | `fn(&'a u8)` | _函数指针_ 类型, 持有可调用 fn 以及**指定的**生命周期 `'a`. |
 | `for<'a> fn(&'a u8)` | **高阶类型**<sup>1</sup> {{ link(url="https://github.com/rust-lang/rust/issues/56105") }} 持有可调用 fn  **任意** _小于_ 上述生命周期的参数; 上面的子类型. |
@@ -1230,7 +1230,7 @@ let c: S = M::new();
     1. 仅允许被友好定义的操作去操作这些比特位,
     1. 防止其他随机变量或比特写到这个位置.
 - 这里赋值语句将会编译失败, 因为 `M::new()` 的字节无法被有效地转换为 `S` 类型.
-- **类型之间的直接转换 _总会_ 失败.** 通常情况下, **有一些例外会被允许** (强转或 `as` 转换等).
+- **类型之间的直接转换 _总会_ 失败.** 但通常**允许某些例外** (强转或 `as` 转换等).
 
 </explanation>
 </lifetime-section>
@@ -1309,13 +1309,13 @@ let c: S = M::new();
 }   // <- 这里退出了 `a`, `t`, `c` 的作用域, 将调用 `a`, `c` 的析构方法.
 ```
 
-- Once the 'name' of a non-vacated variable goes out of (drop-)**scope**, the contained value is **dropped**.
-    - Rule of thumb: execution reaches point where name of variable leaves `{}`-block it was defined in
-    - In detail more tricky, esp. temporaries, &hellip;
-- Drop also invoked when new value assigned to existing variable location.
-- In that case **`Drop::drop()`** is called on the location of that value.
-    - In the example above `drop()` is called on `a`, twice on `c`, but not on `t`.
-- Most non-`Copy` values get dropped most of the time; exceptions include `mem::forget()`, `Rc` cycles, `abort()`.
+- 一旦一个未腾出空间的“变量名”离开其**作用域**, 其包含的值将被**析构**.
+    - 首要规则: 当变量名离开其定义的 `{}` 块时执行,
+    - 临时变量等尤为如此.
+- 当新值赋值给已有变量位置时也会触发析构.
+- 当调用了值对应位置的 **`Drop::drop()`** 时.
+    - 上例中 `drop()` 在 `a` 上调用了一次, 在 `c` 上调用了两次, 但没有在 `t` 上调用过.
+- 多数非 `Copy` 的值都在此时发生析构, 除非使用了 `mem::forget()`, `Rc` 之类或者 `abort()`.
 
 </explanation>
 </lifetime-section>
@@ -1385,7 +1385,7 @@ let c: S = M::new();
             <label class="byte2" style="left: 57px;"><code>a</code></label>
             <label class="byte2" style="left: 97.5px;"><code>x</code></label>
         </labels>
-        <subtext>Function Boundaries</subtext>
+        <subtext>函数边界</subtext>
         <!-- <subtext><code>fn f(x: S) {}</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1394,16 +1394,16 @@ let c: S = M::new();
 ```
 fn f(x: S) { ... }
 
-let a = S(1); // <- We are here
+let a = S(1); // <- 在这里
 f(a);
 ```
 
-- When a **function is called**, memory for parameters (and return values) are reserved on stack.<sup>1</sup>
-- Here before `f` is invoked value in `a` is moved to 'agreed upon' location on stack, and during `f` works like 'local variable' `x`.
+- 当**函数被调用**, 参数和返回值的内存将会保存在栈上.<sup>1</sup>
+- 这里当调用 `f` 之前, `a` 中的值将会移动到“商量”好的栈位置, 当 `f` 执行时作为“局部变量” `x`.
 
 <footnotes>
 
-<sup>1</sup> Actual location depends on calling convention, might practically not end up on stack at all, but that doesn't change mental model.
+<sup>1</sup> 实际的位置取决于调用时的转换, 可能根本不会分配在栈上, 但这不影响此处的心智模型.
 
 </footnotes>
 
@@ -1465,7 +1465,7 @@ f(a);
             <label class="byte2" style="left: 97.5px;"><code>x</code></label>
             <label class="byte2" style="left: 136px;"><code>x</code></label>
         </labels>
-        <subtext>Nested Functions</subtext>
+        <subtext>嵌套函数</subtext>
         <!-- <subtext><code>fn f(x: S) { ... f(x) ... }</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1473,15 +1473,15 @@ f(a);
 
 ```
 fn f(x: S) {
-    if once() { f(x) } // <- We are here (before recursion)
+    if once() { f(x) } // <- 递归前在这里
 }
 
 let a = S(1);
 f(a);
 ```
 
-- **Recursively calling** functions, or calling other functions, likewise extends the stack frame.
-- Nesting too many invocations (esp. via unbounded recursion) will cause stack to grow, and eventually to overflow, terminating the app.
+- 函数的**递归调用**, 或由其他函数调用, 都将会扩展栈帧.
+- 过多的嵌套调用 (比如无限递归) 会使得栈不断增长, 以至于溢出并导致程序终止.
 
 </explanation>
 </lifetime-section>
@@ -1490,7 +1490,7 @@ f(a);
 <lifetime-section>
 
 <lifetime-example class="not-first">
-    <section-header>Validity of Variables</section-header>
+    <section-header>变量有效性</section-header>
     <memory-row>
         <memory-backdrop>
             <byte></byte>
@@ -1544,7 +1544,7 @@ f(a);
             <label class="byte2" style="left: 97.5px;"><code>x</code></label>
             <label class="byte2" style="left: 174px;"><code>m</code></label>
         </labels>
-        <subtext>Repurposing Memory</subtext>
+        <subtext>内存重定义</subtext>
         <!-- <subtext><code>f(x); let m = M::new();</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1553,18 +1553,18 @@ f(a);
 ```
 fn f(x: S) {
     if once() { f(x) }
-    let m = M::new() // <- We are here (after recursion)
+    let m = M::new() // <- 递归后在这里
 }
 
 let a = S(1);
 f(a);
 ```
 
-- Stack that previously held a certain type will be repurposed across (even within) functions.
-- Here, recursing on `f` produced second `x`, which after recursion was partially reused for `m`.
+- 之前保有确定类型的栈将由函数或内部函数重新定义此处的用途.
+- 这里 `f` 的递归产生的第二个 `x`, 将会在后续的递归里由 `m` 重新利用.
 
-> Key take away so far, there are multiple ways how memory locations that previously held a valid value of a certain type stopped doing so in the meantime.
-> As we will see shortly, this has implications for pointers.
+> 关键点在于, 有很多种方法来保证之前保有一个确定类型有效值内存位置在此期间不被使用.
+> 简单来说就是实现了指针.
 
 </explanation>
 </lifetime-section>
@@ -1575,12 +1575,12 @@ f(a);
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-lt-3" name="tab-lt">
-<label for="tab-lt-3"><b>References & Pointers</b></label>
+<label for="tab-lt-3"><b>引用 & 指针</b></label>
 <panel><div>
 
 <lifetime-section>
 <lifetime-example>
-    <section-header class="arrowed">Reference Types</section-header>
+    <section-header class="arrowed">引用类型</section-header>
     <memory-row>
         <arrows>
             <arrow style="left: 62px; width: 176px;">&nbsp;<tip>▼</tip></arrow>
@@ -1636,7 +1636,7 @@ f(a);
             <label class="byte2" style="left: 57px;"><code>a</code></label>
             <label class="byte4" style="left: 171px;"><code>r</code></label>
         </labels>
-        <subtext>References as Pointers</subtext>
+        <subtext>引用作为指针</subtext>
         <!-- <subtext><code>let r = &mut a;</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1647,10 +1647,10 @@ let a = S(1);
 let r: &S = &a;
 ```
 
-- A **reference type** such as `&S` or `&mut S` can hold the **location of** some `s`.
-- Here type `&S`, bound as name `r`, holds _location of_ variable `a` (`0x3`), that must be type `S`, obtained via `&a`.
-- If you think of variable `c` as _specific location_, reference **`r` is a _switchboard for locations_**.
-- The type of the reference, like all other types, can often be inferred, so we might omit it from now on:
+- 类似 `&S` 或 `&mut S` 这样的**引用类型**持有某个 `s` 的**位置**.
+- 这里类型 `&S` 绑定到了名称 `r`, 持有变量 `a` (`0x3`) 的 _位置_, 它的类型为 `S`, 通过 `&a` 获取.
+- 如果你将变量 `c` 视为 _指定位置_, 引用 **`r` 就是 _位置的接入点_**.
+- 引用的类型与其他类型类似, 通常可以被推断出来, 所以可以省略不写:
     ```
     let r: &S = &a;
     let r = &a;
@@ -1663,7 +1663,7 @@ let r: &S = &a;
 
 <lifetime-section>
 <lifetime-example class="not-first">
-    <section-header class="arrowed">(Mutable) References</section-header>
+    <section-header class="arrowed">(可变) 引用</section-header>
     <memory-row>
         <arrows>
             <arrow style="left: 62px; width: 176px;">&nbsp;<tip>▼</tip></arrow>
@@ -1721,7 +1721,7 @@ let r: &S = &a;
             <label class="byte4" style="left: 171px;"><code>r</code></label>
             <label class="byte4" style="left: 193px;"><code>d</code></label>
         </labels>
-        <subtext>Access to Non-Owned Memory</subtext>
+        <subtext>访问共享内存</subtext>
         <!-- <subtext><code>let d = r.clone(); *r = S(2);</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1730,16 +1730,16 @@ let r: &S = &a;
 ```
 let mut a = S(1);
 let r = &mut a;
-let d = r.clone();  // Valid to clone (or copy) from r-target.
-*r = S(2);          // Valid to set new S value to r-target.
+let d = r.clone();  // 从 r 指向目标克隆或拷贝.
+*r = S(2);          // 将 r 指向目标设置为新值 S.
 ```
 
 
-- References can **read from**  (`&S`) and also **write to** (`&mut S`) location they point to.
-- The *dereference* `*r` means to neither use the _location of_ or _value within_ `r`, but the **location `r` points to**.
-- In example above, clone `d` is created from `*r`, and `S(2)` written to `*r`.
-    - Method `Clone::clone(&T)` expects a reference itself, which is why we can use `r`, not `*r`.
-    - On assignment `*r = ...` old value in location also dropped (not shown above).
+- 引用可以**读取自**  (`&S`) 或**写入到** (`&mut S`) 它们指向的位置.
+- *解引用* `*r` 表示既不使用 `r` 的 _位置_ 也不使用其包含的 _值_, 而是使用**位置 `r` 指向的目标**.
+- 上例中, 克隆 `d` 是由 `*r` 创建的, 并且 `S(2)` 写入到了 `*r`.
+    - 方法 `Clone::clone(&T)` 期望传入其自身的引用, 这就是我们使用 `r` 而非 `*r` 的原因.
+    - 赋值语句 `*r = ...` 中的旧值也会被析构 (图中未说明).
 
 </explanation>
 </lifetime-section>
@@ -1806,7 +1806,7 @@ let d = r.clone();  // Valid to clone (or copy) from r-target.
             <label class="byte4" style="left: 171px;"><code>r</code></label>
             <label class="byte4" style="left: 193px;"><code>d</code></label>
         </labels>
-        <subtext>References Guard Referents</subtext>
+        <subtext>引用对象保护</subtext>
         <!-- <subtext><code>let d = *r; *r = M::new();</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1815,14 +1815,14 @@ let d = r.clone();  // Valid to clone (or copy) from r-target.
 ```
 let mut a = ...;
 let r = &mut a;
-let d = *r;       // Invalid to move out value, `a` would be empty.
-*r = M::new();    // invalid to store non S value, doesn't make sense.
+let d = *r;       // 无法移出值, 否则 `a` 将为空.
+*r = M::new();    // 无法存储非 S 类型值, 毫无意义.
 ```
 
-- While bindings guarantee to always _hold_ valid data, references guarantee to always _point to_ valid data.
-- Esp. `&mut T` must provide same guarantees as variables, and some more as they can't dissolve the target:
-    - They do **not allow writing invalid** data.
-    - They do **not allow moving out** data (would leave target empty w/o owner knowing).
+- 当绑定保证总是 _持有_ 有效值时, 引用也总是保证一定 _指向_ 有效数据.
+- 特别是 `&mut T` 必须和变量一样提供保证, 要知道它们并不能让指向的目标消失:
+    - **不允许写无效**数据.
+    - **不允许移出**数据 (否则会留下一个不知道所有者的空目标).
 
 </explanation>
 </lifetime-section>
@@ -1887,7 +1887,7 @@ let d = *r;       // Invalid to move out value, `a` would be empty.
             <label class="byte2 hide" style="left: 57px;"><code>c</code></label>
             <label class="byte4" style="left: 171px;"><code>p</code></label>
         </labels>
-        <subtext>Raw Pointers</subtext>
+        <subtext>裸指针</subtext>
         <!-- <subtext><code>let p: *const S = ...;</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -1897,9 +1897,9 @@ let d = *r;       // Invalid to move out value, `a` would be empty.
 let p: *const S = questionable_origin();
 ```
 
-- In contrast to references, pointers come with almost no guarantees.
-- They may point to invalid or non-existent data.
-- Dereferencing them is `unsafe`, and treating an invalid `*p` as if it were valid is undefined behavior. {{ below(target="#unsafe-unsound-undefined") }}
+- 与引用不同, 指针不提供任何保证.
+- 指针有可能指向无效数据或者不存在的数据.
+- 解引用指针是 `unsafe` 的, 将无效的 `*p` 作为有效值来操作是未定义行为 (UB). {{ below(target="#unsafe-unsound-undefined") }}
 
 </explanation>
 </lifetime-section>
@@ -1912,7 +1912,7 @@ let p: *const S = questionable_origin();
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-lt-10" name="tab-lt">
-<label for="tab-lt-10"><b>Lifetime Basics</b></label>
+<label for="tab-lt-10"><b>生命周期</b></label>
 <panel><div>
 
 
@@ -2068,32 +2068,32 @@ let p: *const S = questionable_origin();
             <label class="byte2" style="left: 81px;"><code>'c</code></label>
             <label class="byte4" style="left: 139px;"><code>'d</code></label> -->
         </labels>
-        <subtext>"Lifetime" of Things</subtext>
+        <subtext>事物的“生命周期”</subtext>
         <!-- <subtext><code>f(); g(); h();</code></subtext> -->
     </memory-row>
 </lifetime-example>
 <explanation>
 
-- Every entity in a program has some (temporal / spatial) room where it is relevant, i.e., _alive_.
-- Loosely speaking, this _alive time_ can be<sup>1</sup>
-    1. the **LOC** (lines of code) where an **item is available** (e.g., a module name).
-    1. the **LOC** between when a _location_ is **initialized** with a value, and when the location is **abandoned**.
-    1. the **LOC** between when a location is first **used in a certain way**, and when that **usage stops**.
-    1. the **LOC (or actual time)** between when a _value_ is created, and when that value is dropped.
-- Within the rest of this section, we will refer to the items above as the:
-    1. **scope** of that item, irrelevant here.
-    1. **scope** of that variable or location.
-    1. **lifetime**<sup>2</sup> of that usage.
-    1. **lifetime** of that value, might be useful when discussing open file descriptors, but also irrelevant here.
-- Likewise, lifetime parameters in code, e.g., `r: &'a S`, are
-    - concerned with LOC any **location r _points to_** needs to be accessible or locked;
-    - unrelated to the 'existence time' (as LOC) of `r` itself (well, it needs to exist shorter, that's it).
-- `&'static S` means address must be _valid during all lines of code_.
+- 程序中的每个实体都有其相关的临时或者长期的空间, 即 _生存_.
+- 宽松地说, _生存时间_ 可以是<sup>1</sup>
+    1. **项目可用**的**代码行** (LOC). (如模块名).
+    1. 从 _位置_ 的**初始化**到位置被**丢弃**之间的**代码行**.
+    1. 从位置第一次**确定性使用**到**停止使用**之间的**代码行**.
+    1. 从创建 _值_ 到该值被析构之间的**代码行 (或实际时间)**.
+- 本节剩余部分会将上面的项目分别称为:
+    1. 项目**作用域**, 不重要.
+    1. 变量或位置的**作用域**.
+    1. 用法的**生命周期**<sup>2</sup>.
+    1. 值的**生命周期**, 当和文件描述符打交道时非常有用, 但这里也不重要.
+- 同样地, 代码中的生命周期参数 `r: &'a S`
+    - 任意**位置 r _指向_** 的代码行导致的未确定态都要求可访问或被锁定;
+    - 与 `r` 本身作为代码行的“存在时间”并无关联 (它只要存在得更短就行了).
+- `&'static S` 意味着地址必须 _在所有代码行中有效_.
 
-> <sup>1</sup> There is sometimes ambiguity in the docs differentiating the various _scopes_ and _lifetimes_.
-> We try to be pragmatic here, but suggestions are welcome.
+> <sup>1</sup> 文档中的 _作用域_ 和 _生命周期_ 有时存在歧义.
+> 这里尝试作一定的区分, 但如果有更好的意见也欢迎提出.
 >
-> <sup>2</sup> _Live lines_ might have been a more appropriate term ...
+> <sup>2</sup> _生存行_ 可能是个更好的说法...
 
 </explanation>
 </lifetime-section>
@@ -2258,16 +2258,16 @@ let p: *const S = questionable_origin();
             <label class="byte2" style="left: 118px;"><code>c</code></label>
             <label class="byte4" style="left: 177px;"><code>r</code></label>
         </labels>
-        <subtext>Meaning of <code>r: &'c S</code></subtext>
+        <subtext><code>r: &'c S</code> 的含义</subtext>
         <!-- <subtext><code>r: &mut 'c S</code></subtext> -->
     </memory-row>
 </lifetime-example>
 <explanation>
 
-- Assume you got a `r: &'c S` from somewhere it means:
-    - `r` holds an address of some `S`,
-    - any address `r` points to must and will exist for at least `'c`,
-    - the variable `r` itself cannot live longer than `'c`.
+- 假设你从哪里看到 `r: &'c S`, 它表示:
+    - `r` 持有某个 `S` 的地址,
+    - `r` 指向的任意地址会至少存在在 `'c` 期间,
+    - 变量 `r` 本身不能活得比 `'c` 长.
 
 
 
@@ -2434,7 +2434,7 @@ let p: *const S = questionable_origin();
             <label class="byte2" style="left: 118px;"><code>c</code></label>
             <label class="byte4" style="left: 177px;"><code>r</code></label>
         </labels>
-        <subtext>Typelikeness of Lifetimes</subtext>
+        <subtext>生命周期与类型的相似性</subtext>
         <!-- <subtext><code>r = &mut b;</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -2445,22 +2445,22 @@ let p: *const S = questionable_origin();
     let b = S(3);
     {
         let c = S(2);
-        let r: &'c S = &c;      // Does not quite work since we can't name lifetimes of local
-        {                       // variables in a function body, but very same principle applies
-            let a = S(0);       // to functions next page.
+        let r: &'c S = &c;      // 不能如愿运行
+        {                       // 因为函数体中的局部变量无法命名生命周期
+            let a = S(0);       // 函数中的规则也类似
 
-            r = &a;             // Location of `a` does not live sufficient many lines -> not ok.
-            r = &b;             // Location of `b` lives all lines of `c` and more -> ok.
+            r = &a;             // `a` 的位置在很多行都不存在 -> 不行.
+            r = &b;             // `b` 的位置活在比 `c` 更大的范围 -> 可以.
         }
     }
 }
 ```
 
-- Assume you got a `mut r: &mut 'c S` from somewhere.
-    - That is, a mutable location that can hold a mutable reference.
-- As mentioned, that reference must guard the targeted memory.
-- However, the **`'c` part**, like a type, also **guards what is allowed into `r`**.
-- Here assiging `&b` (`0x6`) to `r` is valid, but `&a` (`0x3`) would not, as only `&b` lives equal or longer than `&c`.
+- 假设你在哪里看到了 `mut r: &mut 'c S`.
+    - 它表示一个可以持有一个可变引用的可变地址.
+- 如上述, 引用必须保证目标内存有效.
+- **`'c` 部分**和类型一样**限制了赋值到 `r` 的操作**.
+- 将 `&b` (`0x6`) 赋值到 `r` 是有效的, 但 `&a` (`0x3`) 无效, 就因为 `&b` 生存时间大于等于 `&c`.
 
 </explanation>
 </lifetime-section>
@@ -2627,7 +2627,7 @@ let p: *const S = questionable_origin();
             <label class="byte2 hide" style="left: 118px;"><code>c</code></label>
             <label class="byte4 hide" style="left: 177px;"><code></code></label>
         </labels>
-        <subtext>Borrowed State</subtext>
+        <subtext>借用态</subtext>
     </memory-row>
 </lifetime-example>
 <explanation>
@@ -2636,7 +2636,7 @@ let p: *const S = questionable_origin();
 let mut b = S(0);
 let r = &mut b;
 
-b = S(4);   // Will fail since `b` in borrowed state.
+b = S(4);   // 无效. 因为 `b` 处于借用态.
 
 print_byte(r);
 ```

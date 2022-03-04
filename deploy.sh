@@ -31,7 +31,7 @@ function abort() {
 rm -rf "$FOLDER_PREP"; mkdir "$FOLDER_PREP";
 rm -rf "$FOLDER_DIST"; mkdir "$FOLDER_DIST";
 
-zola -c "$TOML_BASE" check || abort
+# zola -c "$TOML_BASE" check || abort
 zola -c "$TOML_BASE" build || abort
 npm run posthtml_1 || abort  # This is absolutely terrible but apparently the asset inliner we use
 npm run posthtml_2 || abort  # is unable to handle multiple files with different paths gracefully ...
@@ -76,4 +76,15 @@ if [[ $1 == "--staging" ]]; then
 
     # Staging
     scp -r public.clean/* rb@192.168.0.1:/data/sites/cheats.rs
+fi
+
+
+if [[ $1 == "--kingfree" ]]; then
+    # CN URL:
+    # http://cheats.rs.kingfree.moe/
+
+    echo -e "Sending to ${_YELLOW}kingfree.moe${_NC} environment."
+
+    # CN
+    scp -r public.clean/* root@toyama.moe:/var/www/cheats.rs
 fi
