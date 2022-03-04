@@ -2,16 +2,16 @@
 
 [cheats.rs 原版](https://cheats.rs) | [中文版本在线阅读:2022-02-23](https://nootn.com/rust-language-cheat-sheet/) | [阅览 PDF 版](https://s3.eu-central-1.amazonaws.com/cheats.rs/rust_cheat_sheet.pdf)
 
-**为喜欢高信息密度的人提供的单页 Rust 资源。**
+**为喜欢高信息密度的人提供的单页 Rust 资源. **
 
 使用案例，按优先顺序排列：
 ***识别和查找指南** 用于代码中遇到的构造，
 ***发现** 你可能不懂的语言部分，
-***了解 Rust** 如果你有编程经验。
+***了解 Rust** 如果你有编程经验. 
 
 # 构建
 
-使用 [Zola](https://www.getzola.org/) 构建，这是一个用 Rust 编写的静态站点生成器。要在本地开发请安装 Zola，然后运行：
+使用 [Zola](https://www.getzola.org/) 构建，这是一个用 Rust 编写的静态站点生成器. 要在本地开发请安装 Zola，然后运行：
 
 ```bash
 # 安装node的依赖包
@@ -48,8 +48,8 @@ Big shout-out to [all the contributors](https://github.com/ralfbiedert/cheats.rs
 - [Asins](https://github.com/asins)
 - [kingfree](https://github.com/kingfree)
 
-欢迎对文档进行交流。
+欢迎对文档进行交流. 
 
 # 许可证
 
-详情请看[这里](content/legal.md)。
+详情请看[这里](content/legal.md). 

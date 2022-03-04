@@ -15,11 +15,11 @@ insert_anchor_links = "right"
 <symbol-legend class="short">
 
 文中提到的书籍:
-**Rust 程序设计语言** {{ book(page="") }}（中文）,
-**通过例子学 Rust** {{ ex(page="") }}（中文）,
+**Rust 程序设计语言** {{ book(page="") }} (中文) ,
+**通过例子学 Rust** {{ ex(page="") }} (中文) ,
 **标准库文档** {{ std(page="std") }},
-**Rust 死灵书** {{ nom(page="") }}（中文）,
-**Rust 参考手册** {{ ref(page="") }}（中文）.
+**Rust 死灵书** {{ nom(page="") }} (中文) ,
+**Rust 参考手册** {{ ref(page="") }} (中文).
 
 </symbol-legend>
 
@@ -44,10 +44,10 @@ insert_anchor_links = "right"
 
 **其他凡例** <br>
 <br> <legend-symbol> {{ deprecated() }}   </legend-symbol>基本**已废弃**
-<br> <legend-symbol> {{ edition(ed="'18") }} </legend-symbol>有**最低版本**要求。
-<br> <legend-symbol> {{ experimental() }} </legend-symbol>要求**Rust nightly**（或不完整）。
-<br> <legend-symbol> {{ bad() }}   </legend-symbol>故意的**错误示例**或**缺陷代码**。
-<br> <legend-symbol> {{ esoteric() }}   </legend-symbol>略显**深奥**，很少使用的高级我。
+<br> <legend-symbol> {{ edition(ed="'18") }} </legend-symbol>有**最低版本**要求. 
+<br> <legend-symbol> {{ experimental() }} </legend-symbol>要求**Rust nightly** (或不完整). 
+<br> <legend-symbol> {{ bad() }}   </legend-symbol>故意的**错误示例**或**缺陷代码**. 
+<br> <legend-symbol> {{ esoteric() }}   </legend-symbol>略显**深奥**，很少使用的高级我. 
 <br> <legend-symbol> {{ hot() }}   </legend-symbol>**常用特性**
 <br> <legend-symbol> {{ todo() }} </legend-symbol>**缺少链接**或说明
 <br> <legend-symbol> {{ opinionated() }} </legend-symbol>**作者见解**
@@ -184,11 +184,11 @@ fn main() {
 
 **Rust 擅长此事**
 
-- 编译后的代码性能与 C/C++ [差不多](https://benchmarksgame-team.pages.debian.net/benchmarksgame/box-plot-summary-charts.html)，而且[内存和能源效率](https://dl.acm.org/doi/10.1145/3136014.3136031)非常出色。
-- 可以避免 C/C++中存在的[70% 的安全问题](https://www.chromium.org/Home/chromium-security/memory-safety)，以及大多数内存问题。
-- 强类型系统可防止[数据竞争](https://doc.rust-lang.org/nomicon/races.html)，带来“[无畏并发](https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html)”（等等）。
+- 编译后的代码拥有与 C/C++ [几乎同样的性能](https://benchmarksgame-team.pages.debian.net/benchmarksgame/box-plot-summary-charts.html) , 在[内存和能效](https://dl.acm.org/doi/10.1145/3136014.3136031)方面甚至更强.
+- 可以避免 C/C++ 存在 [70% 的安全问题](https://www.chromium.org/Home/chromium-security/memory-safety)和绝大多数内存问题.
+- 强类型系统可防止[数据竞争](https://doc.rust-lang.org/nomicon/races.html), 带来[「无畏并发」](https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html) (以及更多).
 - 与 C 无缝衔接, [支持数十个平台](https://doc.rust-lang.org/rustc/platform-support.html) (基于 LLVM).
-- 连续 6 年“[最喜爱的语言](https://insights.stackoverflow.com/survey/2021#technology-most-loved-dreaded-and-wanted)”。
+- 连续 6 年[「最喜爱的语言」](https://insights.stackoverflow.com/survey/2021#technology-most-loved-dreaded-and-wanted).
 - 现代工具链: `cargo` (构建工作 _正好能用_), `clippy` (450+ 代码质量 lints), `rustup` (易用的工具链管理)).
 
 </div></panel></tab>
@@ -217,12 +217,12 @@ fn main() {
 <panel><div>
 
 **下载**
-- 从 [**rustup.rs**](https://rustup.rs/) 获取安装程序（推荐用于任何平台）
+- 从 [**rustup.rs**](https://rustup.rs/) 获取安装程序 (推荐用于任何平台) 
 
 
 **IDE 编辑器**
-- [IntelliJ](https://www.jetbrains.com/idea/) （免费）或者带有 [**IntelliJ Rust**](https://intellij-rust.github.io/) 功能的 [CLion](https://www.jetbrains.com/clion/) （收费）。
-- 安装了 [**rust-analyzer**](https://rust-analyzer.github.io/) 插件的 [Visual Studio Code](https://code.visualstudio.com/)。
+- [IntelliJ](https://www.jetbrains.com/idea/)  (免费) 或者带有 [**IntelliJ Rust**](https://intellij-rust.github.io/) 功能的 [CLion](https://www.jetbrains.com/clion/)  (收费). 
+- 安装了 [**rust-analyzer**](https://rust-analyzer.github.io/) 插件的 [Visual Studio Code](https://code.visualstudio.com/). 
 
 
 </div></panel></tab>
@@ -241,13 +241,13 @@ fn main() {
              -->
 
 **模块化初学者资源**
-- [**Rust 语言之旅（中文）**](https://tourofrust.com/TOC_zh-cn.html) - 并排的实时代码和解释。
-- [Rust in Easy English](https://dhghomon.github.io/easy_rust/Chapter_3.html) - 用若干个例子和简单的英语解释了 60 多个概念. 可以用来练习英语。
+- [《Rust 语言之旅》(中文)](https://tourofrust.com/TOC_zh-cn.html) - 一边讲解, 一边实时编码.
+- [Rust in Easy English](https://dhghomon.github.io/easy_rust/Chapter_3.html) - 用若干个例子和简单的英语解释了 60 多个概念. 可以用来练习英语.
 
 另可参考常用文档. {{ book(page="") }} {{ ex(page="") }} {{ std(page="std") }}
 
 
-> **作者按** {{ opinionated() }} &mdash; 如果你从来没用过 Rust 最好还是先看看上面的教程, 本文后续章节对相关概念仅作简要说明, 不会深入讲解。
+> **作者按** {{ opinionated() }} &mdash; 如果你从来没用过 Rust 最好还是先看看上面的教程, 本文后续章节对相关概念仅作简要说明, 不会深入讲解. 
 
 </div></panel></tab>
 
@@ -257,81 +257,81 @@ fn main() {
 
 ### 数据结构 {#data-structures}
 
-数据类型和内存位置由关键字定义。
+数据类型和内存位置由关键字定义. 
 
 <fixed-2-column>
 
 | 示例 | 说明 |
 |---------|-------------|
-| `struct S {}` | 定义包含命名字段的**结构体**{{ book(page="ch05-00-structs.html") }} {{ ex(page="custom_types/structs.html") }} {{ std(page="std/keyword.struct.html") }} {{ ref(page="expressions/struct-expr.html") }}。 |
-| {{ tab() }} `struct S { x: T }` | 定义包含 `T` 类型命名字段 `x` 的结构体。 |
-| {{ tab() }} `struct S` &#8203;`(T);` | 定义 `T` 类型数字字段 `.0` 的“元组”结构体。 |
-| {{ tab() }} `struct S;` | 定义一个**零大小**{{ nom(page="exotic-sizes.html#zero-sized-types-zsts")}}的单元结构体。已优化不占用任何空间。 |
-| `enum E {}` | 定义**枚举**{{ book(page="ch06-01-defining-an-enum.html") }} {{ ex(page="custom_types/enum.html#enums") }} {{ ref(page="items/enumerations.html") }}， 参见[数字数据类型](https://en.wikipedia.org/wiki/Algebraic_data_type)和[标签联合](https://en.wikipedia.org/wiki/Tagged_union)。 |
-| {{ tab() }}  `enum E { A, B`&#8203;`(), C {} }` | 定义变体枚举；可以是单元- `A`，元组 `B` &#8203;`()` 或者结构体风格的 `C{}`。 |
-| {{ tab() }}  `enum E { A = 1 }` | 如果所有变体都是单元值，则允许判别式值，例如用于 FFI。 |
-| `union U {}` | 不安全的 C 风格**联合体**{{ ref(page="items/unions.html") }}，用于兼容 FFI。 {{ esoteric() }} |
-| `static X: T = T();`  | 具有 `'static` 生命周期的**全局变量** {{ book(page="ch19-01-unsafe-rust.html#accessing-or-modifying-a-mutable-static-variable") }} {{ ex(page="custom_types/constants.html#constants") }} {{ ref(page="items/static-items.html#static-items") }}，内存位置独立。 |
-| `const X: T = T();`  | 定义**常量**{{ book(page="ch03-01-variables-and-mutability.html#differences-between-variables-and-constants") }} {{ ex(page="custom_types/constants.html") }} {{ ref(page="items/constant-items.html") }}，使用时会临时复制一份。 |
-| `let x: T;`  | 在栈{{ note( note="1") }}上分配 `T` 大小的字节并命名为 `x`。 一旦分配不可修改。 |
-| `let mut x: T;`  | 类似于 `let`，但具有**可变性**{{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings/mut.html") }}, 允许修改和可变借用{{ note( note="2") }}。 |
-| {{ tab() }} `x = y;` | 将 `y` 移动到 `x`，如果 `T` 不能 **`Copy`**{{ std(page="std/marker/trait.Copy.html") }}，`y` 将不再可用，否则会复制一份 `y`。 |
+| `struct S {}` | 定义包含命名字段的**结构体**{{ book(page="ch05-00-structs.html") }} {{ ex(page="custom_types/structs.html") }} {{ std(page="std/keyword.struct.html") }} {{ ref(page="expressions/struct-expr.html") }}.  |
+| {{ tab() }} `struct S { x: T }` | 定义包含 `T` 类型命名字段 `x` 的结构体.  |
+| {{ tab() }} `struct S` &#8203;`(T);` | 定义 `T` 类型数字字段 `.0` 的“元组”结构体.  |
+| {{ tab() }} `struct S;` | 定义一个**零大小**{{ nom(page="exotic-sizes.html#zero-sized-types-zsts")}}的单元结构体. 已优化不占用任何空间.  |
+| `enum E {}` | 定义**枚举**{{ book(page="ch06-01-defining-an-enum.html") }} {{ ex(page="custom_types/enum.html#enums") }} {{ ref(page="items/enumerations.html") }}， 参见[数字数据类型](https://en.wikipedia.org/wiki/Algebraic_data_type)和[标签联合](https://en.wikipedia.org/wiki/Tagged_union).  |
+| {{ tab() }}  `enum E { A, B`&#8203;`(), C {} }` | 定义变体枚举；可以是单元- `A`，元组 `B` &#8203;`()` 或者结构体风格的 `C{}`.  |
+| {{ tab() }}  `enum E { A = 1 }` | 如果所有变体都是单元值，则允许判别式值，例如用于 FFI.  |
+| `union U {}` | 不安全的 C 风格**联合体**{{ ref(page="items/unions.html") }}，用于兼容 FFI.  {{ esoteric() }} |
+| `static X: T = T();`  | 具有 `'static` 生命周期的**全局变量** {{ book(page="ch19-01-unsafe-rust.html#accessing-or-modifying-a-mutable-static-variable") }} {{ ex(page="custom_types/constants.html#constants") }} {{ ref(page="items/static-items.html#static-items") }}，内存位置独立.  |
+| `const X: T = T();`  | 定义**常量**{{ book(page="ch03-01-variables-and-mutability.html#differences-between-variables-and-constants") }} {{ ex(page="custom_types/constants.html") }} {{ ref(page="items/constant-items.html") }}，使用时会临时复制一份.  |
+| `let x: T;`  | 在栈{{ note( note="1") }}上分配 `T` 大小的字节并命名为 `x`.  一旦分配不可修改.  |
+| `let mut x: T;`  | 类似于 `let`，但具有**可变性**{{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings/mut.html") }}, 允许修改和可变借用{{ note( note="2") }}.  |
+| {{ tab() }} `x = y;` | 将 `y` 移动到 `x`，如果 `T` 不能 **`Copy`**{{ std(page="std/marker/trait.Copy.html") }}，`y` 将不再可用，否则会复制一份 `y`.  |
 
 </fixed-2-column>
 
 <footnotes>
 
-<sup>1</sup> **域变量** {{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings.html") }} {{ ref(page="variables.html") }}是生存在栈上的同步代码。在`async{}`中，这些变量将成为异步状态机的一部分，最终可能是驻留在堆上。<br>
-<sup>2</sup> 注意术语_可变_和_不可变_并不准确。不可变绑定或共享引用可能仍然包含 Cell {{ std(page="std/cell/index.html") }}，从而提供_内部可变性_。
+<sup>1</sup> **域变量** {{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings.html") }} {{ ref(page="variables.html") }}是生存在栈上的同步代码. 在`async{}`中，这些变量将成为异步状态机的一部分，最终可能是驻留在堆上. <br>
+<sup>2</sup> 注意术语_可变_和_不可变_并不准确. 不可变绑定或共享引用可能仍然包含 Cell {{ std(page="std/cell/index.html") }}，从而提供_内部可变性_. 
 
 </footnotes>
 
 
 {{ tablesep() }}
 
-下面列出了如何构建和访问数据结构；以及一些_神奇的_类型。
+下面列出了如何构建和访问数据结构；以及一些_神奇的_类型. 
 
 <fixed-2-column>
 
 | 示例 | 说明 |
 |---------|-------------|
-| `S { x: y }` | 构建 `struct S {}` 或者 `use` 的 `enum E::S {}` 字段 `x` 设置为 `y`。 |
-| `S { x }` | 同上，但字段 `x` 会被设置为局部变量 `x`。 |
-| `S { ..s }` | 用 `s` 填充剩余字段，常配合 [Default](https://doc.rust-lang.org/std/default/trait.Default.html) 一起使用。 |
-| `S { 0: x }` | 类似下面的 `S` &#8203;`(x)`，但是用结构体语法设置字段 `.0`。 |
-| `S`&#8203; `(x)` | 创建 `struct S` &#8203;`(T)` 或者 `use` 的 `enum E::S`&#8203; `()` 其中字段 `.0` 设置为 `x`。 |
-| `S` | 表示 `struct S;` 或以 `S` 为值创建 `use` 来的 `enum E::S`。 |
-| `E::C { x: y }` | 构建枚举变体 `C`。 上面的其他方法依然有效。 |
-| `()` | 空元组，既是字面量也是类型，又称**单元**。{{ std(page="std/primitive.unit.html") }} |
-| `(x)` | 括号表达式。 |
-| `(x,)` | 单元素**元组**表达式。{{ ex(page="primitives/tuples.html") }} {{ std(page="std/primitive.tuple.html") }} {{ ref(page="expressions/tuple-expr.html") }} |
-| `(S,)` | 单元素元组类型。 |
-| `[S]` | 未指明长度的数组类型，如**切片**。{{ ex(page="primitives/array.html") }} {{ std(page="std/primitive.slice.html") }} {{ ref(page="types.html#array-and-slice-types") }} 不能生存在栈上。{{ note( note="*") }} |
-| `[S; n]` | 元素类型为 `S`，定长为 `n` 的**数组类型** {{ ex(page="primitives/array.html") }}  {{ std(page="std/primitive.array.html") }}。 |
-| `[x; n]` | 由 `n` 个 `x` 的副本构建的数组实例。{{ ref(page="expressions/array-expr.html") }} |
-| `[x, y]` | 由给定元素 `x` 和 `y`构成的数据实例。 |
-| `x[0]` | 索引，下标为 `usize` 类型。可重载 [**Index**](https://doc.rust-lang.org/std/ops/trait.Index.html) 和 [**IndexMut**](https://doc.rust-lang.org/std/ops/trait.IndexMut.html)。 |
+| `S { x: y }` | 构建 `struct S {}` 或者 `use` 的 `enum E::S {}` 字段 `x` 设置为 `y`.  |
+| `S { x }` | 同上，但字段 `x` 会被设置为局部变量 `x`.  |
+| `S { ..s }` | 用 `s` 填充剩余字段，常配合 [Default](https://doc.rust-lang.org/std/default/trait.Default.html) 一起使用.  |
+| `S { 0: x }` | 类似下面的 `S` &#8203;`(x)`，但是用结构体语法设置字段 `.0`.  |
+| `S`&#8203; `(x)` | 创建 `struct S` &#8203;`(T)` 或者 `use` 的 `enum E::S`&#8203; `()` 其中字段 `.0` 设置为 `x`.  |
+| `S` | 表示 `struct S;` 或以 `S` 为值创建 `use` 来的 `enum E::S`.  |
+| `E::C { x: y }` | 构建枚举变体 `C`.  上面的其他方法依然有效.  |
+| `()` | 空元组，既是字面量也是类型，又称**单元**. {{ std(page="std/primitive.unit.html") }} |
+| `(x)` | 括号表达式.  |
+| `(x,)` | 单元素**元组**表达式. {{ ex(page="primitives/tuples.html") }} {{ std(page="std/primitive.tuple.html") }} {{ ref(page="expressions/tuple-expr.html") }} |
+| `(S,)` | 单元素元组类型.  |
+| `[S]` | 未指明长度的数组类型，如**切片**. {{ ex(page="primitives/array.html") }} {{ std(page="std/primitive.slice.html") }} {{ ref(page="types.html#array-and-slice-types") }} 不能生存在栈上. {{ note( note="*") }} |
+| `[S; n]` | 元素类型为 `S`，定长为 `n` 的**数组类型** {{ ex(page="primitives/array.html") }}  {{ std(page="std/primitive.array.html") }}.  |
+| `[x; n]` | 由 `n` 个 `x` 的副本构建的数组实例. {{ ref(page="expressions/array-expr.html") }} |
+| `[x, y]` | 由给定元素 `x` 和 `y`构成的数据实例.  |
+| `x[0]` | 索引，下标为 `usize` 类型. 可重载 [**Index**](https://doc.rust-lang.org/std/ops/trait.Index.html) 和 [**IndexMut**](https://doc.rust-lang.org/std/ops/trait.IndexMut.html).  |
 | {{ tab() }} `x[..]` | 范围索引，这里是_全部范围_，又见下 `x[a..b]`, `x[a..=b]`, ...  |
-| `a..b` | **左闭右开区间** {{ std(page="std/ops/struct.Range.html") }} {{ ref(page="expressions/range-expr.html") }}，如 `1..3` 表示 `1, 2`。  |
-| `..b` | 无起点到**右开区间** {{ std(page="std/ops/struct.RangeTo.html") }}。 |
-| `a..=b` | **全闭合区间**, {{ std(page="std/ops/struct.RangeInclusive.html") }} `1..=3` 表示 `1, 2, 3`。 |
-| `..=b` | 无起点到**右闭合区间** {{ std(page="std/ops/struct.RangeFrom.html") }}。 |
-| `..` | **全包含区间**{{ std(page="std/ops/struct.RangeFull.html") }}，常表示_整个组合_。 |
-| `s.x` | 命名 **字段访问**{{ ref(page="expressions/field-expr.html") }}，如果 `x` 不是类型 `S` 的一部分的话则会尝试 [Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html)。 |
-| `s.0` | 数字字段访问，用于元组类型 `S` &#8203;`(T)`。 |
+| `a..b` | **左闭右开区间** {{ std(page="std/ops/struct.Range.html") }} {{ ref(page="expressions/range-expr.html") }}，如 `1..3` 表示 `1, 2`.   |
+| `..b` | 无起点到**右开区间** {{ std(page="std/ops/struct.RangeTo.html") }}.  |
+| `a..=b` | **全闭合区间**, {{ std(page="std/ops/struct.RangeInclusive.html") }} `1..=3` 表示 `1, 2, 3`.  |
+| `..=b` | 无起点到**右闭合区间** {{ std(page="std/ops/struct.RangeFrom.html") }}.  |
+| `..` | **全包含区间**{{ std(page="std/ops/struct.RangeFull.html") }}，常表示_整个组合_.  |
+| `s.x` | 命名 **字段访问**{{ ref(page="expressions/field-expr.html") }}，如果 `x` 不是类型 `S` 的一部分的话则会尝试 [Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html).  |
+| `s.0` | 数字字段访问，用于元组类型 `S` &#8203;`(T)`.  |
 
 </fixed-2-column>
 
 <footnotes>
 
-<sup>*</sup> 目前, 可以参考{{ rfc( page ="1909-unsized-rvalues.html") }}中的[已知问题](https://github.com/rust-lang/rust/issues/48055)。
+<sup>*</sup> 目前, 可以参考{{ rfc( page ="1909-unsized-rvalues.html") }}中的[已知问题](https://github.com/rust-lang/rust/issues/48055). 
 
 </footnotes>
 
 
 ### 引用 & 指针 {#references-pointers}
 
-为非所有者内存赋予访问权限。另请参见 [泛型 & 约束](#generics-constraints)。
+为非所有者内存赋予访问权限. 另请参见 [泛型 & 约束](#generics-constraints). 
 
 
 <fixed-2-column>
@@ -353,8 +353,8 @@ fn main() {
 | {{ tab() }} `let ref r = s;` | 等价于 `let r = &s`. |
 | {{ tab() }} `let S { ref mut x } = s;` | 可变引用绑定 (`let x = &mut s.x`), 解构{{ below( target = "#pattern-matching") }}的简写. |
 | `*r` | **解引用** {{ book(page="ch15-02-deref.html") }} {{ std(page="std/ops/trait.Deref.html") }} {{ nom(page="vec-deref.html") }} 引用 `r` 以访问指针指向的内容. |
-| {{ tab() }} `*r = s;` | 如果 `r` 是一个可变引用, 则将 `s` 移动或复制到目标内存。 |
-| {{ tab() }} `s = *r;` | 如果 `r` 可 `Copy`, 则将 `r` 引用的内容复制到 `s`。 |
+| {{ tab() }} `*r = s;` | 如果 `r` 是一个可变引用, 则将 `s` 移动或复制到目标内存.  |
+| {{ tab() }} `s = *r;` | 如果 `r` 可 `Copy`, 则将 `r` 引用的内容复制到 `s`.  |
 | {{ tab() }} `s = *my_box;` | `Box` 有一个特例{{ link(url="https://www.reddit.com/r/rust/comments/b4so6i/what_is_exactly/ej8xwg8") }}, 即便它不可 `Copy`, 也仍会从 Box 里面移动出来. |
 | `'a`  | **生命周期参数**, {{ book(page="ch10-00-generics.html") }} {{ ex(page="scope/lifetime.html")}} {{ nom(page="lifetimes.html") }} {{ ref(page="items/generics.html#type-and-lifetime-parameters")}}, 为静态分析声明一块代码的持续时间. |
 | {{ tab() }}  `&'a S`  | 仅支持生存时间不短于 `'a` 的地址 `s` . |
@@ -362,7 +362,7 @@ fn main() {
 | {{ tab() }}  `struct S<'a> {}`  | 表明 `S` 包含一个生命周期为 `'a` 的地址.由 `S` 的创建者决定 `'a`. |
 | {{ tab() }} `trait T<'a> {}` | 表明一个实现了 `impl T for S` 的 `S` 可能会包含地址. |
 | {{ tab() }}  `fn f<'a>(t: &'a T)`  | 同上, 用于函数.调用者决定 `'a`. |
-| `'static`  | 特殊的生命周期, 生存在程序的整个执行过程中。 |
+| `'static`  | 特殊的生命周期, 生存在程序的整个执行过程中.  |
 
 </fixed-2-column>
 
@@ -371,7 +371,7 @@ fn main() {
 
 ###  函数 & 行为 {#functions-behavior}
 
-定义代码单元及其抽象。
+定义代码单元及其抽象. 
 
 <fixed-2-column>
 
@@ -407,7 +407,7 @@ fn main() {
 
 ### 控制流程 {#control-flow}
 
-在函数中控制执行。
+在函数中控制执行. 
 
 <fixed-2-column>
 
@@ -443,7 +443,7 @@ fn main() {
 
 ### 代码组织 {#organizing-code}
 
-将项目分割成更小的单元并最大限度地减少依赖关系。
+将项目分割成更小的单元并最大限度地减少依赖关系. 
 
 <fixed-2-column>
 
@@ -464,25 +464,25 @@ fn main() {
 | `pub use a::b;`  | 将 `a::b` 引入作用域, 并再次从当前位置导出. |
 | `pub T`  | 控制 `T` 的**可见性** {{ book(page="ch07-02-defining-modules-to-control-scope-and-privacy.html") }}.「如果父级路径公开, 我也公开」. |
 | {{ tab() }} `pub(crate) T` | 可见性仅<sup>1</sup>在当前 crate 内. |
-| {{ tab() }} `pub(super) T`  | 可见性仅<sup>1</sup>在父级以下。 |
-| {{ tab() }} `pub(self) T`  | 可见性仅<sup>1</sup>在当前模块内。 |
+| {{ tab() }} `pub(super) T`  | 可见性仅<sup>1</sup>在父级以下.  |
+| {{ tab() }} `pub(self) T`  | 可见性仅<sup>1</sup>在当前模块内.  |
 | {{ tab() }} `pub(in a::b) T`  | 可见性仅<sup>1</sup>在 `a::b` 内. |
-| `extern crate a;` | 声明依赖一个外部 **crate** {{ book(page="ch02-00-guessing-game-tutorial.html#using-a-crate-to-get-more-functionality") }} {{ ex(page="crates/link.html#extern-crate") }} {{ ref(page="items/extern-crates.html#extern-crate-declarations") }} {{ deprecated() }}. 换用 `use a::b` {{ edition(ed="'18") }}。 |
-| `extern "C" {}`  | _声明_ **FFI** 的外部依赖和 ABI(如 `"C"`){{ book(page="ch19-01-unsafe-rust.html#using-extern-functions-to-call-external-code") }} {{ ex(page="std_misc/ffi.html#foreign-function-interface") }} {{ nom(page="ffi.html#calling-foreign-functions") }} {{ ref(page="items/external-blocks.html#external-blocks") }}。 |
-| `extern "C" fn f() {}`  | _定义_ FFI 导出成 ABI(如 `"C"`)的函数。 |
+| `extern crate a;` | 声明依赖一个外部 **crate** {{ book(page="ch02-00-guessing-game-tutorial.html#using-a-crate-to-get-more-functionality") }} {{ ex(page="crates/link.html#extern-crate") }} {{ ref(page="items/extern-crates.html#extern-crate-declarations") }} {{ deprecated() }}. 换用 `use a::b` {{ edition(ed="'18") }}.  |
+| `extern "C" {}`  | _声明_ **FFI** 的外部依赖和 ABI(如 `"C"`){{ book(page="ch19-01-unsafe-rust.html#using-extern-functions-to-call-external-code") }} {{ ex(page="std_misc/ffi.html#foreign-function-interface") }} {{ nom(page="ffi.html#calling-foreign-functions") }} {{ ref(page="items/external-blocks.html#external-blocks") }}.  |
+| `extern "C" fn f() {}`  | _定义_ FFI 导出成 ABI(如 `"C"`)的函数.  |
 
 </fixed-2-column>
 
 <footnotes>
 
-<sup>1</sup> 子模块中的总是可以访问所有项目, 与其是否是 `pub` 无关。
+<sup>1</sup> 子模块中的总是可以访问所有项目, 与其是否是 `pub` 无关. 
 
 </footnotes>
 
 
 ### 类型别名和转换 {#type-aliases-and-casts}
 
-类型名称的简写, 以及转为其他类型的方法。
+类型名称的简写, 以及转为其他类型的方法. 
 
 <fixed-2-column>
 
@@ -502,7 +502,7 @@ fn main() {
 
 <footnotes>
 
-<sup>1</sup> 关于在类型之间转换的所有方法，请参见下面的[类型转换](#type-conversions)。
+<sup>1</sup> 关于在类型之间转换的所有方法，请参见下面的[类型转换](#type-conversions). 
 
 </footnotes>
 
@@ -510,15 +510,15 @@ fn main() {
 
 ### 宏 & 属性 {#macros-attributes}
 
-实际编译前的代码预展开。
+实际编译前的代码预展开. 
 
 <fixed-2-column>
 
 | 示例 |  说明 |
 |---------|---------|
-| `m!()` |  **宏** {{book(page="ch19-06-macros.html")}} {{std(page="std/index.html#macros")}} {{ref(page="macros.html")}} 咒语，也作 `m!{}`、`m![]`（取决于宏本身） |
-| `#[attr]`  | 外部**属性**{{ex(page="attribute.html")}} {{ref(page="attributes.html")}}，注解接下来的内容。 |
-| `#![attr]` | 内部属性，注解_上部_，周边的内容。 |
+| `m!()` |  **宏** {{book(page="ch19-06-macros.html")}} {{std(page="std/index.html#macros")}} {{ref(page="macros.html")}} 咒语，也作 `m!{}`、`m![]` (取决于宏本身)  |
+| `#[attr]`  | 外部**属性**{{ex(page="attribute.html")}} {{ref(page="attributes.html")}}，注解接下来的内容.  |
+| `#![attr]` | 内部属性，注解_上部_，周边的内容.  |
 
 </fixed-2-column>
 
@@ -542,7 +542,7 @@ fn main() {
 
 ### 模式匹配 {#pattern-matching}
 
-函数参数, `match` 或 `let` 表达式中的构造。
+函数参数, `match` 或 `let` 表达式中的构造. 
 
 
 <fixed-2-column>
@@ -558,8 +558,8 @@ fn main() {
 |  {{ tab() }} `let s @ S { x } = get();`  | 将 `s` 绑定到 `S` 并将 `x` 绑定到 `s.x`, **模式绑定**, {{ book(page="ch18-03-pattern-syntax.html#-bindings") }} {{ ex(page="flow_control/match/binding.html#binding") }} {{ ref(page="patterns.html#identifier-patterns") }} 见下 {{ esoteric() }} |
 |  {{ tab() }} `let w @ t @ f = get();`  | 存储 3 份 `get()` 结果的拷贝分别到 `w`, `t`, `f`. {{ esoteric() }} |
 |  {{ tab() }} `let Some(x) = get();` | **不可用**{{ bad() }}, 因为模式可能会**不匹配**{{ ref(page="expressions/if-expr.html#if-let-expressions") }}. 换用 `if let`. |
-| `if let Some(x) = get() {}`  | 如果模式匹配则执行该分支(如某个 `enum` 变体). 语法糖<sup>*</sup>。 |
-| `while let Some(x) = get() {}`  | 等效；这里继续调用 `get()`，只要可以分配模式就运行 `{}`。 |
+| `if let Some(x) = get() {}`  | 如果模式匹配则执行该分支(如某个 `enum` 变体). 语法糖<sup>*</sup>.  |
+| `while let Some(x) = get() {}`  | 等效；这里继续调用 `get()`，只要可以分配模式就运行 `{}`.  |
 | `fn f(S { x }: S)`  | 类似于 `let`, 模式匹配也可用在函数参数上. 这里 `f(s)` 的 `x` 被绑定到 `s.x`.{{ esoteric() }}|
 
 </fixed-2-column>
@@ -575,7 +575,7 @@ fn main() {
 
 {{ tablesep() }}
 
-`match` 表达式的模式匹配分支。左列的分支也可用于 `let` 表达式。
+`match` 表达式的模式匹配分支. 左列的分支也可用于 `let` 表达式. 
 
 <fixed-2-column class="color-header special_example">
 
@@ -619,7 +619,7 @@ fn main() {
 
 ### 泛型 & 约束 {#generics-constraints}
 
-泛型使得类型构造、trait 和函数更加可扩展。
+泛型使得类型构造、trait 和函数更加可扩展. 
 
 <fixed-2-column>
 
@@ -630,7 +630,7 @@ fn main() {
 | {{ tab() }} `T: R, P: S`  | **独立 trait 约束**(这里一个对 `T`, 一个对 `P`). |
 | {{ tab() }} `T: R, S`  | 编译错误{{ bad() }}. 可以用下面的 `R + S` 代替. |
 | {{ tab() }} `T: R + S`  | **合并 trait 约束**{{ book(page="ch10-02-traits.html#specifying-multiple-trait-bounds-with-the--syntax") }} {{ ex(page="generics/multi_bounds.html") }}. `T` 必须同时满足 `R` 和 `S`. |
-| {{ tab() }} `T: R + 'a`  | 同上, 但有生命周期。`T` 必须满足 `R`；如果 `T` 有生命周期, 则必须长于 `'a`. |
+| {{ tab() }} `T: R + 'a`  | 同上, 但有生命周期. `T` 必须满足 `R`；如果 `T` 有生命周期, 则必须长于 `'a`. |
 | {{ tab() }} `T: ?Sized` | 指定一个预定义的 trait 绑定, 如这里是 `Sized`. {{ todo() }} |
 | {{ tab() }} `T: 'a` | 类型**生命周期约束**{{ ex(page="scope/lifetime/lifetime_bounds.html") }}. `T` 应长于 `'a`. |
 | {{ tab() }} `T: 'static` | 同上. 但 _不_ 意味着值 `t` _会_ {{ bad() }} 活在 `'static` 上, 仅在它可以的时候才行. |
@@ -639,7 +639,7 @@ fn main() {
 | {{ tab() }} `S<10>` | 可以指定字面量. |
 | {{ tab() }} `S<{5+5}>` | 表达式需要用花括号包起来. |
 | `S<T> where T: R`  | 几乎等同于 `S<T: R>`, 但对于比较长的约束更容易阅读. |
-| {{ tab() }} `S<T> where u8: R<T>`  | 还允许您创建涉及其他类型的条件语句。 |
+| {{ tab() }} `S<T> where u8: R<T>`  | 还允许您创建涉及其他类型的条件语句.  |
 | `S<T = R>` | **默认参数**. {{ book(page="ch19-03-advanced-traits.html#default-generic-type-parameters-and-operator-overloading") }} 保持扩展性的同时更易于使用. |
 | {{ tab() }} `S<const N: u8 = 0>` | 常量默认参数. 如 `f(x: S) {}` 中参数 `N` 为 `0`. |
 | {{ tab() }} `S<T = u8>` | 类型默认参数. 如 `f(x: S) {}` 中参数 `T` 为 `u8`. |
@@ -663,7 +663,7 @@ fn main() {
 
 ### 高阶项目 {{ esoteric() }} {#higher-ranked-items}
 
-_实际的_ 类型和 trait, 某些事物的抽象以及常用生命周期。
+_实际的_ 类型和 trait, 某些事物的抽象以及常用生命周期. 
 
 <fixed-2-column>
 
@@ -702,7 +702,7 @@ _实际的_ 类型和 trait, 某些事物的抽象以及常用生命周期。
 
 ### 字符串 & 字符 {#strings-chars}
 
-Rust 提供了若干种创建字符串和字符字面量的办法。
+Rust 提供了若干种创建字符串和字符字面量的办法. 
 
 
 <fixed-2-column>
@@ -754,7 +754,7 @@ Rust 提供了若干种创建字符串和字符字面量的办法。
 
 ### 杂项 {#miscellaneous}
 
-这些小技巧不属于其他分类但最好了解一下。
+这些小技巧不属于其他分类但最好了解一下. 
 
 <fixed-2-column>
 
@@ -884,7 +884,7 @@ Rust 支持大部分其他语言也有的通用操作符(`+`, `*`, `%`, `=`, `==
 
 ## 语法糖 {#language-sugar}
 
-如果有什么东西让你觉得，“不该能用的啊”，那可能就是这里的原因。
+如果有什么东西让你觉得，“不该能用的啊”，那可能就是这里的原因. 
 
 
 
@@ -1472,7 +1472,7 @@ f(a);
             <label class="byte2" style="left: 136px;"><code>x</code></label>
         </labels>
         <subtext>嵌套函数</subtext>
-        <!-- <subtext><code>fn f(x: S) { ... f(x) ... }</code></subtext> -->
+        <!-- <subtext><code>fn f(x: S) { ... f(x)... }</code></subtext> -->
     </memory-row>
 </lifetime-example>
 <explanation>
@@ -2647,9 +2647,9 @@ b = S(4);   // 无效. 因为 `b` 处于借用态.
 print_byte(r);
 ```
 
-- Once the address of a variable is taken via `&b` or `&mut b` the variable is marked as **borrowed**.
-- While borrowed, the content of the address cannot be modified anymore via original binding `b`.
-- Once address taken via `&b` or `&mut b` stops being used (in terms of LOC) original binding `b` works again.
+- 一旦变量地址被 `&b` 或 `&mut b` 捕获, 变量就会被标记为**已借用**.
+- 借用时, 就不能再通过原始绑定 `b` 修改地址的内容.
+- 一旦捕获了地址的 `&b` 或 `&mut b` 在上下文中不再使用, 原始绑定 `b` 将会恢复可用.
 
 
 </explanation>
@@ -2661,7 +2661,7 @@ print_byte(r);
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-lt-11" name="tab-lt">
-<label for="tab-lt-11"><b>Lifetimes in Functions</b></label>
+<label for="tab-lt-11"><b>函数中的生命周期</b></label>
 <panel>
 <div>
 
@@ -2824,7 +2824,7 @@ print_byte(r);
             <label class="byte4" style="left: 165px;"><code>x</code></label>
             <label class="byte4" style="left: 188px;"><code>y</code></label>
         </labels>
-        <subtext>Function Parameters</subtext>
+        <subtext>函数参数</subtext>
         <!-- <subtext><code>let r = f(&b, &c);</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -2839,9 +2839,9 @@ let c = S(2);
 let r = f(&b, &c);
 ```
 
-- When calling functions that take and return references two interesting things happen:
-    - The used local variables are placed in a borrowed state,
-    - But it is during compilation unknown which address will be returned.
+- 调用函数时会捕获返回的引用, 这里将会发生两件趣事:
+    - 用到的局部变量将会置为借用态,
+    - 但编译期间并不知道返回值的地址.
 
 
 
@@ -3009,7 +3009,7 @@ let r = f(&b, &c);
             <label class="byte4 hide" style="left: 165px;"><code>x</code></label>
             <label class="byte4 hide" style="left: 188px;"><code>y</code></label>
         </labels>
-        <subtext>Problem of 'Borrowed' Propagation</subtext>
+        <subtext>“借用态”传播的问题</subtext>
         <!-- <subtext><code>let a = b;</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -3021,15 +3021,15 @@ let c = S(2);
 
 let r = f(&b, &c);
 
-let a = b;   // Are we allowed to do this?
-let a = c;   // Which one is _really_ borrowed?
+let a = b;   // 这样做可行吗?
+let a = c;   // 谁才是真正被借用的?
 
 print_byte(r);
 ```
 
-- Since `f` can return only one address, not in all cases `b` and `c` need to stay locked.
-- In many cases we can get quality-of-life improvements.
-    - Notably, when we know one parameter _couldn't_ have been used in return value anymore.
+- 因为 `f` 只能返回一个地址, 所以并不是所有情况下 `b` 和 `c` 都需要保持锁定态.
+- 多数情况下我们是有更好的办法解决这个问题的.
+    - 特别是当我们知道一个参数 _不能_ 再被用于返回值的时候.
 
 
 </explanation>
@@ -3198,7 +3198,7 @@ print_byte(r);
             <label class="byte4 hide" style="left: 165px;"><code>x</code></label>
             <label class="byte4 hide" style="left: 188px;"><code>y</code></label>
         </labels>
-        <subtext>Lifetimes Propagate Borrowed State</subtext>
+        <subtext>借用态传播生命周期</subtext>
         <!-- <subtext><code>f(x: &'x S, y: &'y S) -> &'y u8</code></subtext> -->
     </memory-row>
 </lifetime-example>
@@ -3210,21 +3210,21 @@ fn f<'b, 'c>(x: &'b S, y: &'c S) -> &'c u8 { ... }
 let b = S(1);
 let c = S(2);
 
-let r = f(&b, &c); // We know returned reference is `c`-based, which must stay locked,
-                   // while `b` is free to move.
+let r = f(&b, &c); // 我们知道返回的引用是基于 `c` 的, 它必须保持锁定;
+                   // 然而 `b` 却是可以自由移动的.
 
 let a = b;
 
 print_byte(r);
 ```
 
-- Lifetime parameters in signatures, like `'c` above, solve that problem.
-- Their primary purpose is:
-    - **outside the function**, to explain based on which input address an output address could be generated,
-    - **within the function**, to guarantee only addresses that live at least `'c` are assigned.
-- The actual lifetimes `'b`, `'c` are transparently picked by the compiler at **call site**, based on the borrowed variables the developer gave.
-- They are **not** equal to the _scope_ (which would be LOC from initialization to destruction) of `b` or `c`, but only a minimal subset of their scope called _lifetime_, that is, a minmal set of LOC based on how long `b` and `c` need to be borrowed to perform this call and use the obtained result.
-- In some cases, like if `f` had `'c: 'b` instead, we still couldn't distinguish and both needed to stay locked.
+- 解决这个问题的办法就是签名中的生命周期参数 (比如上面的 `'c`).
+- 它们的主要作用是:
+    - **函数外**会用于描述生成的结果基于哪个输入地址和输出地址,
+    - **函数内**来保证只有生存时间低于 `'c` 的地址允许被赋值.
+- 实际的生命周期 `'b`, `'c` 会基于开发者给出的借用态变量被编译器透明地指派给**调用方**.
+- 它并**不等同于** `b` 或 `c` 的 _作用域_ (可能是从初始化到结束之间的代码行), 但仅有一个最小子集可以作为该作用域的 _生命周期_, 即基于 `b` 和 `c` 需要借用于该调用和保存结果的最少代码行.
+- 某些如 `f` 被 `'c: 'b` 替代, 仍不能区分出来的情况下, 两个都会保持锁定.
 
 </explanation>
 </lifetime-section>
@@ -3391,7 +3391,7 @@ print_byte(r);
             <label class="byte4 hide" style="left: 188px;"><code>y</code></label>
         </labels>
         <!-- <subtext><code>{ let r = ... }</code></subtext> -->
-        <subtext>Unlocking</subtext>
+        <subtext>解锁</subtext>
     </memory-row>
 </lifetime-example>
 <explanation>
@@ -3401,15 +3401,15 @@ let mut c = S(2);
 
 let r = f(&c);
 let s = r;
-                    // <- Not here, `s` prolongs locking of `c`.
+                    // <- 不是这里, `s` 会延长 `c` 的锁定时间.
 
 print_byte(s);
 
-let a = c;          // <- But here, no more use of `r` or `s`.
+let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 
 ```
-- A variable location is _unlocked_ again once the last use of any reference that may point to it ends.
+- 一旦任意引用最后指向了结束, 变量位置将会再次 _解锁_.
 
 </explanation>
 </lifetime-section>
@@ -3420,7 +3420,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 <footnotes>
 
-↕️ Examples expand by clicking.
+↕️ 点击展开用例
 
 </footnotes>
 
@@ -3437,12 +3437,12 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 # 数据类型
 
-通用数据类型的内存表示。
+通用数据类型的内存表示. 
 
 
 ## 基本类型 {#basic-types}
 
-语言核心内建的必要类型。
+语言核心内建的必要类型. 
 
 
 #### 数字类型 {{ ref(page="types/numeric.html") }}
@@ -3560,7 +3560,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
         <byte style="border-color: #aaa;"><code></code></byte>
     </visual>
     <zoom>
-        与平台的 <code>ptr</code> 一致。
+        与平台的 <code>ptr</code> 一致. 
     </zoom>
 </datum>
 
@@ -3593,7 +3593,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 |`u32`| `4_294_967_295` |
 |`u64`| `18_446_744_073_709_551_615` |
 |`u128`| `340_282_366_920_938_463_463_374_607_431_768_211_455` |
-|`usize`| Depending on platform pointer size, same as `u16`, `u32`, or `u64`. |
+|`usize`| 取决于平台指针大小, 可以是 `u16`, `u32`, 或 `u64`. |
 
 
 </div></panel></tab>
@@ -3614,7 +3614,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 |`i32`| `2_147_483_647` |
 |`i64`| `9_223_372_036_854_775_807` |
 |`i128`| `170_141_183_460_469_231_731_687_303_715_884_105_727` |
-|`isize`| Depending on platform pointer size, same as `i16`, `i32`, or `i64`. |
+|`isize`| 取决于平台指针大小, 可以是 `i16`, `i32`, 或 `i64`. |
 
 {{ tablesep() }}
 
@@ -3625,7 +3625,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 |`i32`| `-2_147_483_648` |
 |`i64`| `-9_223_372_036_854_775_808` |
 |`i128`| `-170_141_183_460_469_231_731_687_303_715_884_105_728` |
-|`isize`| Depending on platform pointer size, same as `i16`, `i32`, or `i64`. |
+|`isize`| 取决于平台指针大小, 可以是 `i16`, `i32`, 或 `i64`. |
 
 
 </div></panel></tab>
@@ -3710,7 +3710,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 | NaN | ± | 2047 | 非零 | NaN  |
 
 <footnotes>
-    <sup>*</sup> 浮点类型遵循 <a href="https://en.wikipedia.org/wiki/IEEE_754-2008_revision">IEEE 754-2008</a> 规范，并取决于平台大小端序。
+    <sup>*</sup> 浮点类型遵循 <a href="https://en.wikipedia.org/wiki/IEEE_754-2008_revision">IEEE 754-2008</a> 规范，并取决于平台大小端序. 
 </footnotes>
 
 </div></panel></tab>
@@ -3720,17 +3720,17 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-numeric-4" name="tab-group-numeric">
-<label for="tab-numeric-4"><b>Casting Pitfalls</b> {{ bad() }}</label>
+<label for="tab-numeric-4"><b>转换的陷阱</b> {{ bad() }}</label>
 <panel><div class="">
 
 
-| Cast<sup>1</sup> | Gives | Note |
+| 转换<sup>1</sup> | 结果 | 说明 |
 | --- | --- | --- |
-| `3.9_f32 as u8` | `3` | Truncates, consider `x.round()` first. |
-| `314_f32 as u8` | `255` | 采用最接近的可用数字。 |
-| `f32::INFINITY as u8` | `255` | Same, treats `INFINITY` as _really_ large number.|
+| `3.9_f32 as u8` | `3` | 截断, 请优先使用 `x.round()`. |
+| `314_f32 as u8` | `255` | 采用最接近的可用数字.  |
+| `f32::INFINITY as u8` | `255` | 同上, 但会把 `INFINITY` 当做一个 _真正的_ 大数.|
 | `f32::NAN as u8` | `0` | - |
-| `_314 as u8` | `58` | 截断多余的位。 |
+| `_314 as u8` | `58` | 截断多余的位.  |
 | `_200 as i8` | `56` | - |
 | `_257 as i8` | `-1` | - |
 
@@ -3771,9 +3771,9 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 <footnotes>
 
-<sup>1</sup>表达式`_100`表示可能包含`100`值的任何内容，例如`100_i32`，但对编译器是不透明的。<br/>
-<sup>d</sup> 调试版本。<br/>
-<sup>r</sup> 发布版本。<br/>
+<sup>1</sup>表达式`_100`表示可能包含`100`值的任何内容，例如`100_i32`，但对编译器是不透明的. <br/>
+<sup>d</sup> 调试版本. <br/>
+<sup>r</sup> 发布版本. <br/>
 
 </footnotes>
 
@@ -3794,7 +3794,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
         <byte><code></code></byte>
         <byte><code></code></byte>
     </visual>
-    <description>任意 UTF-8 标量。</description>
+    <description>任意 UTF-8 标量. </description>
 </datum>
 
 
@@ -3811,7 +3811,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
         <byte class="bytes"><code>8</code></byte>
         <note>...未指明条目</note>
     </visual>
-    <description>很少单独见到，常用 <code>&str</code> 代替。</description>
+    <description>很少单独见到，常用 <code>&str</code> 代替. </description>
 </datum>
 
 
@@ -3827,8 +3827,8 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 | 类型 | 描述 |
 |---------|-------------|
-| `char` | 总是为 4 字节，且仅包含一个 Unicode **标量值**{{ link(url="https://www.unicode.org/glossary/#unicode_scalar_value") }}。 |
-| `str` | 未知长度的 `u8` 数组保证保存 **UTF-8 编码的码位**。 |
+| `char` | 总是为 4 字节，且仅包含一个 Unicode **标量值**{{ link(url="https://www.unicode.org/glossary/#unicode_scalar_value") }}.  |
+| `str` | 未知长度的 `u8` 数组保证保存 **UTF-8 编码的码位**.  |
 
 </div></panel></tab>
 
@@ -3917,7 +3917,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 ## 自定义类型 {#custom-types}
 
-用户定义的基本类型。它实际的<b>内存布局</b>{{ ref(page="type-layout.html") }}取决于<b>表示法</b>{{ ref(page="type-layout.html#representations") }}，还有对齐。
+用户定义的基本类型. 它实际的<b>内存布局</b>{{ ref(page="type-layout.html") }}取决于<b>表示法</b>{{ ref(page="type-layout.html#representations") }}，还有对齐. 
 
 
 <!-- NEW ENTRY -->
@@ -3949,7 +3949,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
        <framed class="any t"><code>T</code></framed>
        <note>... n 次</note>
     </visual>
-    <description>固定的 <code>n</code> 个元素的数组。</description>
+    <description>固定的 <code>n</code> 个元素的数组. </description>
 </datum>
 
 
@@ -3963,7 +3963,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
        <framed class="any t"><code>T</code></framed>
        <note>...未指定条目</note>
     </visual>
-    <description>未知多元素的<b>切片类型</b>。Neither <br> <code>Sized</code> （不携带 <code>len</code> 信息），<br>而且大多数情况下都是以<code>&[T]</code>为参照。{{ below(target="#references-pointers-ui") }}</description>
+    <description>未知多元素的<b>切片类型</b>. Neither <br> <code>Sized</code>  (不携带 <code>len</code> 信息) ，<br>而且大多数情况下都是以<code>&[T]</code>为参照. {{ below(target="#references-pointers-ui") }}</description>
 </datum>
 
 <!-- NEW ENTRY -->
@@ -3991,7 +3991,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
        <framed class="any"><code>A</code></framed>
        <framed class="any" style="width: 50px;"><code>C</code></framed>
     </visual>
-    <description>除非强制表示（例如通过 <code>#[repr(C)]</code>）<br>否则类型布局未指定。</description>
+    <description>除非强制表示 (例如通过 <code>#[repr(C)]</code>) <br>否则类型布局未指定. </description>
 </datum>
 
 
@@ -4008,7 +4008,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
        <pad><code style="">↦</code></pad>
        <framed class="any" style="width: 100px;"><code>B</code></framed>
     </visual>
-    <description>编译器还可以添加填充。</description>
+    <description>编译器还可以添加填充. </description>
 </datum>
 
 
@@ -4016,7 +4016,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 <blockquote>
 <footnotes>
 
-还需注意，具有完全相同字段的两种类型 `A(X, Y)` 和 `B(X, Y)` 仍然可以具有不同的布局；如果没有表示保证，则决不能使用 `transmute()`。
+还需注意，具有完全相同字段的两种类型 `A(X, Y)` 和 `B(X, Y)` 仍然可以具有不同的布局；如果没有表示保证，则决不能使用 `transmute()`. 
 
 
 </footnotes>
@@ -4053,7 +4053,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
         </framed>
     </visual>
     <description>
-        安全地保存 A、B 或 C。<br>又名“标签联合”，尽管编译器会忽略标签。
+        安全地保存 A、B 或 C. <br>又名“标签联合”，尽管编译器会忽略标签. 
     </description>
 </datum>
 
@@ -4079,7 +4079,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
         </framed>
     </visual>
     <description>
-        不安全地以多种方式解释同一块内存。<br>结果可能是未定义的。
+        不安全地以多种方式解释同一块内存. <br>结果可能是未定义的. 
     </description>
 </datum>
 
@@ -4087,8 +4087,8 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 ## 引用 & 指针 {#references-pointers-ui}
 
-引用授权了对其他内存空间的安全访问。裸指针则是不安全 `unsafe` 的访问。
-各自的 `mut` 类型是相同的。
+引用授权了对其他内存空间的安全访问. 裸指针则是不安全 `unsafe` 的访问. 
+各自的 `mut` 类型是相同的. 
 
 
 
@@ -4110,7 +4110,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
         </memory>
     </memory-entry>
     <description>必须定位一些有效 <code>t</code> 的 <code>T</code>，<br> 并且任何这样的目标必须
-至少存在<code>'a</code>。</description>
+至少存在<code>'a</code>. </description>
 </datum>
 
 
@@ -4126,7 +4126,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
         </payload>
     </visual>
     <zoom>
-        没有任何保证。
+        没有任何保证. 
     </zoom>
 </datum>
 
@@ -4135,8 +4135,8 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 ### 元指针 {#pointer-meta}
 
-许多引用和指针类型可以携带一个额外的字段，**元数据指针**{{ std(page="nightly/std/ptr/trait.Pointee.html#pointer-metadata") }}。
-它可以是目标的元素长度或字节长度，也可以是指向<i>vtable</i>的指针。带有 meta 的指针称为**胖指针(fat)**，否则称为**细指针(thin)**。
+许多引用和指针类型可以携带一个额外的字段，**元数据指针**{{ std(page="nightly/std/ptr/trait.Pointee.html#pointer-metadata") }}. 
+它可以是目标的元素长度或字节长度，也可以是指向<i>vtable</i>的指针. 带有 meta 的指针称为**胖指针(fat)**，否则称为**细指针(thin)**. 
 
 <!-- NEW ENTRY -->
 <datum class="spaced">
@@ -4152,7 +4152,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
             <framed class="any t"><code>T</code></framed>
         </memory>
     </memory-entry>
-    <description>没有大小目标的元（细指针）。</description>
+    <description>没有大小目标的元 (细指针). </description>
 </datum>
 
 
@@ -4267,7 +4267,7 @@ let a = c;          // <- But here, no more use of `r` or `s`.
 
 ## 闭包 {#closures-data}
 
-闭包是一个临时函数，定义闭包时，它会自动管理数据**捕获**{{ ref(page="types/closure.html#capture-modes") }}环境中访问的内容。例如：
+闭包是一个临时函数，定义闭包时，它会自动管理数据**捕获**{{ ref(page="types/closure.html#capture-modes") }}环境中访问的内容. 例如：
 
 <!-- NEW ENTRY -->
 <datum class="spaced">
@@ -4340,7 +4340,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
     <visual class="cell">
            <framed class="any unsized"><code>T</code></framed>
     </visual>
-    <description>魔术类型, 允许<br>别名可变性。</description>
+    <description>魔术类型, 允许<br>别名可变性. </description>
 </datum>
 
 
@@ -4350,7 +4350,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
     <visual>
            <framed class="any unsized celled"><code>T</code></framed>
     </visual>
-    <description>允许 <code>T</code> 的<br>移动进出。</description>
+    <description>允许 <code>T</code> 的<br>移动进出. </description>
 </datum>
 
 
@@ -4539,7 +4539,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
             </div>
         </memory>
     </memory-entry>
-    <description>以空字符结束, 但中间没有空字符。</description>
+    <description>以空字符结束, 但中间没有空字符. </description>
 </datum>
 
 
@@ -5364,7 +5364,7 @@ Each argument designator in format macro is either empty `{}`, `{argument}`, or 
 | `width` | Minimum width (&geq; 0), padding with `fill` (default to space). If starts with `0`, zero-padded. |
 | `precision` | Decimal digits (&geq; 0) for numerics, or max width for non-numerics. |
 | `$` | Interpret `width` or `precision` as argument identifier instead to allow for dynamic formatting. |
-| **`type`** | `Debug`{{ std(page="std/fmt/trait.Debug.html") }} (`?`) formatting, hex (`x`), binary (`b`), octal (`o`), pointer (`p`), exp (`e`) ... [see more](https://doc.rust-lang.org/std/fmt/index.html#traits). |
+| **`type`** | `Debug`{{ std(page="std/fmt/trait.Debug.html") }} (`?`) formatting, hex (`x`), binary (`b`), octal (`o`), pointer (`p`), exp (`e`)... [see more](https://doc.rust-lang.org/std/fmt/index.html#traits). |
 
 </div>
 
@@ -5774,7 +5774,7 @@ Commands and tools that are good to know.
 
 | 命令 | 说明 |
 |--------| ---- |
-| `cargo init` | 基于最新的版本创建新项目。 |
+| `cargo init` | 基于最新的版本创建新项目.  |
 | <code>cargo <span class="cargo-prefix">b</span>uild</code> | Build the project in debug mode (<code>--<span class="cargo-prefix">r</span>elease</code> for all optimization). |
 | <code>cargo <span class="cargo-prefix">c</span>heck</code> | Check if project would compile (much faster). |
 | <code>cargo <span class="cargo-prefix">t</span>est</code> | Run tests for the project. |
