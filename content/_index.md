@@ -47,7 +47,7 @@ insert_anchor_links = "right"
 <br> <legend-symbol> {{ edition(ed="'18") }} </legend-symbol>有**最低版本**要求. 
 <br> <legend-symbol> {{ experimental() }} </legend-symbol>要求**Rust nightly** (或不完整). 
 <br> <legend-symbol> {{ bad() }}   </legend-symbol>故意的**错误示例**或**缺陷代码**. 
-<br> <legend-symbol> {{ esoteric() }}   </legend-symbol>略显**深奥**，很少使用的高级我. 
+<br> <legend-symbol> {{ esoteric() }}   </legend-symbol>略显**深奥**, 很少使用的高级我. 
 <br> <legend-symbol> {{ hot() }}   </legend-symbol>**常用特性**
 <br> <legend-symbol> {{ todo() }} </legend-symbol>**缺少链接**或说明
 <br> <legend-symbol> {{ opinionated() }} </legend-symbol>**作者见解**
@@ -149,9 +149,9 @@ insert_anchor_links = "right"
 
 </noprint>
 
-## 你好，Rust!
+## 你好, Rust!
 
-如果你是 Rust 新手，或者你想试点什么，可以在下面尝试运行一下：
+如果你是 Rust 新手, 或者你想试点什么, 可以在下面尝试运行一下: 
 
 <tabs>
 
@@ -267,58 +267,58 @@ fn main() {
 | {{ tab() }} `struct S { x: T }` | 定义包含 `T` 类型命名字段 `x` 的结构体.  |
 | {{ tab() }} `struct S` &#8203;`(T);` | 定义 `T` 类型数字字段 `.0` 的“元组”结构体.  |
 | {{ tab() }} `struct S;` | 定义一个**零大小**{{ nom(page="exotic-sizes.html#zero-sized-types-zsts")}}的单元结构体. 已优化不占用任何空间.  |
-| `enum E {}` | 定义**枚举**{{ book(page="ch06-01-defining-an-enum.html") }} {{ ex(page="custom_types/enum.html#enums") }} {{ ref(page="items/enumerations.html") }}， 参见[数字数据类型](https://en.wikipedia.org/wiki/Algebraic_data_type)和[标签联合](https://en.wikipedia.org/wiki/Tagged_union).  |
-| {{ tab() }}  `enum E { A, B`&#8203;`(), C {} }` | 定义变体枚举；可以是单元- `A`，元组 `B` &#8203;`()` 或者结构体风格的 `C{}`.  |
-| {{ tab() }}  `enum E { A = 1 }` | 如果所有变体都是单元值，则允许判别式值，例如用于 FFI.  |
-| `union U {}` | 不安全的 C 风格**联合体**{{ ref(page="items/unions.html") }}，用于兼容 FFI.  {{ esoteric() }} |
-| `static X: T = T();`  | 具有 `'static` 生命周期的**全局变量** {{ book(page="ch19-01-unsafe-rust.html#accessing-or-modifying-a-mutable-static-variable") }} {{ ex(page="custom_types/constants.html#constants") }} {{ ref(page="items/static-items.html#static-items") }}，内存位置独立.  |
-| `const X: T = T();`  | 定义**常量**{{ book(page="ch03-01-variables-and-mutability.html#differences-between-variables-and-constants") }} {{ ex(page="custom_types/constants.html") }} {{ ref(page="items/constant-items.html") }}，使用时会临时复制一份.  |
+| `enum E {}` | 定义**枚举**{{ book(page="ch06-01-defining-an-enum.html") }} {{ ex(page="custom_types/enum.html#enums") }} {{ ref(page="items/enumerations.html") }},  参见[数字数据类型](https://en.wikipedia.org/wiki/Algebraic_data_type)和[标签联合](https://en.wikipedia.org/wiki/Tagged_union).  |
+| {{ tab() }}  `enum E { A, B`&#8203;`(), C {} }` | 定义变体枚举; 可以是单元- `A`, 元组 `B` &#8203;`()` 或者结构体风格的 `C{}`.  |
+| {{ tab() }}  `enum E { A = 1 }` | 如果所有变体都是单元值, 则允许判别式值, 例如用于 FFI.  |
+| `union U {}` | 不安全的 C 风格**联合体**{{ ref(page="items/unions.html") }}, 用于兼容 FFI.  {{ esoteric() }} |
+| `static X: T = T();`  | 具有 `'static` 生命周期的**全局变量** {{ book(page="ch19-01-unsafe-rust.html#accessing-or-modifying-a-mutable-static-variable") }} {{ ex(page="custom_types/constants.html#constants") }} {{ ref(page="items/static-items.html#static-items") }}, 内存位置独立.  |
+| `const X: T = T();`  | 定义**常量**{{ book(page="ch03-01-variables-and-mutability.html#differences-between-variables-and-constants") }} {{ ex(page="custom_types/constants.html") }} {{ ref(page="items/constant-items.html") }}, 使用时会临时复制一份.  |
 | `let x: T;`  | 在栈{{ note( note="1") }}上分配 `T` 大小的字节并命名为 `x`.  一旦分配不可修改.  |
-| `let mut x: T;`  | 类似于 `let`，但具有**可变性**{{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings/mut.html") }}, 允许修改和可变借用{{ note( note="2") }}.  |
-| {{ tab() }} `x = y;` | 将 `y` 移动到 `x`，如果 `T` 不能 **`Copy`**{{ std(page="std/marker/trait.Copy.html") }}，`y` 将不再可用，否则会复制一份 `y`.  |
+| `let mut x: T;`  | 类似于 `let`, 但具有**可变性**{{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings/mut.html") }}, 允许修改和可变借用{{ note( note="2") }}.  |
+| {{ tab() }} `x = y;` | 将 `y` 移动到 `x`, 如果 `T` 不能 **`Copy`**{{ std(page="std/marker/trait.Copy.html") }}, `y` 将不再可用, 否则会复制一份 `y`.  |
 
 </fixed-2-column>
 
 <footnotes>
 
-<sup>1</sup> **域变量** {{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings.html") }} {{ ref(page="variables.html") }}是生存在栈上的同步代码. 在`async{}`中，这些变量将成为异步状态机的一部分，最终可能是驻留在堆上. <br>
-<sup>2</sup> 注意术语_可变_和_不可变_并不准确. 不可变绑定或共享引用可能仍然包含 Cell {{ std(page="std/cell/index.html") }}，从而提供_内部可变性_. 
+<sup>1</sup> **域变量** {{ book(page="ch03-01-variables-and-mutability.html") }} {{ ex(page="variable_bindings.html") }} {{ ref(page="variables.html") }}是生存在栈上的同步代码. 在`async{}`中, 这些变量将成为异步状态机的一部分, 最终可能是驻留在堆上. <br>
+<sup>2</sup> 注意术语_可变_和_不可变_并不准确. 不可变绑定或共享引用可能仍然包含 Cell {{ std(page="std/cell/index.html") }}, 从而提供_内部可变性_. 
 
 </footnotes>
 
 
 {{ tablesep() }}
 
-下面列出了如何构建和访问数据结构；以及一些_神奇的_类型. 
+下面列出了如何构建和访问数据结构; 以及一些_神奇的_类型. 
 
 <fixed-2-column>
 
 | 示例 | 说明 |
 |---------|-------------|
 | `S { x: y }` | 构建 `struct S {}` 或者 `use` 的 `enum E::S {}` 字段 `x` 设置为 `y`.  |
-| `S { x }` | 同上，但字段 `x` 会被设置为局部变量 `x`.  |
-| `S { ..s }` | 用 `s` 填充剩余字段，常配合 [Default](https://doc.rust-lang.org/std/default/trait.Default.html) 一起使用.  |
-| `S { 0: x }` | 类似下面的 `S` &#8203;`(x)`，但是用结构体语法设置字段 `.0`.  |
+| `S { x }` | 同上, 但字段 `x` 会被设置为局部变量 `x`.  |
+| `S { ..s }` | 用 `s` 填充剩余字段, 常配合 [Default](https://doc.rust-lang.org/std/default/trait.Default.html) 一起使用.  |
+| `S { 0: x }` | 类似下面的 `S` &#8203;`(x)`, 但是用结构体语法设置字段 `.0`.  |
 | `S`&#8203; `(x)` | 创建 `struct S` &#8203;`(T)` 或者 `use` 的 `enum E::S`&#8203; `()` 其中字段 `.0` 设置为 `x`.  |
 | `S` | 表示 `struct S;` 或以 `S` 为值创建 `use` 来的 `enum E::S`.  |
 | `E::C { x: y }` | 构建枚举变体 `C`.  上面的其他方法依然有效.  |
-| `()` | 空元组，既是字面量也是类型，又称**单元**. {{ std(page="std/primitive.unit.html") }} |
+| `()` | 空元组, 既是字面量也是类型, 又称**单元**. {{ std(page="std/primitive.unit.html") }} |
 | `(x)` | 括号表达式.  |
 | `(x,)` | 单元素**元组**表达式. {{ ex(page="primitives/tuples.html") }} {{ std(page="std/primitive.tuple.html") }} {{ ref(page="expressions/tuple-expr.html") }} |
 | `(S,)` | 单元素元组类型.  |
-| `[S]` | 未指明长度的数组类型，如**切片**. {{ ex(page="primitives/array.html") }} {{ std(page="std/primitive.slice.html") }} {{ ref(page="types.html#array-and-slice-types") }} 不能生存在栈上. {{ note( note="*") }} |
-| `[S; n]` | 元素类型为 `S`，定长为 `n` 的**数组类型** {{ ex(page="primitives/array.html") }}  {{ std(page="std/primitive.array.html") }}.  |
+| `[S]` | 未指明长度的数组类型, 如**切片**. {{ ex(page="primitives/array.html") }} {{ std(page="std/primitive.slice.html") }} {{ ref(page="types.html#array-and-slice-types") }} 不能生存在栈上. {{ note( note="*") }} |
+| `[S; n]` | 元素类型为 `S`, 定长为 `n` 的**数组类型** {{ ex(page="primitives/array.html") }}  {{ std(page="std/primitive.array.html") }}.  |
 | `[x; n]` | 由 `n` 个 `x` 的副本构建的数组实例. {{ ref(page="expressions/array-expr.html") }} |
 | `[x, y]` | 由给定元素 `x` 和 `y`构成的数据实例.  |
-| `x[0]` | 索引，下标为 `usize` 类型. 可重载 [**Index**](https://doc.rust-lang.org/std/ops/trait.Index.html) 和 [**IndexMut**](https://doc.rust-lang.org/std/ops/trait.IndexMut.html).  |
-| {{ tab() }} `x[..]` | 范围索引，这里是_全部范围_，又见下 `x[a..b]`, `x[a..=b]`, ...  |
-| `a..b` | **左闭右开区间** {{ std(page="std/ops/struct.Range.html") }} {{ ref(page="expressions/range-expr.html") }}，如 `1..3` 表示 `1, 2`.   |
+| `x[0]` | 索引, 下标为 `usize` 类型. 可重载 [**Index**](https://doc.rust-lang.org/std/ops/trait.Index.html) 和 [**IndexMut**](https://doc.rust-lang.org/std/ops/trait.IndexMut.html).  |
+| {{ tab() }} `x[..]` | 范围索引, 这里是_全部范围_, 又见下 `x[a..b]`, `x[a..=b]`, ...  |
+| `a..b` | **左闭右开区间** {{ std(page="std/ops/struct.Range.html") }} {{ ref(page="expressions/range-expr.html") }}, 如 `1..3` 表示 `1, 2`.   |
 | `..b` | 无起点到**右开区间** {{ std(page="std/ops/struct.RangeTo.html") }}.  |
 | `a..=b` | **全闭合区间**, {{ std(page="std/ops/struct.RangeInclusive.html") }} `1..=3` 表示 `1, 2, 3`.  |
 | `..=b` | 无起点到**右闭合区间** {{ std(page="std/ops/struct.RangeFrom.html") }}.  |
-| `..` | **全包含区间**{{ std(page="std/ops/struct.RangeFull.html") }}，常表示_整个组合_.  |
-| `s.x` | 命名 **字段访问**{{ ref(page="expressions/field-expr.html") }}，如果 `x` 不是类型 `S` 的一部分的话则会尝试 [Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html).  |
-| `s.0` | 数字字段访问，用于元组类型 `S` &#8203;`(T)`.  |
+| `..` | **全包含区间**{{ std(page="std/ops/struct.RangeFull.html") }}, 常表示_整个组合_.  |
+| `s.x` | 命名 **字段访问**{{ ref(page="expressions/field-expr.html") }}, 如果 `x` 不是类型 `S` 的一部分的话则会尝试 [Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html).  |
+| `s.0` | 数字字段访问, 用于元组类型 `S` &#8203;`(T)`.  |
 
 </fixed-2-column>
 
@@ -502,7 +502,7 @@ fn main() {
 
 <footnotes>
 
-<sup>1</sup> 关于在类型之间转换的所有方法，请参见下面的[类型转换](#type-conversions). 
+<sup>1</sup> 关于在类型之间转换的所有方法, 请参见下面的[类型转换](#type-conversions). 
 
 </footnotes>
 
@@ -516,9 +516,9 @@ fn main() {
 
 | 示例 |  说明 |
 |---------|---------|
-| `m!()` |  **宏** {{book(page="ch19-06-macros.html")}} {{std(page="std/index.html#macros")}} {{ref(page="macros.html")}} 咒语，也作 `m!{}`、`m![]` (取决于宏本身)  |
-| `#[attr]`  | 外部**属性**{{ex(page="attribute.html")}} {{ref(page="attributes.html")}}，注解接下来的内容.  |
-| `#![attr]` | 内部属性，注解_上部_，周边的内容.  |
+| `m!()` |  **宏** {{book(page="ch19-06-macros.html")}} {{std(page="std/index.html#macros")}} {{ref(page="macros.html")}} 咒语, 也作 `m!{}`、`m![]` (取决于宏本身)  |
+| `#[attr]`  | 外部**属性**{{ex(page="attribute.html")}} {{ref(page="attributes.html")}}, 注解接下来的内容.  |
+| `#![attr]` | 内部属性, 注解_上部_, 周边的内容.  |
 
 </fixed-2-column>
 
@@ -559,7 +559,7 @@ fn main() {
 |  {{ tab() }} `let w @ t @ f = get();`  | 存储 3 份 `get()` 结果的拷贝分别到 `w`, `t`, `f`. {{ esoteric() }} |
 |  {{ tab() }} `let Some(x) = get();` | **不可用**{{ bad() }}, 因为模式可能会**不匹配**{{ ref(page="expressions/if-expr.html#if-let-expressions") }}. 换用 `if let`. |
 | `if let Some(x) = get() {}`  | 如果模式匹配则执行该分支(如某个 `enum` 变体). 语法糖<sup>*</sup>.  |
-| `while let Some(x) = get() {}`  | 等效；这里继续调用 `get()`，只要可以分配模式就运行 `{}`.  |
+| `while let Some(x) = get() {}`  | 等效; 这里继续调用 `get()`, 只要可以分配模式就运行 `{}`.  |
 | `fn f(S { x }: S)`  | 类似于 `let`, 模式匹配也可用在函数参数上. 这里 `f(s)` 的 `x` 被绑定到 `s.x`.{{ esoteric() }}|
 
 </fixed-2-column>
@@ -630,7 +630,7 @@ fn main() {
 | {{ tab() }} `T: R, P: S`  | **独立 trait 约束**(这里一个对 `T`, 一个对 `P`). |
 | {{ tab() }} `T: R, S`  | 编译错误{{ bad() }}. 可以用下面的 `R + S` 代替. |
 | {{ tab() }} `T: R + S`  | **合并 trait 约束**{{ book(page="ch10-02-traits.html#specifying-multiple-trait-bounds-with-the--syntax") }} {{ ex(page="generics/multi_bounds.html") }}. `T` 必须同时满足 `R` 和 `S`. |
-| {{ tab() }} `T: R + 'a`  | 同上, 但有生命周期. `T` 必须满足 `R`；如果 `T` 有生命周期, 则必须长于 `'a`. |
+| {{ tab() }} `T: R + 'a`  | 同上, 但有生命周期. `T` 必须满足 `R`; 如果 `T` 有生命周期, 则必须长于 `'a`. |
 | {{ tab() }} `T: ?Sized` | 指定一个预定义的 trait 绑定, 如这里是 `Sized`. {{ todo() }} |
 | {{ tab() }} `T: 'a` | 类型**生命周期约束**{{ ex(page="scope/lifetime/lifetime_bounds.html") }}. `T` 应长于 `'a`. |
 | {{ tab() }} `T: 'static` | 同上. 但 _不_ 意味着值 `t` _会_ {{ bad() }} 活在 `'static` 上, 仅在它可以的时候才行. |
@@ -884,7 +884,7 @@ Rust 支持大部分其他语言也有的通用操作符(`+`, `*`, `%`, `=`, `==
 
 ## 语法糖 {#language-sugar}
 
-如果有什么东西让你觉得，“不该能用的啊”，那可能就是这里的原因. 
+如果有什么东西让你觉得, “不该能用的啊”, 那可能就是这里的原因. 
 
 
 
@@ -3698,7 +3698,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 {{ tablesep() }}
 
-同样，对于 <code>f64</code> 类型，这将类似于：
+同样, 对于 <code>f64</code> 类型, 这将类似于: 
 
 
 | f64 | S (1) | E (11) | F (52) | 值 |
@@ -3710,7 +3710,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 | NaN | ± | 2047 | 非零 | NaN  |
 
 <footnotes>
-    <sup>*</sup> 浮点类型遵循 <a href="https://en.wikipedia.org/wiki/IEEE_754-2008_revision">IEEE 754-2008</a> 规范，并取决于平台大小端序. 
+    <sup>*</sup> 浮点类型遵循 <a href="https://en.wikipedia.org/wiki/IEEE_754-2008_revision">IEEE 754-2008</a> 规范, 并取决于平台大小端序. 
 </footnotes>
 
 </div></panel></tab>
@@ -3740,22 +3740,22 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-numeric-5" name="tab-group-numeric">
-<label for="tab-numeric-5"><b>Arithmetical Pitfalls</b> {{ bad() }}</label>
+<label for="tab-numeric-5"><b>运算的陷阱</b> {{ bad() }}</label>
 <panel><div class="">
 
-| Operation<sup>1</sup> | Gives | Note |
+| 操作<sup>1</sup> | 结果 | 说明 |
 | --- | --- | --- |
-| `200_u8 / 0_u8` | Compile error. | - |
-| `200_u8 / _0` <sup>d</sup> | Panic. | Regular math may panic; here: division by zero. |
-| `200_u8 / _0` <sup>r</sup> | Panic. | Same. |
-| `200_u8 + 200_u8` |  Compile error. | - |
-| `200_u8 + _200` <sup>d</sup> | Panic. | Consider `checked_`, `wrapping_`, ... instead. {{ std(page="std/primitive.isize.html#method.checked_add") }}|
-| `200_u8 + _200` <sup>r</sup> | `144` | In release mode this will overflow. |
-| `1_u8 / 2_u8` | `0` | Other integer division truncates. |
+| `200_u8 / 0_u8` | 编译错误. | - |
+| `200_u8 / _0` <sup>d</sup> | Panic. | 由于除以 0, 该计算会 panic. |
+| `200_u8 / _0` <sup>r</sup> | Panic. | 同上. |
+| `200_u8 + 200_u8` |  编译错误. | - |
+| `200_u8 + _200` <sup>d</sup> | Panic. | 考虑换用 `checked_`, `wrapping_` 等方法 {{ std(page="std/primitive.isize.html#method.checked_add") }}|
+| `200_u8 + _200` <sup>r</sup> | `144` | 在 release 模式下会溢出. |
+| `1_u8 / 2_u8` | `0` | 整数除法会截断. |
 | `0.8_f32 + 0.1_f32` | `0.90000004` | - |
 | `1.0_f32 / 0.0_f32` | `f32::INFINITY` | - |
 | `0.0_f32 / 0.0_f32` | `f32::NAN` | - |
-| `x < f32::NAN` | `false` | `NAN` comparisons always return false. |
+| `x < f32::NAN` | `false` | `NAN` 的比较结果永远为假. |
 | `x > f32::NAN` | `false` | - |
 | `f32::NAN == f32::NAN` | `false` | - |
 
@@ -3771,7 +3771,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 <footnotes>
 
-<sup>1</sup>表达式`_100`表示可能包含`100`值的任何内容，例如`100_i32`，但对编译器是不透明的. <br/>
+<sup>1</sup>表达式 `_100` 表示可能包含 `100` 值的任何内容, 例如 `100_i32`, 但对编译器是不透明的. <br/>
 <sup>d</sup> 调试版本. <br/>
 <sup>r</sup> 发布版本. <br/>
 
@@ -3782,7 +3782,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 
 
-#### 文字类型 {{ ref(page="types/textual.html") }}
+#### 文本类型 {{ ref(page="types/textual.html") }}
 
 
 <!-- NEW ENTRY -->
@@ -3811,7 +3811,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
         <byte class="bytes"><code>8</code></byte>
         <note>...未指明条目</note>
     </visual>
-    <description>很少单独见到，常用 <code>&str</code> 代替. </description>
+    <description>很少单独见到, 常用 <code>&str</code> 代替. </description>
 </datum>
 
 
@@ -3827,7 +3827,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 | 类型 | 描述 |
 |---------|-------------|
-| `char` | 总是为 4 字节，且仅包含一个 Unicode **标量值**{{ link(url="https://www.unicode.org/glossary/#unicode_scalar_value") }}.  |
+| `char` | 总是为 4 字节, 且仅包含一个 Unicode **标量值**{{ link(url="https://www.unicode.org/glossary/#unicode_scalar_value") }}.  |
 | `str` | 未知长度的 `u8` 数组保证保存 **UTF-8 编码的码位**.  |
 
 </div></panel></tab>
@@ -3849,13 +3849,13 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 | 字符 | 描述 |
 |---------|-------------|
-| `let c = 'a';` | Often a `char` (unicode scalar) can coincide with your intuition of _character_. |
-| `let c = '❤';` | It can also hold many Unicode symbols. |
-| `let c = '❤️';` | But not always. Given emoji is **two** `char` (see Encoding) and **can't** {{ bad() }} be held by `c`.<sup>1</sup> |
-| `c = 0xffff_ffff;` | Also, chars are **not allowed** {{ bad() }} to hold arbitrary bit patterns. |
+| `let c = 'a';` | 通常一个 `char` (Unicode 标量) 就是你直觉上认为的 _字符_. |
+| `let c = '❤';` | 它可以持有很多 Unicode 符号. |
+| `let c = '❤️';` | 但并不总是如此. 比如一个 emoji 是由**两个** `char` (参见编码) 组成的, **并不能**{{ bad() }}存在 `c` 里.<sup>1</sup> |
+| `c = 0xffff_ffff;` | 字符也**不允许**{{ bad() }}用一个随便的比特模式就表示了. |
 
 <footnotes>
-    <sup>1</sup> Fun fact, due to the <a href="https://en.wikipedia.org/wiki/Zero-width_joiner">Zero-width joiner</a> (⨝) what the user <i>perceives as a character</i> can get even more unpredictable: 👨‍👩‍👧 is in fact 5 chars 👨⨝👩⨝👧, and rendering engines are free to either show them fused as one, or separately as three, depending on their abilities.
+    <sup>1</sup> 有趣的是, <a href="https://zh.wikipedia.org/wiki/%E9%9B%B6%E5%AE%BD%E8%BF%9E%E5%AD%97">零宽连字</a> (⨝) 会让用户把这些连起来<i>看起来像个字符</i>: 👨‍👩‍👧 实际上是由 👨⨝👩⨝👧 这 5 个字符组成的, 渲染引擎也可以把它们显示成一个字符, 也可以分开显示成三个, 这取决于平台的能力.
 </footnotes>
 
 
@@ -3863,8 +3863,8 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 | 字符串 | 描述 |
 |---------|-------------|
-| `let s = "a";` | A `str` is usually never held directly, but as `&str`, like `s` here. |
-| `let s = "❤❤️";` | It can hold arbitrary text, has variable length per _c._, and is hard to index. |
+| `let s = "a";` | 通常并不会直接使用 `str`, 而是像这里的 `s` 一样通过 `&str` 访问. |
+| `let s = "❤❤️";` | 可以存储任意长度的文本, 但很难进行索引. |
 
 
 </div></panel></tab>
@@ -3873,14 +3873,14 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-textual-2" name="tab-group-textual">
-<label for="tab-textual-2"><b>Encoding</b>{{ esoteric() }}</label>
+<label for="tab-textual-2"><b>编码</b>{{ esoteric() }}</label>
 <panel><div>
 
 
 `let s = "I ❤ Rust"; ` <br>
 `let t = "I ❤️ Rust";`
 
-| Variant | Memory Representation<sup>2<sup> |
+| 变体 | 内存表示<sup>2<sup> |
 |---------|-------------|
 | `s.as_bytes()` | `49` `20` <span class="force-code-color same-black"><b>`e2 9d a4`</b> </span> `20 52 75 73 74` <sup>3<sup> |
 | `s.chars()`<sup>1<sup> | `49 00 00 00 20 00 00 00` <span class="force-code-color same-black"><b>`64 27 00 00` </b></span> `20 00 00 00 52 00 00 00 75 00 00 00 73 00` &hellip; |
@@ -3890,10 +3890,10 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 {{ tablesep() }}
 
 <footnotes>
-    <sup>1</sup> Result then collected into array and transmuted to bytes.<br>
-    <sup>2</sup> Values given in hex, on x86.<br>
-    <sup>3</sup> Notice how <code>❤</code>, having <a href="https://codepoints.net/U+2764">Unicode Code Point (U+2764)</a>, is represented as <span class="force-code-color same-black"><b>64 27 00 00</b></span> inside the <code>char</code>, but got <a href="https://en.wikipedia.org/wiki/UTF-8#Description">UTF-8 encoded to</a> <span class="force-code-color same-black"><b>e2 9d a4</b></span> in the <code>str</code>.<br>
-    <sup>4</sup> Also observe how the emoji <a href="https://emojipedia.org/red-heart/">Red Heart <code>❤️</code></a>, is a combination of <code>❤</code> and the <a href="https://codepoints.net/U+FE0F">U+FE0F Variation Selector</a>, thus <code>t</code> has a higher char count than <code>s</code>.
+    <sup>1</sup> 结果会转为字节数组.<br>
+    <sup>2</sup> 在 x86 平台上的十六进制表示.<br>
+    <sup>3</sup> 注意 <code>❤</code> 对应一个 <a href="https://codepoints.net/U+2764">Unicode 代码点 (U+2764)</a>, 它在 <code>char</code> 中被表示为 <span class="force-code-color same-black"><b>64 27 00 00</b></span>, 但在 <code>str</code> 中则被表示为 <a href="https://zh.wikipedia.org/wiki/UTF-8#%E7%BB%93%E6%9E%84">UTF-8 编码</a> <span class="force-code-color same-black"><b>e2 9d a4</b></span>.<br>
+    <sup>4</sup> 注意 emoji <a href="https://emojipedia.org/red-heart/">红心 <code>❤️</code></a> 其实是由心形 <code>❤</code> 和 <a href="https://codepoints.net/U+FE0F">U+FE0F Variation Selector</a> 组成的, 可以看到 <code>t</code> 比 <code>s</code> 拥有更多字符.
 </footnotes>
 
 {{ tablesep() }}
@@ -3901,7 +3901,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 <footnotes>
 
-> <sup>💬</sup> For what seem to be browser bugs Safari and Edge render the hearts in Footnote 3 and 4 wrong, despite being able to differentiate them correctly in `s` and `t` above.
+> <sup>💬</sup> 尽管上面的 `s` 和 `t` 是不一样的, 但 Safari 和 Edge 都有把脚注 3 和 4 的心形符号渲染错误的 Bug.
 
 </footnotes>
 
@@ -3917,7 +3917,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 ## 自定义类型 {#custom-types}
 
-用户定义的基本类型. 它实际的<b>内存布局</b>{{ ref(page="type-layout.html") }}取决于<b>表示法</b>{{ ref(page="type-layout.html#representations") }}，还有对齐. 
+用户定义的基本类型. 它实际的<b>内存布局</b>{{ ref(page="type-layout.html") }}取决于<b>表示法</b>{{ ref(page="type-layout.html#representations") }}, 还有对齐. 
 
 
 <!-- NEW ENTRY -->
@@ -3927,7 +3927,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
     <visual>
        <framed class="any t"><code>T</code></framed>
     </visual>
-    <description>Sized {{ below(target = "#sized-types") }} </description>
+    <description>有大小 {{ below(target = "#sized-types") }} </description>
 </datum>
 
 <!-- NEW ENTRY -->
@@ -3963,7 +3963,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
        <framed class="any t"><code>T</code></framed>
        <note>...未指定条目</note>
     </visual>
-    <description>未知多元素的<b>切片类型</b>. Neither <br> <code>Sized</code>  (不携带 <code>len</code> 信息) ，<br>而且大多数情况下都是以<code>&[T]</code>为参照. {{ below(target="#references-pointers-ui") }}</description>
+    <description>未知多元素的<b>切片类型</b>.<br>既非 <code>Sized</code>  (不携带 <code>len</code> 信息) , <br>而且大多数情况下都是以<code>&[T]</code>为参照. {{ below(target="#references-pointers-ui") }}</description>
 </datum>
 
 <!-- NEW ENTRY -->
@@ -3973,7 +3973,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
     <visual style="width: 15px;" class="zst">
         <code></code>
     </visual>
-    <description>Zero-Sized {{ below(target = "#sized-types") }} </description>
+    <description>零大小 {{ below(target = "#sized-types") }} </description>
 </datum>
 
 
@@ -3985,7 +3985,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
        <framed class="any" style="width: 100px;"><code>B</code></framed>
        <framed class="any" style="width: 50px;"><code>C</code></framed>
     </visual>
-    <andor>or maybe</andor>
+    <andor>或者也可能</andor>
     <visual style="width: 182px;">
        <framed class="any" style="width: 100px;"><code>B</code></framed>
        <framed class="any"><code>A</code></framed>
@@ -4002,7 +4002,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
        <framed class="any" style="width: 100px;"><code>B</code></framed>
        <framed class="any" style="width: 50px;"><code>C</code></framed>
     </visual>
-    <andor>或者也许</andor>
+    <andor>或者也可能</andor>
     <visual>
        <framed class="any" style="width: 50px;"><code>C</code></framed>
        <pad><code style="">↦</code></pad>
@@ -4016,7 +4016,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 <blockquote>
 <footnotes>
 
-还需注意，具有完全相同字段的两种类型 `A(X, Y)` 和 `B(X, Y)` 仍然可以具有不同的布局；如果没有表示保证，则决不能使用 `transmute()`. 
+还需注意, 具有完全相同字段的两种类型 `A(X, Y)` 和 `B(X, Y)` 仍然可以具有不同的布局; 如果没有表示保证, 则决不能使用 `transmute()`. 
 
 
 </footnotes>
@@ -4026,7 +4026,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 {{ tablesep() }}
 
-这些**合并类型**存有其一种子类型的值：
+这些**合并类型**存有其一种子类型的值: 
 
 
 <!-- NEW ENTRY -->
@@ -4053,7 +4053,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
         </framed>
     </visual>
     <description>
-        安全地保存 A、B 或 C. <br>又名“标签联合”，尽管编译器会忽略标签. 
+        安全地保存 A、B 或 C. <br>又名“标签联合”, 尽管编译器会忽略标签. 
     </description>
 </datum>
 
@@ -4109,7 +4109,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
             <framed class="any unsized"><code>T</code></framed>
         </memory>
     </memory-entry>
-    <description>必须定位一些有效 <code>t</code> 的 <code>T</code>，<br> 并且任何这样的目标必须
+    <description>必须定位一些有效 <code>t</code> 的 <code>T</code>, <br> 并且任何这样的目标必须
 至少存在<code>'a</code>. </description>
 </datum>
 
@@ -4135,8 +4135,8 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 ### 元指针 {#pointer-meta}
 
-许多引用和指针类型可以携带一个额外的字段，**元数据指针**{{ std(page="nightly/std/ptr/trait.Pointee.html#pointer-metadata") }}. 
-它可以是目标的元素长度或字节长度，也可以是指向<i>vtable</i>的指针. 带有 meta 的指针称为**胖指针(fat)**，否则称为**细指针(thin)**. 
+许多引用和指针类型可以携带一个额外的字段, **元数据指针**{{ std(page="nightly/std/ptr/trait.Pointee.html#pointer-metadata") }}. 
+它可以是目标的元素长度或字节长度, 也可以是指向<i>vtable</i>的指针. 带有元数据的指针称为**胖指针(fat)**, 否则称为**瘦指针(thin)**. 
 
 <!-- NEW ENTRY -->
 <datum class="spaced">
@@ -4152,7 +4152,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
             <framed class="any t"><code>T</code></framed>
         </memory>
     </memory-entry>
-    <description>没有大小目标的元 (细指针). </description>
+    <description>没有大小目标的元 (瘦指针). </description>
 </datum>
 
 
@@ -4267,7 +4267,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 ## 闭包 {#closures-data}
 
-闭包是一个临时函数，定义闭包时，它会自动管理数据**捕获**{{ ref(page="types/closure.html#capture-modes") }}环境中访问的内容. 例如：
+闭包是一个临时函数, 定义闭包时, 它会自动管理数据**捕获**{{ ref(page="types/closure.html#capture-modes") }}环境中访问的内容. 例如: 
 
 <!-- NEW ENTRY -->
 <datum class="spaced">
@@ -4806,7 +4806,7 @@ PRs for this section are very welcome. Idea is:
 
 <footnotes>
 
-<sup>*</sup> **`T: Send`** 表示实例 `t` 可以移动到另一个线程；**`T: Sync`** 表示 `&t` 可以移动到另一个线程.<br>
+<sup>*</sup> **`T: Send`** 表示实例 `t` 可以移动到另一个线程; **`T: Sync`** 表示 `&t` 可以移动到另一个线程.<br>
 <sup>1</sup> 如果 `T` 为 `Sync`. <br>
 <sup>2</sup> 如果 `T` 为 `Send`.
 <sup>3</sup> If you need to send a raw pointer, create newtype `struct Ptr(*const u8)` and `unsafe impl Send for Ptr {}`. Just ensure you _may_ send it.

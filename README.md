@@ -4,14 +4,14 @@
 
 **为喜欢高信息密度的人提供的单页 Rust 资源. **
 
-使用案例，按优先顺序排列：
-***识别和查找指南** 用于代码中遇到的构造，
-***发现** 你可能不懂的语言部分，
+使用案例, 按优先顺序排列: 
+***识别和查找指南** 用于代码中遇到的构造, 
+***发现** 你可能不懂的语言部分, 
 ***了解 Rust** 如果你有编程经验. 
 
 # 构建
 
-使用 [Zola](https://www.getzola.org/) 构建，这是一个用 Rust 编写的静态站点生成器. 要在本地开发请安装 Zola，然后运行：
+使用 [Zola](https://www.getzola.org/) 构建, 这是一个用 Rust 编写的静态站点生成器. 要在本地开发请安装 Zola, 然后运行: 
 
 ```bash
 # 安装node的依赖包
@@ -44,7 +44,7 @@ Big shout-out to [all the contributors](https://github.com/ralfbiedert/cheats.rs
 * steffahn from users.rust-lang.org (for outstanding explanations)
 
 # 关于中文翻译
-简体翻译版本翻译参与人员：
+简体翻译版本翻译参与人员: 
 - [Asins](https://github.com/asins)
 - [kingfree](https://github.com/kingfree)
 
