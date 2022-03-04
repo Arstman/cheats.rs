@@ -114,7 +114,7 @@ insert_anchor_links = "right"
 <column>
 
 **标准库**
-* [One-Liners](#one-liners)
+* [基本准则](#one-liners)
 * [线程安全](#thread-safety)
 * [迭代器](#iterators)
 * [数字转换](#number-conversions)
@@ -4678,12 +4678,12 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
 ---
 
 
-# Standard Library
+# 标准库
 
 
-## One-Liners
+## 基本准则 {#one-liners}
 
-Snippets that are common, but still easy to forget. See **Rust Cookbook** {{ link(url="https://rust-lang-nursery.github.io/rust-cookbook/") }} for more.
+这些代码片段很通用但经常容易忘. 详情可以参考 **Rust Cookbook** {{ link(url="https://rust-lang-nursery.github.io/rust-cookbook/") }}.
 
 
 <!--
@@ -4704,24 +4704,24 @@ PRs for this section are very welcome. Idea is:
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-api-2" name="tab-api-sized" checked>
-<label for="tab-api-2"><b>Strings</b></label>
+<label for="tab-api-2"><b>字符串</b></label>
 <panel><div class="color-header one-liners cheats">
 
-| Intent | Snippet |
+| 用途 | 代码 |
 |---------|-------------|
-| Concatenate strings (any `Display`{{ below(target="#string-output") }} that is). <sup>1</sup>  {{ edition(ed="'21") }} | `format!("{x}{y}")` |
-| Split by separator pattern. {{ std(page="std/str/pattern/trait.Pattern.html") }} {{ link(url="https://stackoverflow.com/a/38138985") }} | `s.split(pattern)` |
-| {{ tab() }} ... with `&str` | `s.split("abc")` |
-| {{ tab() }} ... with `char` | `s.split('/')` |
-| {{ tab() }} ... with closure | `s.split(char::is_numeric)`|
-| Split by whitespace. | `s.split_whitespace()` |
-| Split by newlines. | `s.lines()` |
-| Split by regular expression.<sup>2</sup> | ` Regex::new(r"\s")?.split("one two three")` |
+| 连接字符串 (任何实现了 `Display`{{ below(target="#string-output") }} 的类型). <sup>1</sup>  {{ edition(ed="'21") }} | `format!("{x}{y}")` |
+| 以给定匹配分割字符串. {{ std(page="std/str/pattern/trait.Pattern.html") }} {{ link(url="https://stackoverflow.com/a/38138985") }} | `s.split(pattern)` |
+| {{ tab() }} ... 以 `&str` | `s.split("abc")` |
+| {{ tab() }} ... 以 `char` | `s.split('/')` |
+| {{ tab() }} ... 以闭包 | `s.split(char::is_numeric)`|
+| 以空白分割. | `s.split_whitespace()` |
+| 以换行分割. | `s.lines()` |
+| 以正则表达式分割.<sup>2</sup> | ` Regex::new(r"\s")?.split("one two three")` |
 
 <footnotes>
 
-<sup>1</sup> Allocates; might not be fastest solution if `x` is `String` already.<br>
-<sup>2</sup> Requires [regex](https://crates.io/crates/regex) crate.
+<sup>1</sup> 会产生内存分配. 如果 `x` 已经是 `String` 的情况下可能不是性能的最优解.<br>
+<sup>2</sup> 依赖 [regex](https://crates.io/crates/regex) crate.
 
 </footnotes>
 
@@ -4735,10 +4735,10 @@ PRs for this section are very welcome. Idea is:
 <label for="tab-api-1"><b>I/O</b></label>
 <panel><div class="color-header one-liners cheats">
 
-| Intent | Snippet |
+| 用途 | 代码 |
 |---------|-------------|
-| Create a new file | `File::create(PATH)?` |
-| {{ tab() }}  Same, via OpenOptions | `OpenOptions::new().create(true).write(true).truncate(true).open(PATH)?` |
+| 创建新文件 | `File::create(PATH)?` |
+| {{ tab() }}  同上, 但给出选项 | `OpenOptions::new().create(true).write(true).truncate(true).open(PATH)?` |
 
 <!-- <footnotes>
 
@@ -4753,13 +4753,13 @@ PRs for this section are very welcome. Idea is:
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-api-4" name="tab-api-sized">
-<label for="tab-api-4"><b>Macros</b></label>
+<label for="tab-api-4"><b>宏</b></label>
 <panel><div class="color-header one-liners cheats">
 
-| Intent | Snippet |
+| 用途 | 代码 |
 |---------|-------------|
-| Macro w. variable arguments | `macro_rules! var_args { ($($args:expr),*) => {{ }} }` |
-| {{ tab() }} Using `args`, e.g., calling `f` multiple times. | {{ tab() }} ` $( f($args); )*` |
+| 具有变量参数的宏 | `macro_rules! var_args { ($($args:expr),*) => {{ }} }` |
+| {{ tab() }} 应用 `args`, 如多次调用 `f`. | {{ tab() }} ` $( f($args); )*` |
 
 </div></panel></tab>
 
@@ -4768,16 +4768,16 @@ PRs for this section are very welcome. Idea is:
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-api-3" name="tab-api-sized">
-<label for="tab-api-3"><b>Esoterics</b>{{ esoteric() }}</label>
+<label for="tab-api-3"><b>怪用法</b>{{ esoteric() }}</label>
 <panel><div class="color-header one-liners cheats">
 
-| Intent | Snippet |
+| 用途 | 代码 |
 |---------|-------------|
-| Cleaner closure captures | <code>wants_closure({ let c = outer.clone(); move &vert;&vert; use_clone(c) })</code> |
-| Fix inference in '`try`' closures | <code>iter.try_for_each(&vert;x&vert; { Ok::<(), Error>(()) })?;</code> |
-| Iterate _and_ edit `&mut [T]` if `T` Copy. | `Cell::from_mut(mut_slice).as_slice_of_cells()` |
-| Get subslice with length. | `&original_slice[offset..][..length]` |
-| Canary to ensure trait `T` is object safe. | `const _: Option<&dyn T> = None;` |
+| 清理闭包捕获 | <code>wants_closure({ let c = outer.clone(); move &vert;&vert; use_clone(c) })</code> |
+| 修复 '`try`' 闭包内的类型推断 | <code>iter.try_for_each(&vert;x&vert; { Ok::<(), Error>(()) })?;</code> |
+| 当 `T` 满足 Copy 时, 迭代 _并_ 修改 `&mut [T]` | `Cell::from_mut(mut_slice).as_slice_of_cells()` |
+| 给定长度的切片 | `&original_slice[offset..][..length]` |
+| 确保 trait `T` 是对象安全的写法 | `const _: Option<&dyn T> = None;` |
 
 
 </div></panel></tab>
@@ -4808,8 +4808,8 @@ PRs for this section are very welcome. Idea is:
 
 <sup>*</sup> **`T: Send`** 表示实例 `t` 可以移动到另一个线程; **`T: Sync`** 表示 `&t` 可以移动到另一个线程.<br>
 <sup>1</sup> 如果 `T` 为 `Sync`. <br>
-<sup>2</sup> 如果 `T` 为 `Send`.
-<sup>3</sup> If you need to send a raw pointer, create newtype `struct Ptr(*const u8)` and `unsafe impl Send for Ptr {}`. Just ensure you _may_ send it.
+<sup>2</sup> 如果 `T` 为 `Send`.<br>
+<sup>3</sup> 如果你要发送一个裸指针, 建议创建新类型 `struct Ptr(*const u8)` 并 `unsafe impl Send for Ptr {}`. 用来保证你 _可能_ 会发送它 (到其他线程).
 
 </footnotes>
 
@@ -4822,7 +4822,7 @@ PRs for this section are very welcome. Idea is:
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-trait-iter-1" name="tab-group-trait-iter" checked>
-<label for="tab-trait-iter-1"><b>Obtaining Iterators</b></label>
+<label for="tab-trait-iter-1"><b>获取迭代器</b></label>
 <panel><div>
 
 
@@ -9220,7 +9220,7 @@ When updating an API, these changes can break client code.{{ rfc(page="1105-api-
 ## 打印 PDF {#printing-pdf}
 
 
-> Want this Rust cheat sheet as a PDF? Download the <a href="https://s3.eu-central-1.amazonaws.com/cheats.rs/rust_cheat_sheet.pdf"><b>latest PDF here</b></a>. Alternatively, generate it yourself via <i>File > Print</i> and then "Save as PDF" (works great in Chrome, has some issues in Firefox).
+> 点击<a href="https://github.com/kingfree/cheats.rs/releases/"><b>这里</b></a>找到最新的 PDF 文件下载即可. 自己也可以直接通过<i>文件 > 打印</i>并选择“保存成 PDF”(Chrome 和 Edge 是可以的, Firefox 可能有点问题).
 
 </noprint>
 
