@@ -65,7 +65,7 @@ if [[ $1 == "--live" ]]; then
     fi
 
     # Publish
-    scp -r public.clean/* rb@192.168.0.1:/data/sites/cheats.rs
+    # scp -r public.clean/* rb@192.168.0.1:/data/sites/cheats.rs
 fi
 
 if [[ $1 == "--staging" ]]; then
@@ -75,7 +75,7 @@ if [[ $1 == "--staging" ]]; then
     echo -e "Sending to ${_YELLOW}STAGING${_NC} environment."
 
     # Staging
-    scp -r public.clean/* rb@192.168.0.1:/data/sites/cheats.rs
+    # scp -r public.clean/* rb@192.168.0.1:/data/sites/cheats.rs
 fi
 
 

@@ -193,7 +193,7 @@ datum {
         }
 
         memory.anymem::after {
-            content: "(any mem)";
+            content: "(任意内存)";
             display: block;
             position: absolute;
             bottom: 0px;
@@ -202,7 +202,7 @@ datum {
         }
 
         memory.heap::after {
-            content: "(heap)";
+            content: "栈(heap)";
             display: block;
             position: absolute;
             bottom: 0px;
@@ -212,7 +212,7 @@ datum {
 
 
         memory.static::after {
-            content: "(static)";
+            content: "(静态)";
             display: block;
             position: absolute;
             bottom: 0px;
@@ -221,7 +221,7 @@ datum {
         }
 
         memory.static-vtable::after {
-            content: "(static vtable)";
+            content: "(静态虚表)";
             display: block;
             position: absolute;
             bottom: 0px;
@@ -669,12 +669,12 @@ lifetime-example {
         }
 
         .byte2 {
-            width: 30px;
+            width: 32px;
             height: 22px;
         }
 
         .byte4 {
-            width: 66px;
+            width: 70px;
             height: 22px;
         }
     }
