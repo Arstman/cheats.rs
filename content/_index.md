@@ -15,11 +15,11 @@ insert_anchor_links = "right"
 <symbol-legend class="short">
 
 文中提到的书籍:
-**Rust 程序设计语言** {{ book(page="") }} (中文) ,
-**通过例子学 Rust** {{ ex(page="") }} (中文) ,
-**标准库文档** {{ std(page="std") }},
-**Rust 死灵书** {{ nom(page="") }} (中文) ,
-**Rust 参考手册** {{ ref(page="") }} (中文).
+《Rust 程序设计语言》{{ book(page="") }} (中文),
+《通过例子学 Rust》{{ ex(page="") }} (中文),
+《标准库文档》{{ std(page="std") }},
+《Rust 秘典》{{ nom(page="") }} (中文),
+《Rust 参考手册》{{ ref(page="") }} (中文).
 
 </symbol-legend>
 

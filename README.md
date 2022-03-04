@@ -1,6 +1,6 @@
 # ![Logo](/static/logo.png) Rust 语言备忘清单(中文翻译)
 
-[cheats.rs 原版](https://cheats.rs) | [中文版本在线阅读:2022-02-23](https://nootn.com/rust-language-cheat-sheet/) | [阅览 PDF 版](https://s3.eu-central-1.amazonaws.com/cheats.rs/rust_cheat_sheet.pdf)
+[cheats.rs](https://cheats.rs) | [中文版1](https://cheats.rs.kingfree.moe) | [中文版2](https://nootn.com/rust-language-cheat-sheet/) | [PDF 版](https://s3.eu-central-1.amazonaws.com/cheats.rs/rust_cheat_sheet.pdf)
 
 **为喜欢高信息密度的人提供的单页 Rust 资源. **
 
