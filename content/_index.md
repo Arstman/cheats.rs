@@ -5280,27 +5280,27 @@ CString::new(bytes)?
 <label for="tab-strop-1"><b>API</b></label>
 <panel><div class="color-header undefined-color-3">
 
-Rust has, among others, these APIs to convert types to stringified output, collectively called _format_ macros:
+Rust 拥有一系列将类型转化为字符串输出的 API, 统称为 _格式化_ 宏:
 
-| Macro | Output | Notes |
+| 宏 | 输出 | 说明 |
 | --- | --- | --- |
-|`format!(fmt)` | `String` | Bread-and-butter "to `String`" converter. |
-|`print!(fmt)`| Console | Writes to standard output. |
-|`println!(fmt)`| Console | Writes to standard output. |
-|`eprint!(fmt)`| Console | Writes to standard error. |
-|`eprintln!(fmt)`| Console | Writes to standard error. |
-|`write!(dst, fmt)` | Buffer | Don't forget to also `use std::io::Write;` |
-|`writeln!(dst, fmt)` | Buffer | Don't forget to also `use std::io::Write;` |
+|`format!(fmt)` | `String` | 全功能的“转为 `String`”. |
+|`print!(fmt)`| 控制台 | 写到标准输出. |
+|`println!(fmt)`| 控制台 | 写到标准输出. |
+|`eprint!(fmt)`| 控制台 | 写到标准错误输出. |
+|`eprintln!(fmt)`| 控制台 | 写到标准错误输出. |
+|`write!(dst, fmt)` | 缓冲区 | 别忘了要引入 `use std::io::Write;` |
+|`writeln!(dst, fmt)` | 缓冲区 | 别忘了要引入 `use std::io::Write;` |
 
 {{ tablesep() }}
 
-| Method | Notes |
+| 方法 | 说明 |
 | --- | --- |
-|`x.to_string()` {{ std(page="std/string/trait.ToString.html") }} | Produces `String`, implemented for any `Display` type. |
+|`x.to_string()` {{ std(page="std/string/trait.ToString.html") }} | 产生 `String`, 对每个 `Display` 类型都作了实现. |
 
 {{ tablesep() }}
 
-Here `fmt` is string literal such as `"hello {}"`, that specifies output (compare "Formatting" tab) and additional parameters.
+这里 `fmt` 是个类似于 `"hello {}"` 字符串字面量, 它可以指定输出 (参见“格式化”) 和附加参数.
 
 
 </div></panel></tab>
@@ -5313,7 +5313,7 @@ Here `fmt` is string literal such as `"hello {}"`, that specifies output (compar
 <label for="tab-strop-2"><b>可打印类型</b></label>
 <panel><div class="color-header undefined-color-3">
 
-In `format!` and friends, types convert via trait `Display` `"{}"` {{ std(page="std/fmt/trait.Display.html") }} or `Debug` `"{:?}"` {{ std(page="std/fmt/trait.Debug.html") }} , non exhaustive list:
+这里列出了在 `format!` 和类似命令中, 通过 trait `Display` `"{}"` {{ std(page="std/fmt/trait.Display.html") }} 或 `Debug` `"{:?}"` {{ std(page="std/fmt/trait.Debug.html") }} 实现的类型转换 (并不全面):
 
 | 类型 | 实现 |  |
 | --- | --- | --- |
@@ -5336,7 +5336,7 @@ In `format!` and friends, types convert via trait `Display` `"{}"` {{ std(page="
 
 {{ tablesep() }}
 
-In short, pretty much everything is `Debug`; more _special_ types might need special handling or conversion {{ above(target="#string-conversions" ) }} to `Display`.
+简而言之, `Debug` 打印出详细信息; 而 _特殊_ 类型需要特别指定如何转换到 {{ above(target="#string-conversions" ) }} `Display`.
 
 </div></panel></tab>
 
@@ -5347,7 +5347,7 @@ In short, pretty much everything is `Debug`; more _special_ types might need spe
 <label for="tab-strop-3"><b>格式化</b></label>
 <panel><div>
 
-Each argument designator in format macro is either empty `{}`, `{argument}`, or follows a basic [**syntax**](https://doc.rust-lang.org/std/fmt/index.html#syntax):
+格式化宏中的各参数指示器可以是 `{}`, `{argument}` 或后续下述基本[**语法**](https://doc.rust-lang.org/std/fmt/index.html#syntax):
 
 
 ```
@@ -5356,17 +5356,17 @@ Each argument designator in format macro is either empty `{}`, `{argument}`, or 
 
 <div class="color-header undefined-color-3">
 
-| Element |  Meaning |
+| 元素 |  说明 |
 |---------| ---------|
-| `argument` |  Number (`0`, `1`, ...), argument {{ edition(ed="'21") }} or name,{{ edition(ed="'18") }} e.g., `print!("{x}")`. |
-| `fill` | The character to fill empty spaces with (e.g., `0`), if `width` is specified. |
-| `align` | Left (`<`), center (`^`), or right (`>`), if width is specified. |
+| `argument` |  数字 (`0`, `1`, ...), 参数 {{ edition(ed="'21") }} 或名称,{{ edition(ed="'18") }} 如 `print!("{x}")`. |
+| `fill` | 当指定 `width` 时该字符串将用于填充空白 (如 `0`). |
+| `align` | 当指定宽度时表示左 (`<`), 中 (`^`), 右 (`>`). |
 | `sign` | Can be `+` for sign to always be printed. |
-| `#` | [Alternate formatting](https://doc.rust-lang.org/std/fmt/index.html#sign0), e.g. prettify `Debug`{{ std(page="std/fmt/trait.Debug.html") }} formatter `?` or prefix hex with `0x`. |
-| `width` | Minimum width (&geq; 0), padding with `fill` (default to space). If starts with `0`, zero-padded. |
-| `precision` | Decimal digits (&geq; 0) for numerics, or max width for non-numerics. |
-| `$` | Interpret `width` or `precision` as argument identifier instead to allow for dynamic formatting. |
-| **`type`** | `Debug`{{ std(page="std/fmt/trait.Debug.html") }} (`?`) formatting, hex (`x`), binary (`b`), octal (`o`), pointer (`p`), exp (`e`)... [see more](https://doc.rust-lang.org/std/fmt/index.html#traits). |
+| `#` | [增强格式化](https://doc.rust-lang.org/std/fmt/index.html#sign0), 如更美观的 `Debug`{{ std(page="std/fmt/trait.Debug.html") }} 格式化 `?` 或十六进制前导符 `0x`. |
+| `width` | 最小宽度 (&geq; 0), 用 `fill` 填充 (默认为空格). 如果以 `0` 开头则用 0 填充. |
+| `precision` | 数字类型的十进制位数 (&geq; 0), 或非数值类型的最大宽度. |
+| `$` | 将 `width` 或 `precision` 解释为参数标识符以允许动态格式化. |
+| **`type`** | `Debug`{{ std(page="std/fmt/trait.Debug.html") }} (`?`) 格式化, 十六进制 (`x`), 二进制 (`b`), 八进制 (`o`), 指针 (`p`), 科学计数法 (`e`)... [见此](https://doc.rust-lang.org/std/fmt/index.html#traits). |
 
 </div>
 
@@ -5376,15 +5376,15 @@ Each argument designator in format macro is either empty `{}`, `{argument}`, or 
 
 <div class="color-header undefined-color-3">
 
-| Format Example | Explanation |
+| 格式举例 | 说明 |
 |---------|-------------|
-| `{}` | Print the next argument using `Display`.{{ std(page="std/fmt/trait.Display.html") }} |
-| `{x}` | Same, but use variable `x` from scope. {{ edition(ed="'21") }} |
-| `{:?}` | Print the next argument using `Debug`.{{ std(page="std/fmt/trait.Debug.html") }} |
-| `{2:#?}` | Pretty-print the 3<sup>rd</sup> argument with `Debug`{{ std(page="std/fmt/trait.Debug.html") }} formatting. |
-| `{val:^2$}` | Center the `val` named argument, width specified by the 3<sup>rd</sup> argument. |
-| `{:<10.3}` | Left align with width 10 and a precision of 3.|
-| `{val:#x}` | Format `val` argument as hex, with a leading `0x` (alternate format for `x`). |
+| `{}` | 使用 `Display` 打印下一个参数.{{ std(page="std/fmt/trait.Display.html") }} |
+| `{x}` | 同上, 但使用作用域中的 `x`. {{ edition(ed="'21") }} |
+| `{:?}` | 使用 `Debug` 打印下一个参数.{{ std(page="std/fmt/trait.Debug.html") }} |
+| `{2:#?}` | 用 `Debug`{{ std(page="std/fmt/trait.Debug.html") }} 格式化美观打印第三个参数. |
+| `{val:^2$}` | 将参数 `val` 居中, 其宽度由第三个参数指定. |
+| `{:<10.3}` | 以宽度 10 进行左对齐, 小数位数是 3.|
+| `{val:#x}` | 用十六进制格式化 `val` 参数, 并带有前导 `0x` (`x` 的增强格式). |
 
 </div>
 
@@ -5393,11 +5393,11 @@ Each argument designator in format macro is either empty `{}`, `{argument}`, or 
 
 <div class="color-header undefined-color-3">
 
-| Full Example | Explanation |
+| 用法举例 | 说明 |
 |---------|-------------|
-| `println!("{}", x)` | Print `x` using `Display`{{ std(page="std/fmt/trait.Display.html") }} on std. out and append new line. {{ edition(ed="'15") }} |
-| `println!("{x}")` | Same, but use variable `x` from scope. {{ edition(ed="'21") }}  |
-| `format!("{a:.3} {b:?}")` | Convert `PI` with 3 digits, add space, b with `Debug` {{ std(page="std/fmt/trait.Debug.html") }}, return `String`.  {{ edition(ed="'21") }} |
+| `println!("{}", x)` | 用 `Display`{{ std(page="std/fmt/trait.Display.html") }} 打印 `x` 到标准输出并换行. {{ edition(ed="'15") }} |
+| `println!("{x}")` | 同上, 但使用作用域的 `x`. {{ edition(ed="'21") }}  |
+| `format!("{a:.3} {b:?}")` | 将 `PI` 转为小数点后 3 位, 中间加一个空格后, 用 `Debug` {{ std(page="std/fmt/trait.Debug.html") }} 打印 `b`, 返回 `String`.  {{ edition(ed="'21") }} |
 
 </div>
 
@@ -5419,11 +5419,11 @@ Each argument designator in format macro is either empty `{}`, `{argument}`, or 
 
 ## 项目结构 {#project-anatomy}
 
-Basic project layout, and common files and folders, as used by `cargo`. {{ below(target="#cargo") }}
+基本项目布局, 以及 `cargo` 常用的文件和目录. {{ below(target="#cargo") }}
 
 <div class="color-header red">
 
-| Entry | Code |
+| 项目 | 代码 |
 |--------| ---- |
 | 📁 `.cargo/` | **Project-local cargo configuration**, may contain **`config.toml`**. {{ link( url="https://doc.rust-lang.org/cargo/reference/config.html") }} {{ esoteric() }} |
 | 📁 `benches/` | Benchmarks for your crate, run via **`cargo bench`**, requires nightly by default. <sup>*</sup> {{ experimental() }} |
@@ -5453,7 +5453,7 @@ Basic project layout, and common files and folders, as used by `cargo`. {{ below
 {{ tablesep() }}
 
 
-**Minimal examples** for various entry points might look like:
+各种不同入口的**最简单样例**如下:
 
 <tabs>
 
@@ -5506,7 +5506,7 @@ mod m {
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-anatomy-3" name="tab-group-anatomy" >
-<label for="tab-anatomy-3"><b>Unit Tests</b></label>
+<label for="tab-anatomy-3"><b>单元测试</b></label>
 <panel><div>
 
 <!-- Create a horizontal scrollable area on small displays to preserve layout-->
@@ -5533,7 +5533,7 @@ mod test {
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-anatomy-4" name="tab-group-anatomy" >
-<label for="tab-anatomy-4"><b>Integration Tests</b></label>
+<label for="tab-anatomy-4"><b>集成测试</b></label>
 <panel><div>
 
 <!-- Create a horizontal scrollable area on small displays to preserve layout-->
@@ -5555,7 +5555,7 @@ fn my_sample() {
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-anatomy-5" name="tab-group-anatomy" >
-<label for="tab-anatomy-5"><b>Benchmarks</b></label>
+<label for="tab-anatomy-5"><b>性能测试</b></label>
 <panel><div>
 
 
@@ -5583,7 +5583,7 @@ fn my_algo(b: &mut Bencher) {
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-anatomy-6" name="tab-group-anatomy" >
-<label for="tab-anatomy-6"><b>Build Scripts</b></label>
+<label for="tab-anatomy-6"><b>构建脚本</b></label>
 <panel><div>
 
 <!-- Create a horizontal scrollable area on small displays to preserve layout-->
@@ -5607,7 +5607,7 @@ fn main() {
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-anatomy-25" name="tab-group-anatomy" >
-<label for="tab-anatomy-25"><b>Proc Macros</b>{{ esoteric() }}</label>
+<label for="tab-anatomy-25"><b>过程宏</b>{{ esoteric() }}</label>
 <panel><div>
 
 
@@ -5658,7 +5658,7 @@ Module trees and imports:
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-module-import-1" name="tab-group-module-import" checked>
-<label for="tab-module-import-1"><b>Module Trees</b></label>
+<label for="tab-module-import-1"><b>模块树</b></label>
 <panel><div>
 
 
@@ -5687,7 +5687,7 @@ Actual **module definitions** work as follows:
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-module-import-2" name="tab-group-module-import">
-<label for="tab-module-import-2"><b>Namespaces</b>{{ esoteric() }}</label>
+<label for="tab-module-import-2"><b>命名空间</b>{{ esoteric() }}</label>
 <panel><div>
 
 
@@ -5769,7 +5769,7 @@ Rust has three kinds of **namespaces**:
 
 ## Cargo
 
-Commands and tools that are good to know.
+常用命令行工具.
 
 
 <div class="color-header tooling">
