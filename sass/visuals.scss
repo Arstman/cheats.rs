@@ -202,7 +202,7 @@ datum {
         }
 
         memory.heap::after {
-            content: "栈(heap)";
+            content: "(堆)";
             display: block;
             position: absolute;
             bottom: 0px;

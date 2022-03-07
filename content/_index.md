@@ -3963,7 +3963,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
        <framed class="any t"><code>T</code></framed>
        <note>...未指定条目</note>
     </visual>
-    <description>未知多元素的<b>切片类型</b>.<br>既非 <code>Sized</code>  (不携带 <code>len</code> 信息) , <br>而且大多数情况下都是以<code>&[T]</code>为参照. {{ below(target="#references-pointers-ui") }}</description>
+    <description>未知多元素的<b>切片类型</b>.<br>既非 <code>Sized</code>  (不携带 <code>len</code> 信息) , <br>多数情况下以 <code>&[T]</code> 为参照. {{ below(target="#references-pointers-ui") }}</description>
 </datum>
 
 <!-- NEW ENTRY -->
@@ -4016,7 +4016,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 <blockquote>
 <footnotes>
 
-还需注意, 具有完全相同字段的两种类型 `A(X, Y)` 和 `B(X, Y)` 仍然可以具有不同的布局; 如果没有表示保证, 则决不能使用 `transmute()`. 
+还需注意, 具有完全相同字段的两种类型 `A(X, Y)` 和 `B(X, Y)` 仍然可以具有不同的布局. 在没有使用 `#[repr()]` 限制其布局表示的情况下, 绝不能使用 `transmute()` 进行类型转换. 
 
 
 </footnotes>
@@ -4135,8 +4135,8 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 
 ### 元指针 {#pointer-meta}
 
-许多引用和指针类型可以携带一个额外的字段, **元数据指针**{{ std(page="nightly/std/ptr/trait.Pointee.html#pointer-metadata") }}. 
-它可以是目标的元素长度或字节长度, 也可以是指向<i>vtable</i>的指针. 带有元数据的指针称为**胖指针(fat)**, 否则称为**瘦指针(thin)**. 
+许多引用和指针类型可以携带一个额外的字段, 即**元数据指针**{{ std(page="nightly/std/ptr/trait.Pointee.html#pointer-metadata") }}. 
+它可以是目标的元素长度或字节长度, 也可以是指向 <i>vtable</i> 的指针. 带有元数据的指针称为**胖指针**, 否则称为**瘦指针**. 
 
 <!-- NEW ENTRY -->
 <datum class="spaced">
@@ -4173,8 +4173,8 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
             <framed class="any unsized"><code>T</code></framed>
         </memory>
     </memory-entry>
-    <description>If <code>T</code> is a DST <code>struct</code> such as<br> <code>S { x: [u8] }</code>
-    meta field <code>len</code> is <br>length of dyn. sized content.</description>
+    <description>若 <code>T</code> 是 DST <code>struct</code> (如 <code>S { x: [u8] }</code>), <br>
+    元字段 <code>len</code> 则是动态大小内容的长度.</description>
 </datum>
 
 
@@ -4199,7 +4199,9 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
             ...
         </memory>
     </memory-entry>
-    <description>Regular <b>slice reference</b> (i.e., the <br>reference type of a slice type <code>[T]</code>) {{ above (target="#custom-types") }} <br>often seen as <code>&[T]</code> if <code>'a</code> elided.</description>
+    <description>通常省略 <code>'a</code> 的<b>切片引用</b> <br>
+    (即切片类型 <code>[T]</code> 的引用类型) {{ above (target="#custom-types") }} <br>
+    常表示为 <code>&[T]</code>.</description>
 </datum>
 
 
@@ -4226,7 +4228,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
             ...
         </memory>
     </memory-entry>
-    <description><b>String slice reference</b> (i.e., the <br>reference type of string type <code>str</code>),<br> with meta <code>len</code> being byte length.</description>
+    <description><b>字符串切片引用</b> (即字符串<br>类型 <code>str</code> 的引用),<br> 元字段 <code>len</code> 即为字节长度.</description>
 </datum>
 
 <br>
@@ -4259,7 +4261,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
                 <tr class="vtable"><td><code>*Trait::g(&T, ...)</code></td></tr>
             </table>
         </memory>
-        <description>Meta points to vtable, where <code>*Drop::drop()</code>, <code>*Trait::f()</code>, ... are pointers to their respective <code>impl</code> for <code>T</code>.</description>
+        <description>元指针指向虚表, 其中 <code>*Drop::drop()</code>, <code>*Trait::f()</code> 等是它们各自 <code>impl</code> for <code>T</code> 的指针.</description>
     </memory-entry>
 
 </datum>
@@ -4322,7 +4324,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
 <blockquote>
 <footnotes>
 
-Also produces anonymous <code>fn</code> such as <code>f<sub>c1</sub>(C1, X)</code> or <code>f<sub>c2</sub>(&C2, X)</code>. Details depend which <code>FnOnce</code>, <code>FnMut</code>, <code>Fn</code> ... is supported, based on properties of captured types.
+生成匿名函数 <code>fn</code> 如 <code>f<sub>c1</sub>(C1, X)</code> or <code>f<sub>c2</sub>(&C2, X)</code>. 具体细节取决于捕获类型的属性支持 <code>FnOnce</code>, <code>FnMut</code> 还是 <code>Fn</code> .等.
 
 </footnotes>
 </blockquote>
@@ -4331,7 +4333,7 @@ Also produces anonymous <code>fn</code> such as <code>f<sub>c1</sub>(C1, X)</cod
 
 ## 标准库类型 {#standard-library-types}
 
-Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并定义了一些特殊的语义.一些通用类型如下: 
+Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并定义了一些特殊的语义. 一些通用类型如下: 
 
 
 <!-- NEW ENTRY -->
@@ -4361,9 +4363,8 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
         <sized class="celled"><code>borrowed</code></sized>
         <framed class="any unsized celled"><code>T</code></framed>
     </visual>
-    <description>Also support dynamic<br>
-    borrowing of <code>T</code>. Like <code>Cell</code> this<br>
-    is <code>Send</code>, but not <code>Sync</code>.</description>
+    <description>允许 <code>T</code> 的动态借用.<br>
+    比如 <code>Cell</code> 是 <code>Send</code> 的,<br> 但不是 <code>Sync</code> 的.</description>
 </datum>
 
 
@@ -4383,14 +4384,14 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
 <datum>
     <name><code>Result&lt;T, E&gt;</code></name>
     <visual class="enum" style="text-align: left;">
-        <pad><code>Tag</code></pad>
+        <pad><code>标签</code></pad>
         <framed class="any" style="width: 50px;">
             <code>E</code>
         </framed>
     </visual>
-    <andor>or</andor>
+    <andor>或者</andor>
     <visual class="enum" style="text-align: left;">
-        <pad><code>Tag</code></pad>
+        <pad><code>标签</code></pad>
         <framed class="any" style="width: 100px;">
             <code>T</code>
         </framed>
@@ -4402,16 +4403,16 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
 <datum class="spaced">
     <name><code>Option&lt;T&gt;</code></name>
     <visual class="enum" style="text-align: left;">
-        <pad><code>Tag</code></pad>
+        <pad><code>标签</code></pad>
     </visual>
-    <andor>or</andor>
+    <andor>或者</andor>
     <visual class="enum">
-        <pad><code>Tag</code></pad>
+        <pad><code>标签</code></pad>
         <framed class="any" style="width: 100px;">
             <code>T</code>
         </framed>
     </visual>
-    <description>Tag may be omitted for <br> certain T, e.g., <code>NonNull</code>.</description>
+    <description>对于确定的类型 T 可以省略<br>标签. 比如 <code>NonNull</code>.</description>
 </datum>
 
 
@@ -4439,7 +4440,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
         <framed class="any unsized"><code>T</code></framed>
         </memory>
     </memory-entry>
-    <description>For some <code>T</code> stack proxy may carry <br>meta{{ above (target="#custom-types") }} (e.g., <code>Box<[T]></code>).</description>
+    <description>对某些 <code>T</code> 栈代理可能会持有 <br>元数据{{ above (target="#custom-types") }} (比如 <code>Box<[T]></code>).</description>
 </datum>
 
 <spacer>
@@ -4509,7 +4510,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
             <capacity>← <note>capacity</note> →</capacity>
         </memory>
     </memory-entry>
-    <description>Observe how <code>String</code> differs from <code>&str</code> and <code>&[char]</code>.</description>
+    <description>观察 <code>String</code> 和 <code>&str</code> 以及 <code>&[char]</code> 的区别.</description>
 </datum>
 
 <spacer>
@@ -4565,7 +4566,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
             </div>
         </memory>
     </memory-entry>
-    <description>Encapsulates how operating system<br> represents strings (e.g., UTF-16 on <br>Windows).</description>
+    <description>操作系统对字符串表示的直接封装.<br> (比如 Windows 上的 UTF-16).</description>
 </datum>
 
 <spacer>
@@ -4592,7 +4593,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
             </div>
         </memory>
     </memory-entry>
-    <description>Encapsulates how operating system<br> represents paths.</description>
+    <description>操作系统对路径表示的直接封装.</description>
 </datum>
 
 
@@ -4623,8 +4624,8 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
             </memory>
         </memory-entry>
     </div>
-    <description>在同一个线程上共享 <code>T</code> 的所有权.需要嵌套 <code>Cell</code>
-    或 <br><code>RefCell</code> 以允许修改.它既不是 <code>Send</code> 也不是 <code>Sync</code> 的.</description>
+    <description>在同一个线程上共享 <code>T</code> 的所有权. 需要嵌套 <code>Cell</code>
+    或 <br><code>RefCell</code> 以允许修改. 它既不是 <code>Send</code> 也不是 <code>Sync</code> 的.</description>
 </datum>
 
 
@@ -4649,7 +4650,7 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
             </memory>
         </memory-entry>
     </div>
-    <description>同左.但如果 T 是 <code>Send</code> 且 <code>Sync</code> 的, 则允许在线程间共享.</description>
+    <description>同左. 但如果 T 是 <code>Send</code> 且 <code>Sync</code> 的, 则允许在线程间共享.</description>
 </datum>
 
 <br>
@@ -4668,8 +4669,9 @@ Rust 标准库为上面提到的基本类型扩展了更多有用的类型, 并�
             <code>lock</code>
         </memory>
     </memory-entry>
-    <description>Needs to be held in <code>Arc</code> to be shared between<br> threads,
-    always <code>Send</code> and <code>Sync</code>. Consider using <br> <a href="https://crates.io/crates/parking_lot">parking_lot</a> instead (faster, no heap usage).
+    <description>需要包在 <code>Arc</code> 里以便在线程间共享, <br>
+    总是 <code>Send</code> 且 <code>Sync</code> 的. <br>
+    可用 <a href="https://crates.io/crates/parking_lot">parking_lot</a> 替代 (快且不占用堆).
     </description>
 </datum>
 
@@ -4827,29 +4829,29 @@ PRs for this section are very welcome. Idea is:
 
 
 
-**Basics**
+**基础**
 
-Assume you have a collection `c` of type `C`:
+假设有一个元素类型都为 `C` 的集合 `c`:
 
-* **`c.into_iter()`** &mdash; Turns collection `c` into an **`Iterator`** {{ std(page="std/iter/trait.Iterator.html") }} `i` and **consumes**<sup>*</sup> `c`. Requires **`IntoIterator`** {{ std(page="std/iter/trait.IntoIterator.html") }} for `C` to be implemented. Type of item depends on what `C` was. 'Standardized' way to get Iterators.
-* **`c.iter()`** &mdash; Courtesy method **some** collections provide, returns **borrowing** Iterator, doesn't consume `c`.
-* **`c.iter_mut()`** &mdash; Same, but **mutably borrowing** Iterator that allow collection to be changed.
-
-
-**The Iterator**
-
-Once you have an `i`:
-
-* **`i.next()`** &mdash; Returns `Some(x)` next element `c` provides, or `None` if we're done.
+* **`c.into_iter()`** &mdash; 将集合 `c` 转为一个**`Iterator`** {{ std(page="std/iter/trait.Iterator.html") }} `i` 并**消费掉**<sup>*</sup> `c`. 要求实现 `C` 的 **`IntoIterator`** {{ std(page="std/iter/trait.IntoIterator.html") }}, 其元素类型取决于 `C`. 这是获取迭代器的“标准方式”.
+* **`c.iter()`** &mdash; 对**某些**集合更友好的方法, 返回一个**借用**迭代器而不消费掉 `c`.
+* **`c.iter_mut()`** &mdash; 同上, 但返回一个允许修改集合元素的**可变借用**迭代器.
 
 
-**For Loops**
+**迭代**
 
-* **`for x in c {}`** &mdash; Syntactic sugar, calls `c.into_iter()` and loops `i` until `None`.
+一旦你获得了一个 `i`:
+
+* **`i.next()`** &mdash; 如果下一个元素 `c` 存在则返回 `Some(x)`, 否则返回 `None` 表示结束.
+
+
+**循环**
+
+* **`for x in c {}`** &mdash; 语法糖, 相当于调用 `c.into_iter()` 并且循环 `i` 直到它变为 `None`.
 
 <footnotes>
 
-<sup>*</sup> If it looks as if it doesn't consume `c` that's because type was `Copy`. For example, if you call `(&c).into_iter()` it will invoke `.into_iter()` on `&c` (which will consume the reference and turn it into an Iterator), but `c` remains untouched.
+<sup>*</sup> 当类型是 `Copy` 的时, 迭代器会看起来并没有消费掉 `c`。比如, 调用 `(&c).into_iter()` 会在 `&c` 上调用 `.into_iter()` (会消费掉该引用并返回一个迭代器), 但本质上并没有去访问 `c`.
 
 </footnotes>
 
@@ -4859,16 +4861,16 @@ Once you have an `i`:
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-trait-iter-2" name="tab-group-trait-iter">
-<label for="tab-trait-iter-2"><b>Implementing Iterators</b></label>
+<label for="tab-trait-iter-2"><b>实现迭代器</b></label>
 <panel><div>
 
-**Basics**
+**基础**
 
-Let's assume you have a `struct Collection<T> {}`.
+假设有一集合 `struct Collection<T> {}`.
 
 
-* **`struct IntoIter<T> {}`** &mdash; Create a struct to hold your iteration status (e.g., an index) for value iteration.
-* **`impl Iterator for IntoIter {}`** &mdash; Implement `Iterator::next()` so it can produce elements.
+* **`struct IntoIter<T> {}`** &mdash; 创建一个持有自定义迭代状态 (比如下标) 的结构体.
+* **`impl Iterator for IntoIter {}`** &mdash; 实现能够产生元素的 `Iterator::next()`.
 
 <mini-zoo class="zoo" style="">
     <entry class="wide">
@@ -4888,14 +4890,14 @@ Let's assume you have a `struct Collection<T> {}`.
 ---
 
 
-**Shared & Mutable Iterators**
+**共享和可变迭代器**
 
-* **`struct Iter<T> {}`** &mdash; Create struct holding `&Collection<T>` for shared iteration.
-* **`struct IterMut<T> {}`** &mdash; Similar, but holding `&mut Collection<T>` for mutable iteration.
-* **`impl Iterator for Iter<T> {}`** &mdash; Implement shared iteration.
-* **`impl Iterator for IterMut<T> {}`** &mdash; Implement mutable iteration.
+* **`struct Iter<T> {}`** &mdash; 创建一个持有 `&Collection<T>` 的结构体用于共享迭代.
+* **`struct IterMut<T> {}`** &mdash; 类似地, 但持有 `&mut Collection<T>` 用于可变迭代.
+* **`impl Iterator for Iter<T> {}`** &mdash; 实现共享迭代.
+* **`impl Iterator for IterMut<T> {}`** &mdash; 实现可变迭代.
 
-In addition, you might want to add convenience methods:
+另外, 建议实现如下方法以获取对应迭代器:
 
 - `Collection::iter(&self) -> Iter`,
 - `Collection::iter_mut(&mut self) -> IterMut`.
@@ -4921,10 +4923,10 @@ In addition, you might want to add convenience methods:
 
 ---
 
-**Making Loops Work**
-* **`impl IntoIterator for Collection {}`** &mdash; Now `for x in c {}` works.
-* **`impl IntoIterator for &Collection {}`** &mdash; Now `for x in &c {}` works.
-* **`impl IntoIterator for &mut Collection {}`** &mdash; Now `for x in &mut c {}` works.
+**实现循环**
+* **`impl IntoIterator for Collection {}`** &mdash; 使得 `for x in c {}` 可用.
+* **`impl IntoIterator for &Collection {}`** &mdash; 使得 `for x in &c {}` 可用.
+* **`impl IntoIterator for &mut Collection {}`** &mdash; 使得 `for x in &mut c {}` 可用.
 
 <mini-zoo class="zoo" style="">
     <entry class="wide">
@@ -4932,7 +4934,7 @@ In addition, you might want to add convenience methods:
         <trait-impl class="">⌾ <code style="">IntoIterator</code></trait-impl>
         <associated-type class="grayed"><code>Item = T;</code></associated-type>
         <associated-type class="grayed"><code>To = IntoIter&lt;T&gt;</code></associated-type>
-        <note>Iterate over <code>T</code>.</note>
+        <note>在 <code>T</code> 上迭代.</note>
     </entry>
 </mini-zoo>
 
@@ -4942,7 +4944,7 @@ In addition, you might want to add convenience methods:
         <trait-impl class="">⌾ <code style="">IntoIterator</code></trait-impl>
         <associated-type class="grayed"><code>Item = &T;</code></associated-type>
         <associated-type class="grayed"><code>To = Iter&lt;T&gt;</code></associated-type>
-        <note>Iterate over <code>&T</code>.</note>
+        <note>在 <code>&T</code> 上迭代.</note>
     </entry>
 </mini-zoo>
 
@@ -4952,7 +4954,7 @@ In addition, you might want to add convenience methods:
         <trait-impl class="">⌾ <code style="">IntoIterator</code></trait-impl>
         <associated-type class="grayed"><code>Item = &mut T;</code></associated-type>
         <associated-type class="grayed"><code>To = IterMut&lt;T&gt;</code></associated-type>
-        <note>Iterate over <code>&mut T</code>.</note>
+        <note>在 <code>&mut T</code> 上迭代.</note>
     </entry>
 </mini-zoo>
 
@@ -4972,9 +4974,9 @@ In addition, you might want to add convenience methods:
 ## 数字转换 {#number-conversions}
 
 
-As-<b style="">correct</b>-as-it-currently-gets number conversions.
+目前<b style="">正确</b>的数字转换.
 
-| ↓ Have / Want → | `u8` &hellip; `i128` |  `f32` / `f64` | String |
+| ↓ 原始 / 目标 → | `u8` &hellip; `i128` |  `f32` / `f64` | String |
 | --- | --- |  --- |--- |
 | `u8` &hellip; `i128` | `u8::try_from(x)?` <sup>1</sup> |  `x as f32` <sup>3</sup> | `x.to_string()` |
 | `f32` / `f64` | `x as u8` <sup>2</sup> |  `x as f32` | `x.to_string()` |
@@ -4983,9 +4985,9 @@ As-<b style="">correct</b>-as-it-currently-gets number conversions.
 
 <footnotes>
 
-<sup>1</sup> If type true subset `from()` works directly, e.g., `u32::from(my_u8)`. <br/>
-<sup>2</sup> Truncating (`11.9_f32 as u8` gives `11`) and saturating (`1024_f32 as u8` gives `255`); _c_. below. <br/>
-<sup>3</sup> Might misrepresent number (`u64::MAX as f32`) or produce `Inf` (`u128::MAX as f32`).
+<sup>1</sup> 如果是其类型的真子集, `from()` 将会直接转换, 比如 `u32::from(my_u8)`. <br/>
+<sup>2</sup> 见下, 这些转换将会截断 (`11.9_f32 as u8` 得到 `11`) 或缩容 (`1024_f32 as u8` 得到 `255`). <br/>
+<sup>3</sup> 转换后会重新用二进制位表示 (`u64::MAX as f32`) 或产生无穷大 `Inf` (`u128::MAX as f32`).
 
 </footnotes>
 
@@ -5000,7 +5002,7 @@ As-<b style="">correct</b>-as-it-currently-gets number conversions.
 ## 字符串转换 {#string-conversions}
 
 
-If you **want** a string of type &hellip;
+下面列出要转换到**目标**字符串类型的方法:
 
 <!-- Create a horizontal scrollable area on small displays to preserve layout-->
 <div style="overflow:auto;">
@@ -5015,7 +5017,7 @@ If you **want** a string of type &hellip;
 <label for="tab-str-1"><code>String</code></label>
 <panel><div class="stringconversion">
 
-| If you **have** `x` of type &hellip;| Use this &hellip; |
+| **原始**类型 `x`| 转换方法 |
 | --- | --- |
 |`String`|`x`|
 |`CString`|`x.into_string()?` |
@@ -5036,7 +5038,7 @@ If you **want** a string of type &hellip;
 <label for="tab-str-2"><code>CString</code></label>
 <panel><div class="stringconversion">
 
-| If you **have** `x` of type &hellip;| Use this &hellip; |
+| **原始**类型 `x`| 转换方法 |
 | --- | --- |
 |`String`|`CString::new(x)?`|
 |`CString`|`x`|
@@ -5058,7 +5060,7 @@ If you **want** a string of type &hellip;
 <label for="tab-str-3"><code>OsString</code></label>
 <panel><div class="stringconversion">
 
-| If you **have** `x` of type &hellip;| Use this &hellip; |
+| **原始**类型 `x`| 转换方法 |
 | --- | --- |
 |`String`|`OsString::from(x)` <sup>`i`</sup> |
 |`CString`|`OsString::from(x.to_str()?)`|
@@ -5079,7 +5081,7 @@ If you **want** a string of type &hellip;
 <label for="tab-str-35"><code>PathBuf</code></label>
 <panel><div class="stringconversion">
 
-| If you **have** `x` of type &hellip;| Use this &hellip; |
+| **原始**类型 `x`| 转换方法 |
 | --- | --- |
 |`String`|`PathBuf::from(x)` <sup>`i`</sup>|
 |`CString`|`PathBuf::from(x.to_str()?)`|
@@ -5100,7 +5102,7 @@ If you **want** a string of type &hellip;
 <label for="tab-str-4"><code>Vec&lt;u8&gt;</code></label>
 <panel><div class="stringconversion">
 
-| If you **have** `x` of type &hellip;| Use this &hellip; |
+| **原始**类型 `x`| 转换方法 |
 | --- | --- |
 |`String`|`x.into_bytes()`|
 |`CString`|`x.into_bytes()`|
@@ -5121,7 +5123,7 @@ If you **want** a string of type &hellip;
 <label for="tab-str-5"><code>&str</code></label>
 <panel><div class="stringconversion">
 
-| If you **have** `x` of type &hellip;| Use this &hellip; |
+| **原始**类型 `x`| 转换方法 |
 | --- | --- |
 |`String`|`x.as_str()`|
 |`CString`|`x.to_str()?`|
@@ -5142,7 +5144,7 @@ If you **want** a string of type &hellip;
 <label for="tab-str-6"><code>&CStr</code></label>
 <panel><div class="stringconversion">
 
-| If you **have** `x` of type &hellip;| Use this &hellip; |
+| **原始**类型 `x`| 转换方法 |
 | --- | --- |
 |`String`|`CString::new(x)?.as_c_str()`|
 |`CString`|`x.as_c_str()`|
@@ -5164,7 +5166,7 @@ If you **want** a string of type &hellip;
 <label for="tab-str-8"><code>&OsStr</code></label>
 <panel><div class="stringconversion">
 
-| If you **have** `x` of type &hellip;| Use this &hellip; |
+| **原始**类型 `x`| 转换方法 |
 | --- | --- |
 |`String`|`OsStr::new(&x)`|
 |`CString`| {{ todo() }} |
@@ -5185,7 +5187,7 @@ If you **want** a string of type &hellip;
 <label for="tab-str-85"><code>&Path</code></label>
 <panel><div class="stringconversion">
 
-| If you **have** `x` of type &hellip;| Use this &hellip; |
+| **原始**类型 `x`| 转换方法 |
 | --- | --- |
 |`String`|`Path::new(x)` <sup>`r`</sup>|
 |`CString`|`Path::new(x.to_str()?)` |
@@ -5206,7 +5208,7 @@ If you **want** a string of type &hellip;
 <label for="tab-str-7"><code>&[u8]</code></label>
 <panel><div class="stringconversion">
 
-| If you **have** `x` of type &hellip;| Use this &hellip; |
+| **原始**类型 `x`| 转换方法 |
 | --- | --- |
 |`String`|`x.as_bytes()`|
 |`CString`|`x.as_bytes()`|
@@ -5224,10 +5226,10 @@ If you **want** a string of type &hellip;
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-str-9" name="tab-group-str" >
-<label for="tab-str-9"><b>Other</b></label>
+<label for="tab-str-9"><b>其他</b></label>
 <panel><div class="stringconversion">
 
-| You **want** | And **have** `x` | Use this &hellip; |
+| **目标**类型 | **原始**类型 `x` | 转换方法 |
 | --- | --- | --- |
 |<b>`*const c_char`</b>|<b>`CString`</b>|`x.as_ptr()`|
 
@@ -5243,13 +5245,13 @@ If you **want** a string of type &hellip;
 
 <footnotes>
 
-<sup>i</sup> Short form `x.into()` possible if type can be inferred. <br>
-<sup>r</sup> Short form `x.as_ref()` possible if type can be inferred.
+<sup>i</sup> 如果可以推断出类型则可简写为 `x.into()`. <br>
+<sup>r</sup> 如果可以推断出类型则可简写为 `x.as_ref()`.
 
-<sup>1</sup> You should, or must if call is `unsafe`, ensure raw data comes with a valid representation for the string type (e.g., UTF-8 data for a `String`). {{ link(url="https://people.gnome.org/~federico/blog/correctness-in-rust-reading-strings.html") }}
+<sup>1</sup> 该调用应当也必然为 `unsafe` 的, 请确保原始数据是对应字符串类型的有效表示 (比如 `String` 必须是 UTF-8 编码). {{ link(url="https://people.gnome.org/~federico/blog/correctness-in-rust-reading-strings.html") }}
 
 
-<sup>2</sup> Only on some platforms `std::os::<your_os>::ffi::OsStrExt` exists with helper methods to get a raw `&[u8]` representation of the underlying `OsStr`. Use the rest of the table to go from there, e.g.:
+<sup>2</sup> 仅在某些平台上 `std::os::<your_os>::ffi::OsStrExt` 支持通过辅助方法获取底层 `OsStr` 的原始 `&[u8]` 表示. 例如:
 
 ```
 use std::os::unix::ffi::OsStrExt;
@@ -5257,25 +5259,25 @@ let bytes: &[u8] = my_os_str.as_bytes();
 CString::new(bytes)?
 ```
 
-<sup>3</sup> The `c_char` **must** have come from a previous `CString`. If it comes from FFI see `&CStr` instead.
+<sup>3</sup> `c_char` **必须**由前一个 `CString` 生成. 如果是从 FFI 来的则换用 `&CStr`.
 
-<sup>4</sup> No known shorthand as `x` will lack terminating `0x0`. Best way to probably go via `CString`.
+<sup>4</sup> 如果没有结尾 `0x0` 的话是没法简单地转换为 `x` 的. 最好的办法是通过 `CString` 转一道.
 
-<sup>5</sup> Must ensure vector actually ends with `0x0`.
+<sup>5</sup> 必须保证数组以 `0x0` 结束.
 
 </footnotes>
 
 
 ## 字符串输出 {#string-output}
 
-How to convert types into a `String`, or output them.
+将类型转换为 `String` 或输出出来.
 
 <tabs>
 
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-strop-1" name="tab-group-strop" checked>
-<label for="tab-strop-1"><b>APIs</b></label>
+<label for="tab-strop-1"><b>API</b></label>
 <panel><div class="color-header undefined-color-3">
 
 Rust has, among others, these APIs to convert types to stringified output, collectively called _format_ macros:
@@ -5308,12 +5310,12 @@ Here `fmt` is string literal such as `"hello {}"`, that specifies output (compar
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-strop-2" name="tab-group-strop">
-<label for="tab-strop-2"><b>Printable Types</b></label>
+<label for="tab-strop-2"><b>可打印类型</b></label>
 <panel><div class="color-header undefined-color-3">
 
 In `format!` and friends, types convert via trait `Display` `"{}"` {{ std(page="std/fmt/trait.Display.html") }} or `Debug` `"{:?}"` {{ std(page="std/fmt/trait.Debug.html") }} , non exhaustive list:
 
-| Type | Implements |  |
+| 类型 | 实现 |  |
 | --- | --- | --- |
 |`String`| `Debug, Display` | |
 |`CString`| `Debug` | |
@@ -5342,7 +5344,7 @@ In short, pretty much everything is `Debug`; more _special_ types might need spe
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-strop-3" name="tab-group-strop">
-<label for="tab-strop-3"><b>Formatting</b></label>
+<label for="tab-strop-3"><b>格式化</b></label>
 <panel><div>
 
 Each argument designator in format macro is either empty `{}`, `{argument}`, or follows a basic [**syntax**](https://doc.rust-lang.org/std/fmt/index.html#syntax):
