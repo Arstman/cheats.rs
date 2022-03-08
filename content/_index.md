@@ -5425,22 +5425,22 @@ Rust 拥有一系列将类型转化为字符串输出的 API, 统称为 _格式�
 
 | 项目 | 代码 |
 |--------| ---- |
-| 📁 `.cargo/` | **Project-local cargo configuration**, may contain **`config.toml`**. {{ link( url="https://doc.rust-lang.org/cargo/reference/config.html") }} {{ esoteric() }} |
-| 📁 `benches/` | Benchmarks for your crate, run via **`cargo bench`**, requires nightly by default. <sup>*</sup> {{ experimental() }} |
-| 📁 `examples/` | Examples how to use your crate, they see your crate like external user would.  |
-| {{ tab() }} `my_example.rs` | Individual examples are run like **`cargo run --example my_example`**. |
-| 📁 `src/` | Actual source code for your project. |
-| {{ tab() }} `main.rs` | Default entry point for applications, this is what **`cargo run`** uses. |
-| {{ tab() }} `lib.rs` | Default entry point for libraries. This is where lookup for `my_crate::f()` starts. |
-| 📁 `src/bin/` | Place for additional binaries, even in library projects. |
-| {{ tab() }} `x.rs` | Additional binary, run with `cargo run --bin x`. |
-| 📁 `tests/` | Integration tests go here, invoked via **`cargo test`**. Unit tests often stay in `src/` file. |
-| `.rustfmt.toml` | In case you want to [**customize**](https://rust-lang.github.io/rustfmt/) how **`cargo fmt`** works. |
-| `.clippy.toml` | Special configuration for certain [**clippy lints**](https://rust-lang.github.io/rust-clippy/master/index.html), utilized via **`cargo clippy`**  {{ esoteric() }} |
-| `build.rs` |  **Pre-build script**, {{ link(url="https://doc.rust-lang.org/cargo/reference/build-scripts.html") }} useful when compiling C / FFI, ... |
-| <code class="ignore-auto language-bash">Cargo.toml</code> | Main **project manifest**, {{ link(url="https://doc.rust-lang.org/cargo/reference/manifest.html") }} Defines dependencies, artifacts ... |
-| <code class="ignore-auto language-bash">Cargo.lock</code> | Dependency details for reproducible builds; add to `git` for apps, not for libs. |
-| `rust-toolchain.toml` |  Define **toolchain override**{{ link(url="https://rust-lang.github.io/rustup/overrides.html" )}} (channel, components, targets) for this project. |
+| 📁 `.cargo/` | **项目本地 cargo 配置**, 可以包含 **`config.toml`**. {{ link( url="https://doc.rust-lang.org/cargo/reference/config.html") }} {{ esoteric() }} |
+| 📁 `benches/` | 存放该 crate 的性能测试, 通过 **`cargo bench`** 运行, 默认要求 nightly. <sup>*</sup> {{ experimental() }} |
+| 📁 `examples/` | 使用该 crate 的例程, 其中的代码视该 crate 层级如用户.  |
+| {{ tab() }} `my_example.rs` | 每个独立的例程可以通过 **`cargo run --example my_example`** 来运行. |
+| 📁 `src/` | 项目实际源代码. |
+| {{ tab() }} `main.rs` | 应用程序默认入口, 即 **`cargo run`** 运行的内容. |
+| {{ tab() }} `lib.rs` | 库默认入口. 即 `my_crate::f()` 对应查找的内容. |
+| 📁 `src/bin/` | 额外的二进制程序, 在库项目中也可以有. |
+| {{ tab() }} `x.rs` | 二进制程序可通过 `cargo run --bin x` 来运行. |
+| 📁 `tests/` | 集成测试, 通过 **`cargo test`** 调用. 单元测试则通常直接放在 `src/` 的文件里. |
+| `.rustfmt.toml` | [**自定义**](https://rust-lang.github.io/rustfmt/) **`cargo fmt`** 的运行方式. |
+| `.clippy.toml` | 对特定 [**clippy lint**](https://rust-lang.github.io/rust-clippy/master/index.html) 的特殊配置, 通过 **`cargo clippy`** 调用  {{ esoteric() }} |
+| `build.rs` |  **预编译脚本**, {{ link(url="https://doc.rust-lang.org/cargo/reference/build-scripts.html") }} 当编译 C/FFI 等时常用. |
+| <code class="ignore-auto language-bash">Cargo.toml</code> | 主**项目清单**, {{ link(url="https://doc.rust-lang.org/cargo/reference/manifest.html") }} 定义了依赖和架构等. |
+| <code class="ignore-auto language-bash">Cargo.lock</code> | 用于可重复构建的依赖详情, 对于应用程序建议加入 `git` 版本控制, 但库不需要. |
+| `rust-toolchain.toml` |  定义项目的**工具链覆盖**{{ link(url="https://rust-lang.github.io/rustup/overrides.html" )}} (频道, 组件, 目标). |
 </div>
 
 <footnotes>
@@ -5514,14 +5514,14 @@ mod m {
 <div style="min-width: 100%; width: 650px;">
 
 ```
-// src/my_module.rs (any file of your project)
+// src/my_module.rs (项目中任意文件)
 
 fn f() -> u32 { 0 }
 
 #[cfg(test)]
 mod test {
-    use super::f;           // Need to import items from parent module. Has
-                            // access to non-public members.
+    use super::f;           // 需要从父模块导入.
+                            // 可以访问非公共成员.
     #[test]
     fn ff() {
         assert_eq!(f(), 0);
@@ -5541,12 +5541,12 @@ mod test {
 <div style="min-width: 100%; width: 650px;">
 
 ```
-// tests/sample.rs (sample integration test)
+// tests/sample.rs (例程测试样例)
 
 #[test]
 fn my_sample() {
-    assert_eq!(my_crate::f(), 123); // Integration tests (and benchmarks) 'depend' to the crate like
-}                                   // a 3rd party would. Hence, they only see public items.
+    assert_eq!(my_crate::f(), 123); // 集成和性能测试对 crate 的依赖
+}                                   // 与依赖第三方库是一样的. 因此仅可访问公开项.
 ```
 </div></div></div></panel></tab>
 
@@ -5564,18 +5564,18 @@ fn my_sample() {
 <div style="min-width: 100%; width: 650px;">
 
 ```
-// benches/sample.rs (sample benchmark)
+// benches/sample.rs (性能测试样例)
 
-#![feature(test)]   // #[bench] is still experimental
+#![feature(test)]   // #[bench] 依然是实验性的
 
-extern crate test;  // Even in '18 this is needed ... for reasons.
-                    // Normally you don't need this in '18 code.
+extern crate test;  // 出于某些原因在 '18 版本仍需要.
+                    // 虽然通常情况下可能不需要.
 
 use test::{black_box, Bencher};
 
 #[bench]
 fn my_algo(b: &mut Bencher) {
-    b.iter(|| black_box(my_crate::f())); // `black_box` prevents `f` from being optimized away.
+    b.iter(|| black_box(my_crate::f())); // `black_box` 防止 `f` 被优化掉.
 }
 ```
 </div></div></div></panel></tab>
@@ -5591,15 +5591,15 @@ fn my_algo(b: &mut Bencher) {
 <div style="min-width: 100%; width: 650px;">
 
 ```
-// build.rs (sample pre-build script)
+// build.rs (预编译脚本样例)
 
 fn main() {
-    // You need to rely on env. vars for target; `#[cfg(...)]` are for host.
+    // 通过 env 环境变量获取编译目标; 也可使用 `#[cfg(...)]`.
     let target_os = env::var("CARGO_CFG_TARGET_OS");
 }
 ```
 
-<sup>*</sup>[See here for list](https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts) of environment variables set.
+<sup>*</sup>环境变量详见[该表](https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts).
 
 </div></div></div></panel></tab>
 
@@ -5616,13 +5616,13 @@ fn main() {
 <div style="min-width: 100%; width: 650px;">
 
 ```
-// src/lib.rs (default entry point for proc macros)
+// src/lib.rs (过程宏默认入口)
 
-extern crate proc_macro;  // Apparently needed to be imported like this.
+extern crate proc_macro;  // 需要显式引入.
 
 use proc_macro::TokenStream;
 
-#[proc_macro_attribute]   // Can now be used as `#[my_attribute]`
+#[proc_macro_attribute]   // 此时可以通过 `#[my_attribute]` 使用
 pub fn my_attribute(_attr: TokenStream, item: TokenStream) -> TokenStream {
     item
 }
@@ -5651,7 +5651,7 @@ proc-macro = true
 {{ tablesep() }}
 
 
-Module trees and imports:
+模块树和导入规则:
 
 <tabs>
 
@@ -5666,15 +5666,15 @@ Module trees and imports:
 <div style="overflow:auto;">
 <div style="min-width: 100%; width: 650px;">
 
-**Modules** {{ book(page="ch07-02-defining-modules-to-control-scope-and-privacy.html") }} {{ ex(page="mod.html#modules") }} {{ ref(page="items/modules.html#modules") }} and **source files** work as follows:
+**模块**{{ book(page="ch07-02-defining-modules-to-control-scope-and-privacy.html") }} {{ ex(page="mod.html#modules") }} {{ ref(page="items/modules.html#modules") }}和**源文件**行为如下:
 
-- **Module tree** needs to be explicitly defined, is **not** implicitly built from **file system tree**. {{ link(url="http://www.sheshbabu.com/posts/rust-module-system/") }}
-- **Module tree root** equals library, app, &hellip; entry point (e.g., `lib.rs`).
+- **模块树**要求显式定义, **无法**被隐式地从**文件系统树**中构建. {{ link(url="http://www.sheshbabu.com/posts/rust-module-system/") }}
+- **模块树根**等同于库或应用程序的入口点 (如 `lib.rs`).
 
-Actual **module definitions** work as follows:
-- A **`mod m {}`** defines module in-file, while **`mod m;`** will read `m.rs` or `m/mod.rs`.
-- Path of `.rs` based on **nesting**, e.g., `mod a { mod b { mod c; }}}` is either `a/b/c.rs` or `a/b/c/mod.rs`.
-- Files not pathed from module tree root via some `mod m;` won't be touched by compiler! {{ bad() }}
+实际的**模块定义**行为如下:
+- 一个 **`mod m {}`** 会定义一个文件内模块, 而当使用 **`mod m;`** 时则会读取 `m.rs` 或 `m/mod.rs`.
+- `.rs` 的路径取决于**嵌套层级**, 如 `mod a { mod b { mod c; }}}` 指向 `a/b/c.rs` 或 `a/b/c/mod.rs`.
+- 某些在模块树根中路径不对应文件的 `mod m;` 并不会被编译器检查到! {{ bad() }}
 
 <!-- - **Visibility** of items (e.g., functions, fields) between modules governed by: "Is there visible path to item?"
     - Visibility like `pub fn f() {}` does not mean "`f` is public", but "`f` at most public if all parents public`. -->
@@ -5691,14 +5691,14 @@ Actual **module definitions** work as follows:
 <panel><div>
 
 
-Rust has three kinds of **namespaces**:
+Rust 有如下三种**命名空间**:
 
 <table>
     <thead>
         <tr>
-            <th>Namespace <i>Types</i></th>
-            <th>Namespace <i>Functions</i></th>
-            <th>Namespace <i>Macros</i></th>
+            <th>命名空间 <i>类型</i></th>
+            <th>命名空间 <i>函数</i></th>
+            <th>命名空间 <i>宏</i></th>
         </tr>
     </thead>
     <tbody>
@@ -5745,16 +5745,16 @@ Rust has three kinds of **namespaces**:
 
 <footnotes>
 
-<sup>1</sup> Counts in <i>Types</i> and in <i>Functions</i>.
+<sup>1</sup> 既可以算作 <i>类型</i> 也算作 <i>函数</i>.
 
 </footnotes>
 
-- In any given scope, for example within a module, only one item item per namespace can exist, e.g.,
-    - `enum X {}` and `fn X() {}` can coexist
-    - `struct X;` and `const X` cannot coexist
-- With a `use my_mod::X;` all items called `X` will be imported.
+- 在给定作用域中 (如在某个模块中), 每个命名空间类型下只能有一个项, 如:
+    - `enum X {}` 和 `fn X() {}` 冲突
+    - `struct X;` 和 `const X` 不冲突
+- 当使用 `use my_mod::X;` 时, 所有叫作 `X` 的项都会被导入.
 
-> Due to naming conventions (e.g., `fn` and `mod` are lowercase by convention) and _common sense_ (most developers just don't name all things `X`) you won't have to worry about these _kinds_ in most cases. They can, however, be a factor when designing macros.
+> 出于存在名称转换 (如 `fn` 何 `mod` 都会被转为小写), 以及 _常识_ (开发者不太会命名多个 `X`) 的考虑, 在多数 crate 中通常并不需要担心这些 _情况_. 但在设计宏的时候, 这是需要考虑的一点.
 
 
 </div></panel></tab>
@@ -5777,25 +5777,25 @@ Rust has three kinds of **namespaces**:
 | 命令 | 说明 |
 |--------| ---- |
 | `cargo init` | 基于最新的版本创建新项目.  |
-| <code>cargo <span class="cargo-prefix">b</span>uild</code> | Build the project in debug mode (<code>--<span class="cargo-prefix">r</span>elease</code> for all optimization). |
-| <code>cargo <span class="cargo-prefix">c</span>heck</code> | Check if project would compile (much faster). |
-| <code>cargo <span class="cargo-prefix">t</span>est</code> | Run tests for the project. |
-| <code>cargo <span class="cargo-prefix">d</span>oc --open</code> | Locally generate documentation for your code and dependencies. |
-| <code>cargo <span class="cargo-prefix">r</span>un</code> | Run your project, if a binary is produced (main.rs). |
-| {{ tab() }} `cargo run --bin b` | Run binary `b`. Unifies features with other dependents (can be confusing). |
-| {{ tab() }} `cargo run -p w` | Run main of sub-workspace `w`. Treats features more as you would expect. |
-| `cargo tree` | Show dependency graph. |
-| <code>cargo +{nightly, stable} ...</code>  | Use given toolchain for command, e.g., for 'nightly only' tools. |
-| `cargo +nightly ...` | Some nightly-only commands (substitute `...` with command below) |
-| {{ tab() }}  <code>build -Z timings</code> | Show what crates caused your build to take so long, highly useful. {{ experimental() }} {{ hot() }} |
-| {{ tab() }} `rustc -- -Zunpretty=expanded` |  Show expanded macros. {{ experimental() }} |
-| `rustup doc` | Open offline Rust documentation (incl. the books), good on a plane! |
+| <code>cargo <span class="cargo-prefix">b</span>uild</code> | 调试模式构建项目 (<code>--<span class="cargo-prefix">r</span>elease</code> 启用所有优化). |
+| <code>cargo <span class="cargo-prefix">c</span>heck</code> | 检查项目是否通过编译 (比构建更快)). |
+| <code>cargo <span class="cargo-prefix">t</span>est</code> | 运行项目测试用例. |
+| <code>cargo <span class="cargo-prefix">d</span>oc --open</code> | 生成并打开代码和相关依赖的本地文档. |
+| <code>cargo <span class="cargo-prefix">r</span>un</code> | 编译出二进制文件并运行 (main.rs). |
+| {{ tab() }} `cargo run --bin b` | 运行二进制程序 `b`. 统一 feature 和其他依赖 (可能会产生冲突). |
+| {{ tab() }} `cargo run -p w` | 在子工作空间中 `w` 运行主程序. 对待 feature 可能更如你所愿. |
+| `cargo tree` | 显示依赖树. |
+| <code>cargo +{nightly, stable} ...</code>  | 命令使用给定工具链, 如对某些 'nightly only' 的工具. |
+| `cargo +nightly ...` | 某些 nightly-only 命令 (如下替换 `...`) |
+| {{ tab() }}  <code>build -Z timings</code> | 显示哪个 crate 导致你编译那么久, 很有用. {{ experimental() }} {{ hot() }} |
+| {{ tab() }} `rustc -- -Zunpretty=expanded` |  显示宏展开. {{ experimental() }} |
+| `rustup doc` | 打开离线 Rust 文档 (包括官方手册), “云”上编程! |
 
 </div>
 
 <footnotes>
 
-Here <code>cargo <span class="cargo-prefix">b</span>uild</code> means you can either type `cargo build` or just `cargo b`; and <code>--<span class="cargo-prefix">r</span>elease</code> means it can be replaced with `-r`.
+这里 <code>cargo <span class="cargo-prefix">b</span>uild</code> 表示可以输入 `cargo build` 或者简写成 `cargo b`; <code>--<span class="cargo-prefix">r</span>elease</code> 表示可以简写成 `-r`.
 
 </footnotes>
 
@@ -5803,8 +5803,8 @@ Here <code>cargo <span class="cargo-prefix">b</span>uild</code> means you can ei
 {{ tablesep() }}
 
 
-These are optional `rustup` components.
-Install them with `rustup component add [tool]`.
+可选的 `rustup` 组件.
+通过 `rustup component add [tool]` 安装.
 
 
 <div class="color-header tooling">
@@ -5818,7 +5818,7 @@ Install them with `rustup component add [tool]`.
 
 {{ tablesep() }}
 
-更多 cargo 插件可以在[**这里**](https://crates.io/categories/development-tools::cargo-plugins?sort=downloads) 找到.
+更多 cargo 插件可以在[**这里**](https://crates.io/categories/development-tools::cargo-plugins?sort=downloads)找到.
 
 
 {{ tablesep() }}
@@ -5840,7 +5840,7 @@ Install them with `rustup component add [tool]`.
 
 应从目标供应商(Google, Apple 等)获取这些资源.也可能不支持本地宿主环境(比如, Windows 不支持 iOS 工具链).
 
-**某些工具链需要额外的构建步骤**(比如 Android 的 `make-standalone-toolchain.sh`).
+**某些工具链需要额外的构建步骤** (比如 Android 的 `make-standalone-toolchain.sh`).
 
 🔘 修改 **`~/.cargo/config.toml`** 如下: 
 
@@ -5856,7 +5856,7 @@ linker = "[PATH_TO_TOOLCHAIN]/aarch64-linux-android/bin/aarch64-linux-android-cl
 linker = "C:/[PATH_TO_TOOLCHAIN]/prebuilt/windows-x86_64/bin/aarch64-linux-android21-clang.cmd"
 ```
 
-🔘 Set **environment variables** (optional, wait until compiler complains before setting):
+🔘 设置**环境变量** (可选, 编译器不报错则可以跳过):
 
 ```
 set CC=C:\[PATH_TO_TOOLCHAIN]\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang.cmd
@@ -5865,12 +5865,12 @@ set AR=C:\[PATH_TO_TOOLCHAIN]\prebuilt\windows-x86_64\bin\aarch64-linux-android-
 ...
 ```
 
-Whether you set them depends on how compiler complains, not necessarily all are needed.
+如何设置取决于编辑器提示, 并非所有步骤都是必须的.
 
-> Some platforms / configurations can be **extremely sensitive** how paths are specified (e.g., `\` vs `/`) and quoted.
+> 某些平台和配置可能对路径表示**极其敏感** (比如) `\` 和 `/`).
 
 
-✔️ Compile with **`cargo build --target=X`**
+✔️ 通过 **`cargo build --target=X`** 编译.
 
 
 <!-- End overflow area -->
@@ -5887,14 +5887,14 @@ Whether you set them depends on how compiler complains, not necessarily all are 
 
 ## 工具链命令 {#tooling-directives}
 
-Special tokens embedded in source code used by tooling or preprocessing.
+源代码中用于工具链或预处理的内嵌的特殊标识符.
 
 <tabs>
 
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-preprocessing-1" name="tab-group-preprocessing" checked>
-<label for="tab-preprocessing-1"><b>Macros</b></label>
+<label for="tab-preprocessing-1"><b>宏</b></label>
 <panel><div class="color-header undefined-color-3">
 
 <fixed-2-column class="color-header special_example">
@@ -5908,25 +5908,25 @@ macro_rules! my_macro {
 }
 ``` -->
 
-Inside a **declarative** {{ book(page="ch19-06-macros.html#declarative-macros-with-macro_rules-for-general-metaprogramming") }} **macro by example** {{book(page="ch19-06-macros.html")}} {{ex(page="macros.html#macro_rules")}} {{ref(page="macros-by-example.html")}} `macro_rules!` implementation these work:
+**声明**{{ book(page="ch19-06-macros.html#declarative-macros-with-macro_rules-for-general-metaprogramming") }}**宏** {{book(page="ch19-06-macros.html")}} {{ex(page="macros.html#macro_rules")}} {{ref(page="macros-by-example.html")}} 使用 `macro_rules!`:
 
-| Within Macros |  Explanation |
+| 写法 |  说明 |
 |---------|---------|
-| `$x:ty`  | Macro capture (here a type). |
-| {{ tab() }} `$x:item`    | An item, like a function, struct, module, etc. |
-| {{ tab() }} `$x:block`   | A block `{}` of statements or expressions, e.g., `{ let x = 5; }` |
-| {{ tab() }} `$x:stmt`    | A statement, e.g., `let x = 1 + 1;`, `String::new();` or `vec![];` |
-| {{ tab() }} `$x:expr`    | An expression, e.g., `x`, `1 + 1`, `String::new()` or `vec![]` |
-| {{ tab() }} `$x:pat`     | A pattern, e.g., `Some(t)`, `(17, 'a')` or `_`. |
-| {{ tab() }} `$x:ty`      | A type, e.g., `String`, `usize` or `Vec<u8>`. |
-| {{ tab() }} `$x:ident`   | An identifier, for example in `let x = 0;` the identifier is `x`. |
-| {{ tab() }} `$x:path`    | A path (e.g. `foo`, `::std::mem::replace`, `transmute::<_, int>`). |
-| {{ tab() }} `$x:literal` | A literal (e.g. `3`, `"foo"`, `b"bar"`, etc.). |
-| {{ tab() }} `$x:lifetime` | A lifetime (e.g. `'a`, `'static`, etc.). |
-| {{ tab() }} `$x:meta`    | A meta item; the things that go inside `#[...]` and `#![...]` attributes. |
-| {{ tab() }} `$x:vis`    | A visibility modifier;  `pub`, `pub(crate)`, etc. |
-| {{ tab() }} `$x:tt`      | A single token tree, [see here](https://stackoverflow.com/a/40303308) for more details. |
-| `$crate` | Special hygiene variable, crate where macros is defined. {{ todo() }} |
+| `$x:ty`  | 宏捕获 (此处捕获一个类型). |
+| {{ tab() }} `$x:item`    | 项, 比如一个函数, 结构体或模块等. |
+| {{ tab() }} `$x:block`   | 语句或表达式块 `{}`, 如 `{ let x = 5; }` |
+| {{ tab() }} `$x:stmt`    | 语句, 如 `let x = 1 + 1;`, `String::new();` 或 `vec![];` |
+| {{ tab() }} `$x:expr`    | 表达式, 如 `x`, `1 + 1`, `String::new()` 或 `vec![]` |
+| {{ tab() }} `$x:pat`     | 模式, 如 `Some(t)`, `(17, 'a')` 或 `_`. |
+| {{ tab() }} `$x:ty`      | 类型, 如 `String`, `usize` 或 `Vec<u8>`. |
+| {{ tab() }} `$x:ident`   | 标识符, 比如在 `let x = 0;` 中标识符是 `x`. |
+| {{ tab() }} `$x:path`    | 路径 (如 `foo`, `::std::mem::replace`, `transmute::<_, int>`). |
+| {{ tab() }} `$x:literal` | 字面量 (如 `3`, `"foo"`, `b"bar"` 等.). |
+| {{ tab() }} `$x:lifetime` | 生命周期 (如 `'a`, `'static` 等.). |
+| {{ tab() }} `$x:meta`    | 元项; 用在 `#[...]` 和 `#![...]` 属性声明里. |
+| {{ tab() }} `$x:vis`    | 可见修饰符;  `pub`, `pub(crate)` 等. |
+| {{ tab() }} `$x:tt`      | 单个 token 树, 详情[见此](https://stackoverflow.com/a/40303308). |
+| `$crate` | 特殊保留变量, 宏定义所在的 crate. {{ todo() }} |
 
 </fixed-2-column>
 
@@ -5936,7 +5936,7 @@ Inside a **declarative** {{ book(page="ch19-06-macros.html#declarative-macros-wi
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-preprocessing-2" name="tab-group-preprocessing">
-<label for="tab-preprocessing-2"><b>Documentation</b></label>
+<label for="tab-preprocessing-2"><b>文档</b></label>
 <panel><div class="color-header undefined-color-2">
 
 <fixed-2-column  class="color-header special_example">
@@ -5949,22 +5949,22 @@ Inside a **declarative** {{ book(page="ch19-06-macros.html#declarative-macros-wi
 /// ```
 ``` -->
 
-Inside a **doc comment** {{ book(page="ch14-02-publishing-to-crates-io.html#making-useful-documentation-comments") }} {{ ex(page="meta/doc.html#documentation") }} {{ ref(page="comments.html#doc-comments")}} these work:
+**文档注释**{{ book(page="ch14-02-publishing-to-crates-io.html#making-useful-documentation-comments") }} {{ ex(page="meta/doc.html#documentation") }} {{ ref(page="comments.html#doc-comments")}}中的写法如下:
 
-| Within Doc Comments | Explanation |
+| 写法 | 说明 |
 |--------|-------------|
-| ` ```...``` ` | Include a [**doc test**](https://doc.rust-lang.org/rustdoc/documentation-tests.html) (doc code running on `cargo test`). |
-| ` ```X,Y ...``` ` | Same, and include optional configurations; with `X`, `Y` being ... |
-| {{ tab() }} <code style="color: gray;">rust</code> | Make it explicit test is written in Rust; implied by Rust tooling. |
-| {{ tab() }} <code style="color: gray; opacity: 0.3;">-</code> | Compile test. Run test. Fail if panic. **Default behavior**. |
-| {{ tab() }} <code style="color: gray;">should_panic</code> | Compile test. Run test. Execution should panic. If not, fail test. |
-| {{ tab() }} <code style="color: gray;">no_run</code> | Compile test. Fail test if code can't be compiled, Don't run test. |
-| {{ tab() }} <code style="color: gray;">compile_fail</code> | Compile test but fail test if code _can_ be compiled. |
-| {{ tab() }} <code style="color: gray;">ignore</code> | Do not compile. Do not run. Prefer option above instead. |
-| {{ tab() }} <code style="color: gray;">edition2018</code> | Execute code as Rust '18; default is '15. |
-| `#` | Hide line from documentation (` ```   # use x::hidden; ``` `). |
-| <code>[&#96;S&#96;]</code> | Create a link to struct, enum, trait, function, &hellip; `S`. |
-| <code>[&#96;S&#96;]&#40;crate::S&#41;</code> | Paths can also be used, in the form of markdown links. |
+| ` ```...``` ` | 包含一个[**文档测试**](https://doc.rust-lang.org/rustdoc/documentation-tests.html) (文档代码通过 `cargo test` 运行). |
+| ` ```X,Y ...``` ` | 同上, 但包含可选项 `X`, `Y` 如下 ... |
+| {{ tab() }} <code style="color: gray;">rust</code> | 明确该测试是由 Rust 编写的; 可以通过 Rust 工具链解析. |
+| {{ tab() }} <code style="color: gray; opacity: 0.3;">-</code> | 编译测试. 运行测试. 当 panic 时失败. **默认行为**. |
+| {{ tab() }} <code style="color: gray;">should_panic</code> | 编译测试. 运行测试. 执行应当 panic. 否则测试失败. |
+| {{ tab() }} <code style="color: gray;">no_run</code> | 编译测试. 编译失败则测试失败, 不会运行测试. |
+| {{ tab() }} <code style="color: gray;">compile_fail</code> | 编译测试. 但如果代码 _能够_ 通过编译则失败. |
+| {{ tab() }} <code style="color: gray;">ignore</code> | 不要编译. 不要运行. 忽略. |
+| {{ tab() }} <code style="color: gray;">edition2018</code> | 在 Rust '18 版本下运行; 默认是 '15. |
+| `#` | 文档中注释某行 (` ```   # use x::hidden; ``` `). |
+| <code>[&#96;S&#96;]</code> | 创建一个链接指向结构体, 枚举, trait, 函数, &hellip; 的 `S`. |
+| <code>[&#96;S&#96;]&#40;crate::S&#41;</code> | 可以使用 Markdown 语法指定链接路径. |
 
 
 </fixed-2-column>
