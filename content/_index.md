@@ -130,7 +130,7 @@ insert_anchor_links = "right"
 
 
 **使用类型**
-* [类型、特征、泛型](#types-traits-generics)
+* [类型, Trait, 泛型](#types-traits-generics)
 * [类型乐园](#type-zoo)
 * [类型转换](#type-conversions)
 
@@ -516,7 +516,7 @@ fn main() {
 
 | 示例 |  说明 |
 |---------|---------|
-| `m!()` |  **宏** {{book(page="ch19-06-macros.html")}} {{std(page="std/index.html#macros")}} {{ref(page="macros.html")}} 咒语, 也作 `m!{}`、`m![]` (取决于宏本身)  |
+| `m!()` |  **宏** {{book(page="ch19-06-macros.html")}} {{std(page="std/index.html#macros")}} {{ref(page="macros.html")}} 咒语, 也作 `m!{}`, `m![]` (取决于宏本身)  |
 | `#[attr]`  | 外部**属性**{{ex(page="attribute.html")}} {{ref(page="attributes.html")}}, 注解接下来的内容.  |
 | `#![attr]` | 内部属性, 注解_上部_, 周边的内容.  |
 
@@ -619,7 +619,7 @@ fn main() {
 
 ### 泛型 & 约束 {#generics-constraints}
 
-泛型使得类型构造、trait 和函数更加可扩展. 
+泛型使得类型构造, trait 和函数更加可扩展. 
 
 <fixed-2-column>
 
@@ -4053,7 +4053,7 @@ let a = c;          // <- 是这里, 不再使用 `r` 和 `s`.
         </framed>
     </visual>
     <description>
-        安全地保存 A、B 或 C. <br>又名“标签联合”, 尽管编译器会忽略标签. 
+        安全地保存 A, B 或 C. <br>又名“标签联合”, 尽管编译器会忽略标签. 
     </description>
 </datum>
 
@@ -5987,39 +5987,39 @@ macro_rules! my_macro {
 ``` -->
 <fixed-3-column  class="color-header special_example">
 
-Attributes affecting the whole crate or app:
+这些属性对整个 crate 或应用程序都生效:
 
-| Opt-Out's   | On | Explanation |
+| 外部可选项   | 作用 | 说明 |
 |--------|---| ----------|
-| `#![no_std]` | `C` | Don't (automatically) import **`std`**{{ std(page="std/") }} ; use **`core`**{{ std(page="core/") }} instead. {{ ref(page="names/preludes.html#the-no_std-attribute") }} |
-| `#![no_implicit_prelude]` | `CM` | Don't add **`prelude`**{{ std(page="std/prelude/index.html") }}, need to manually import `None`, `Vec`, ... {{ ref(page="names/preludes.html#the-no_implicit_prelude-attribute") }} |
-| `#![no_main]` |  `C` | Don't emit `main()` in apps if you do that yourself. {{ ref(page="crates-and-source-files.html#the-no_main-attribute") }}|
+| `#![no_std]` | `C` | 不自动引入 **`std`**{{ std(page="std/") }} ; 而使用 **`core`**{{ std(page="core/") }} . {{ ref(page="names/preludes.html#the-no_std-attribute") }} |
+| `#![no_implicit_prelude]` | `CM` | 不添加 **`prelude`**{{ std(page="std/prelude/index.html") }}, 需要手动引入 `None`, `Vec` 等 {{ ref(page="names/preludes.html#the-no_implicit_prelude-attribute") }} |
+| `#![no_main]` |  `C` | 不触发应用程序中的 `main()`, 允许自定义启动. {{ ref(page="crates-and-source-files.html#the-no_main-attribute") }}|
 
 <!-- | `#![no_builtins]` | `C` | Does ... something ... probably important. {{ todo() }} {{ ref(page="attributes/codegen.html#the-no_builtins-attribute") }}| -->
 
 {{ tablesep() }}
 
-| Opt-In's   | On | Explanation |
+| 内部可选项   | 作用 | 说明 |
 |--------|---| ----------|
-| `#![feature(a, b, c)]` | `C` | Rely on features that may never get stabilized, _c._ [**Unstable Book**](https://doc.rust-lang.org/unstable-book/the-unstable-book.html). {{ experimental() }} |
+| `#![feature(a, b, c)]` | `C` | 依赖于某个永远无法被稳定下来的特性, _参见_ [**Unstable Book**](https://doc.rust-lang.org/unstable-book/the-unstable-book.html). {{ experimental() }} |
 
 {{ tablesep() }}
 
-| Builds | On | Explanation |
+| 构建选项   | 作用 | 说明 |
 |--------|---| ----------|
-| `#![windows_subsystem = "x"]` | `C` | On Windows, make a `console` or `windows` app. {{ ref(page="runtime.html#the-windows_subsystem-attribute") }} {{ esoteric() }} |
-| `#![crate_name = "x"]` | `C`  | Specifiy current crate name, e.g., when not using `cargo`. {{ todo() }} {{ ref(page="crates-and-source-files.html#the-crate_name-attribute") }} {{ esoteric() }} |
-| `#![crate_type = "bin"]` | `C`  | Specifiy current crate type (`bin`, `lib`, `dylib`, `cdylib`, ...). {{ ref(page="linkage.html") }} {{ esoteric() }} |
-| `#![recursion_limit = "123"]` | `C` | Set _compile-time_ recursion limit for deref, macros, ... {{ ref(page="attributes/limits.html#the-recursion_limit-attribute") }} {{ esoteric() }} |
-| `#![type_length_limit = "456"]` | `C` | Limits maximum number of type substitutions. {{ ref(page="attributes/limits.html#the-type_length_limit-attribute") }} {{ esoteric() }} |
+| `#![windows_subsystem = "x"]` | `C` | 在 Windows 上创建 `console` 或 `windows` 应用程序. {{ ref(page="runtime.html#the-windows_subsystem-attribute") }} {{ esoteric() }} |
+| `#![crate_name = "x"]` | `C`  | 当不使用 `cargo` 时指定当前 crate 名. {{ todo() }} {{ ref(page="crates-and-source-files.html#the-crate_name-attribute") }} {{ esoteric() }} |
+| `#![crate_type = "bin"]` | `C`  | 指定当前 crate 类型 (`bin`, `lib`, `dylib`, `cdylib`, ...). {{ ref(page="linkage.html") }} {{ esoteric() }} |
+| `#![recursion_limit = "123"]` | `C` | 设置解引用和宏展开等的 _编译期_ 递归限制 {{ ref(page="attributes/limits.html#the-recursion_limit-attribute") }} {{ esoteric() }} |
+| `#![type_length_limit = "456"]` | `C` | 限制类型替换的最大数量. {{ ref(page="attributes/limits.html#the-type_length_limit-attribute") }} {{ esoteric() }} |
 
 
 {{ tablesep() }}
 
-| Handlers | On | Explanation |
+| Handler   | 作用 | 说明 |
 |--------|---|----------|
-| `#[panic_handler]` | `F` | Make some `fn f(&PanicInfo) -> !` app's **panic handler**. {{ ref(page="runtime.html#the-panic_handler-attribute") }} |
-| `#[global_allocator]` | `S` | Make static item impl. `GlobalAlloc` {{ std(page="alloc/alloc/trait.GlobalAlloc.html") }} **global allocator**. {{ ref(page="runtime.html#the-global_allocator-attribute") }}|
+| `#[panic_handler]` | `F` | 使函数 `fn f(&PanicInfo) -> !` 作为 **panic handler**. {{ ref(page="runtime.html#the-panic_handler-attribute") }} |
+| `#[global_allocator]` | `S` | 标记静态实例. `GlobalAlloc` {{ std(page="alloc/alloc/trait.GlobalAlloc.html") }} **全局分配器**. {{ ref(page="runtime.html#the-global_allocator-attribute") }}|
 
 
 </fixed-3-column>
@@ -6034,31 +6034,31 @@ Attributes affecting the whole crate or app:
 <label for="tab-preprocessing-4"><b><code>#[code]</code></b></label>
 <panel><div class="color-header undefined-color-3">
 
-Attributes primarily governing emitted code:
+这些属性主要用于控制相关代码:
 
 <fixed-3-column  class="color-header special_example">
 
-| Developer UX | On | Explanation |
+| 开发者体验 | 作用 | 说明 |
 |-------|---|-------------|
-| `#[non_exhaustive]` | `T` | Future-proof `struct` or `enum`; hint it may grow in future. {{ ref(page="attributes/type_system.html#the-non_exhaustive-attribute") }}|
-| `#[path = "x.rs"]` | `M` | Get module from non-standard file. {{ ref(page="items/modules.html#the-path-attribute") }}|
+| `#[non_exhaustive]` | `T` | 标记 `struct` 或 `enum` 未来有可能发生变更. {{ ref(page="attributes/type_system.html#the-non_exhaustive-attribute") }}|
+| `#[path = "x.rs"]` | `M` | 从非标准文件中获取模块. {{ ref(page="items/modules.html#the-path-attribute") }}|
 
 {{ tablesep() }}
 
-| Codegen | On | Explanation |
+| 代码生成 | 作用 | 声明 |
 |-------|---|-------------|
-| `#[inline]` | `F` | Nicely suggest compiler should inline function at call sites. {{ ref(page="attributes/codegen.html#the-inline-attribute") }}|
-| `#[inline(always)]` | `F` | Emphatically threaten compiler to inline call, or else. {{ ref(page="attributes/codegen.html#the-inline-attribute") }}|
-| `#[inline(never)]` | `F` | Instruct compiler to feel disappointed if it still inlines the function. {{ ref(page="attributes/codegen.html#the-inline-attribute") }} |
-| `#[cold]` | `F` | Hint that function probably isn't going to be called. {{ ref(page="codegen.html#the-cold-attribute") }}|
-| `#[target_feature(enable="x")]` | `F` | Enable CPU feature (e.g., `avx2`) for code of `unsafe fn`. {{ ref(page="attributes/codegen.html#the-target_feature-attribute") }}|
-| `#[track_caller]` | `F` | Allows `fn` to find **`caller`**{{ std(page="core/panic/struct.Location.html#method.caller") }} for better panic messages. {{ ref(page="attributes/codegen.html#the-track_caller-attribute") }}|
-| `#[repr(X)]`<sup>1</sup>  | `T`  | Use another representation instead of the default **`rust`** {{ ref(page="type-layout.html#the-default-representation") }} one: |
-| {{ tab() }} `#[repr(C)]` | `T`  | Use a C-compatible (f. FFI), predictable (f. `transmute`) layout. {{ ref(page="type-layout.html#the-c-representation") }}|
-| {{ tab() }} `#[repr(C, u8)]` | `enum`  | Give `enum` discriminant the specified type. {{ ref(page="type-layout.html#the-c-representation") }}|
-| {{ tab() }} `#[repr(transparent)]` | `T`  | Give single-element type same layout as contained field. {{ ref(page="type-layout.html#the-transparent-representation") }}|
-| {{ tab() }} `#[repr(packed(1))]` | `T`  | Lower alignment of struct and contained fields, mildly UB prone. {{ ref(page="type-layout.html#the-alignment-modifiers") }}|
-| {{ tab() }} `#[repr(align(8))]` | `T`  | Raise alignment of struct to given value, e.g., for SIMD types. {{ ref(page="type-layout.html#the-alignment-modifiers") }}|
+| `#[inline]` | `F` | 建议编译器将函数调用编译为内嵌代码. {{ ref(page="attributes/codegen.html#the-inline-attribute") }}|
+| `#[inline(always)]` | `F` | 要求编译器必须将此函数调用内嵌. {{ ref(page="attributes/codegen.html#the-inline-attribute") }}|
+| `#[inline(never)]` | `F` | 告诉编译器即便该函数可以内嵌也不要这么做. {{ ref(page="attributes/codegen.html#the-inline-attribute") }} |
+| `#[cold]` | `F` | 标记该函数可能并不需要被调用. {{ ref(page="codegen.html#the-cold-attribute") }}|
+| `#[target_feature(enable="x")]` | `F` | 启用 `unsafe fn` 下支持的某些 CPU 特性 (如 `avx2`). {{ ref(page="attributes/codegen.html#the-target_feature-attribute") }}|
+| `#[track_caller]` | `F` | 允许 `fn` 追溯调用者 **`caller`**{{ std(page="core/panic/struct.Location.html#method.caller") }}  已获得更详细的 panic 信息. {{ ref(page="attributes/codegen.html#the-track_caller-attribute") }}|
+| `#[repr(X)]`<sup>1</sup>  | `T`  | 用另一种指定的表示法来替换 **`rust`** {{ ref(page="type-layout.html#the-default-representation") }} 默认的: |
+| {{ tab() }} `#[repr(C)]` | `T`  | 使用兼容 C (当 FFI) 且可预测的 (当 `transmute`) 内存布局. {{ ref(page="type-layout.html#the-c-representation") }}|
+| {{ tab() }} `#[repr(C, u8)]` | `enum`  | 使得该 `enum` 变体以指定类型表示. {{ ref(page="type-layout.html#the-c-representation") }}|
+| {{ tab() }} `#[repr(transparent)]` | `T`  | 使得单元素类型内存布局与其内部字段一致. {{ ref(page="type-layout.html#the-transparent-representation") }}|
+| {{ tab() }} `#[repr(packed(1))]` | `T`  | 结构体及其字段向低位对齐, 可能会 UB. {{ ref(page="type-layout.html#the-alignment-modifiers") }}|
+| {{ tab() }} `#[repr(align(8))]` | `T`  | 结构体对齐提升, 比如用于 SIMD 类型. {{ ref(page="type-layout.html#the-alignment-modifiers") }}|
 
 <!-- {{ tablesep() }}
 
@@ -6073,21 +6073,21 @@ Attributes primarily governing emitted code:
 
 <footnotes>
 
-<sup>1</sup> Some representation modifiers can be combined, e.g., `#[repr(C, packed(1))]`.
+<sup>1</sup> 某些标识装饰器可以合并在一起写, 如 `#[repr(C, packed(1))]`.
 
 </footnotes>
 
 {{ tablesep() }}
 
-| Linking | On | Explanation |
+| 链接 | 作用 | 说明 |
 |-------|---|-------------|
-| `#[no_mangle]` | `*` | Use item name directly as symbol name, instead of mangling.  {{ ref(page="abi.html#the-no_mangle-attribute") }}|
-| `#[no_link]` | `X` | Don't link `extern crate` when only wanting macros. {{ ref(page="items/extern-crates.html#the-no_link-attribute") }}|
-| `#[link(name="x", kind="y")]` | `X`  | Native lib to link against when looking up symbol. {{ ref(page="items/external-blocks.html#the-link-attribute") }}|
-| `#[link_name = "foo"]` | `F`  | Name of symbol to search for resolving `extern fn`. {{ ref(page="items/external-blocks.html#the-link_name-attribute") }}|
-| `#[link_section = ".sample"]` | `FS`  | Section name of object file where item should be placed. {{ ref(page="abi.html#the-link_section-attribute") }}|
-| `#[export_name = "foo"]` | `FS` | Export a `fn` or `static` under a different name. {{ ref(page="abi.html#the-export_name-attribute") }}|
-| `#[used]` | `S`  | Don't optimize away `static` variable despite it looking unused. {{ ref(page="abi.html#the-used-attribute") }}|
+| `#[no_mangle]` | `*` | 使该项编译后如其名, 不添加乱七八糟的字符.  {{ ref(page="abi.html#the-no_mangle-attribute") }}|
+| `#[no_link]` | `X` | 当仅使用宏时不链接 `extern crate`. {{ ref(page="items/extern-crates.html#the-no_link-attribute") }}|
+| `#[link(name="x", kind="y")]` | `X`  | 链接本地库, 表明符号表将从这里查找. {{ ref(page="items/external-blocks.html#the-link-attribute") }}|
+| `#[link_name = "foo"]` | `F`  | 结息 `extern fn` 用的符号名. {{ ref(page="items/external-blocks.html#the-link_name-attribute") }}|
+| `#[link_section = ".sample"]` | `FS`  | 指定对象文件的段名. {{ ref(page="abi.html#the-link_section-attribute") }}|
+| `#[export_name = "foo"]` | `FS` | 将 `fn` 或 `static` 以别名导出. {{ ref(page="abi.html#the-export_name-attribute") }}|
+| `#[used]` | `S`  | 不要优化掉看似未使用过的 `static` 变量. {{ ref(page="abi.html#the-used-attribute") }}|
 
 
 
@@ -6104,22 +6104,22 @@ Attributes primarily governing emitted code:
 <label for="tab-preprocessing-3"><b><code>#[quality]</code></b></label>
 <panel><div class="color-header undefined-color-3">
 
-Attributes used by Rust tools to improve code quality:
+Rust 工具链利用这些属性提升代码质量:
 
 <fixed-3-column  class="color-header special_example">
 
-| Code Patterns | On | Explanation |
+| 代码模式 | 作用 | 说明 |
 |-------|---|-------------|
-| `#[allow(X)]` | `*` | Instruct `rustc` / `clippy` to ... ignore class `X` of possible issues. {{ ref(page="attributes/diagnostics.html#lint-check-attributes") }} |
-| `#[warn(X)]` <sup>1</sup> | `*` |  ... emit a warning, mixes well with `clippy` lints. {{ hot() }} {{ ref(page="attributes/diagnostics.html#lint-check-attributes") }} |
-| `#[deny(X)]` <sup>1</sup> | `*` |  ... fail compilation. {{ ref(page="attributes/diagnostics.html#lint-check-attributes") }} |
-| `#[forbid(X)]` <sup>1</sup> | `*` | ... fail compilation and prevent subsequent `allow` overrides. {{ ref(page="attributes/diagnostics.html#lint-check-attributes") }} |
-| `#[deprecated = "msg"]` | `*` | Let your users know you made a design mistake. {{ ref(page="diagnostics.html#the-deprecated-attribute") }}|
-| `#[must_use = "msg"]` | `FTX` |  Makes compiler check return value is _processed_ by caller. {{ hot() }} {{ ref(page="attributes/diagnostics.html#the-must_use-attribute") }}|
+| `#[allow(X)]` | `*` | 让 `rustc` 或 `clippy` ... 允许 `X` 可能导致的警告. {{ ref(page="attributes/diagnostics.html#lint-check-attributes") }} |
+| `#[warn(X)]` <sup>1</sup> | `*` |  ... 产生警告, 结合 `clippy` lint. {{ hot() }} {{ ref(page="attributes/diagnostics.html#lint-check-attributes") }} |
+| `#[deny(X)]` <sup>1</sup> | `*` |  ... 编译失败. {{ ref(page="attributes/diagnostics.html#lint-check-attributes") }} |
+| `#[forbid(X)]` <sup>1</sup> | `*` | ... 编译失败并禁用后续的 `allow` 声明. {{ ref(page="attributes/diagnostics.html#lint-check-attributes") }} |
+| `#[deprecated = "msg"]` | `*` | 让用户知道你曾经犯了个错误. {{ ref(page="diagnostics.html#the-deprecated-attribute") }}|
+| `#[must_use = "msg"]` | `FTX` |  让编译器检查返回值确被调用者 _处理过_ 了. {{ hot() }} {{ ref(page="attributes/diagnostics.html#the-must_use-attribute") }}|
 
 <footnotes>
 
-<sup>1</sup> There is some debate which one is the _best_ to ensure high quality crates. Actively maintained multi-dev crates probably benefit from more aggressive `deny` or `forbid` lints; less-regularly updated ones probably more from conservative use of `warn` (as future compiler or `clippy` updates may suddenly break otherwise working code with minor issues).
+<sup>1</sup> 关于在 crate 中什么是 _最佳实践_ 上有过不少争论. 通常多人活跃维护的 crate 可能会提供更激进的 `deny` 或 `forbid` lint; 不定期更新的项目则可能只标记一个 `warn` (不保证未来的编译器或者 `clippy` 不会突然对此产生警告).
 
 </footnotes>
 
@@ -6129,21 +6129,21 @@ Attributes used by Rust tools to improve code quality:
 
 <fixed-3-column  class="color-header special_example">
 
-| Tests | On | Explanation |
+| 测试 | 作用 | 说明 |
 |-------|---|-------------|
-| `#[test]` | `F` | Marks the function as a test, run with `cargo test`. {{ hot() }} {{ ref(page="attributes/testing.html#the-test-attribute") }}|
-| `#[ignore = "msg"]` | `F` | Compiles but does not execute some `#[test]` for now. {{ ref(page="attributes/testing.html#the-ignore-attribute") }}|
-| `#[should_panic]` | `F` | Test must `panic!()` to actually succeed. {{ ref(page="attributes/testing.html#the-ignore-attribute") }}|
-| `#[bench]` | `F` | Mark function in `bench/` as benchmark for `cargo bench`. {{ experimental() }} {{ ref(page="") }}|
+| `#[test]` | `F` | 标记该函数为测试, 通过 `cargo test` 运行. {{ hot() }} {{ ref(page="attributes/testing.html#the-test-attribute") }}|
+| `#[ignore = "msg"]` | `F` | 编译但目前不运行某些 `#[test]`. {{ ref(page="attributes/testing.html#the-ignore-attribute") }}|
+| `#[should_panic]` | `F` | 该测试必须 `panic!()` 才算成功. {{ ref(page="attributes/testing.html#the-ignore-attribute") }}|
+| `#[bench]` | `F` | 在 `bench/` 中标记该函数为性能测试, 通过 `cargo bench` 运行. {{ experimental() }} {{ ref(page="") }}|
 
 {{ tablesep() }}
 
 
-| Formatting | On | Explanation |
+| 格式化 | 作用 | 说明 |
 |-------|---|-------------|
-| `#[rustfmt::skip]` |  `*` | Prevent `cargo fmt` from cleaning up item. {{ link(url="https://github.com/rust-lang/rustfmt") }}|
-| `#![rustfmt::skip::macros(x)]` |  `CM` | ... from cleaning up macro `x`. {{ link(url="https://github.com/rust-lang/rustfmt") }}|
-| `#![rustfmt::skip::attributes(x)]` |  `CM` | ... from cleaning up attribute `x`. {{ link(url="https://github.com/rust-lang/rustfmt") }}|
+| `#[rustfmt::skip]` |  `*` | 防止 `cargo fmt` 自动清理该项. {{ link(url="https://github.com/rust-lang/rustfmt") }}|
+| `#![rustfmt::skip::macros(x)]` |  `CM` | ... 防止自动清理宏 `x`. {{ link(url="https://github.com/rust-lang/rustfmt") }}|
+| `#![rustfmt::skip::attributes(x)]` |  `CM` | ... 防止自动清理属性 `x`. {{ link(url="https://github.com/rust-lang/rustfmt") }}|
 
 </fixed-3-column>
 
@@ -6152,16 +6152,16 @@ Attributes used by Rust tools to improve code quality:
 <fixed-3-column class="color-header special_example extra-wide">
 
 
-| Documentation | On | Explanation |
+| 文档 | 作用 | 说明 |
 |-------|---|-------------|
-| `#[doc = "Explanation"]` | `*` | Same as adding a `///` doc comment. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html") }} |
-| `#[doc(alias = "other")]` | `*` | Provide another name users can search for in the docs. {{ link(url="https://github.com/rust-lang/rust/issues/50146") }} |
-| `#[doc(hidden)]` | `*` | Prevent item from showing up in docs. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#dochidden") }} |
-| `#![doc(html_favicon_url = "")]` | `C` | Sets the `favicon` for the docs. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#html_favicon_url") }}|
-| `#![doc(html_logo_url  = "")]` | `C` | The logo used in the docs. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#html_logo_url") }}|
-| `#![doc(html_playground_url  = "")]` | `C` | Generates `Run` buttons and uses given service. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#html_playground_url") }}|
-| `#![doc(html_root_url  = "")]` | `C` | Base URL for links to external crates. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#html_root_url") }}|
-| `#![doc(html_no_source)]` | `C` | Prevents source from being included in docs. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#html_no_source") }}|
+| `#[doc = "Explanation"]` | `*` | 与 `///` 文档注释效果相同. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html") }} |
+| `#[doc(alias = "other")]` | `*` | 让用户用该别名也能在文档中搜索到该项. {{ link(url="https://github.com/rust-lang/rust/issues/50146") }} |
+| `#[doc(hidden)]` | `*` | 在文档中隐藏. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#dochidden") }} |
+| `#![doc(html_favicon_url = "")]` | `C` | 设置文档图标 `favicon`. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#html_favicon_url") }}|
+| `#![doc(html_logo_url  = "")]` | `C` | 设置文档 Logo. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#html_logo_url") }}|
+| `#![doc(html_playground_url  = "")]` | `C` | 用给定服务生成 `运行` 按钮. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#html_playground_url") }}|
+| `#![doc(html_root_url  = "")]` | `C` | 外部 crate 的基础链接. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#html_root_url") }}|
+| `#![doc(html_no_source)]` | `C` | 生成的文档中不要包含源代码. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#html_no_source") }}|
 
 <!-- | `#![doc(issue_tracker_base_url  = "")]` | `C` | Mostly for `std::`, where issue numbers link. {{ link(url="https://doc.rust-lang.org/rustdoc/the-doc-attribute.html#issue_tracker_base_url") }}| -->
 
@@ -6183,26 +6183,26 @@ Attributes used by Rust tools to improve code quality:
 
 <fixed-3-column  class="color-header special_example">
 
-Attributes related to the creation and use of macros:
+这些属性用于创建或者修饰宏:
 
-| Macros By Example | On | Explanation |
+| 声明宏 | 作用 | 说明 |
 |-------|---|-------------|
-| `#[macro_export]` |  `!` | Export `macro_rules!` as `pub` on crate level {{ ref(page="macros-by-example.html#path-based-scope") }}|
-| `#[macro_use]` | `MX` | Let macros persist past modules; or import from `extern crate`. {{ ref(page="macros-by-example.html#the-macro_use-attribute") }}|
+| `#[macro_export]` |  `!` | 将 `macro_rules!` 导出为 `pub` 到 crate 层级 {{ ref(page="macros-by-example.html#path-based-scope") }}|
+| `#[macro_use]` | `MX` | 让宏得以运行在模块里; 或从 `extern crate` 导入. {{ ref(page="macros-by-example.html#the-macro_use-attribute") }}|
 
 {{ tablesep() }}
 
-| Proc Macros | On | Explanation |
+| 过程宏 | 作用 | 说明 |
 |-------|---|-------------|
-| `#[proc_macro]` | `F`  | Mark `fn` as **function-like** procedural macro callable as `m!()`. {{ ref(page="procedural-macros.html#function-like-procedural-macros") }}|
-| `#[proc_macro_derive(Foo)]` | `F`  | Mark `fn` as **derive macro** which can `#[derive(Foo)]`. {{ ref(page="procedural-macros.html#derive-macros") }}|
-| `#[proc_macro_attribute]` | `F`  | Mark `fn` as **attribute macro** which can understand new `#[x]`. {{ ref(page="procedural-macros.html#attribute-macros") }}|
+| `#[proc_macro]` | `F`  | 标记 `fn` 为 **函数式** 过程宏, 调用方式如 `m!()`. {{ ref(page="procedural-macros.html#function-like-procedural-macros") }}|
+| `#[proc_macro_derive(Foo)]` | `F`  | 标记 `fn` 为 **Derive 宏**, 调用方式如 `#[derive(Foo)]`. {{ ref(page="procedural-macros.html#derive-macros") }}|
+| `#[proc_macro_attribute]` | `F`  | 标记 `fn` 为 **属性宏**, 调用方式如一个新的 `#[x]`. {{ ref(page="procedural-macros.html#attribute-macros") }}|
 
 {{ tablesep() }}
 
-| Derives | On | Explanation |
+| Derive | 作用 | 说明 |
 |-------|---|-------------|
-| `#[derive(X)]` | `T` | Let some proc macro provide a goodish `impl` of `trait X`. {{ hot() }} {{ ref(page="") }}|
+| `#[derive(X)]` | `T` | 通过某些过程宏提供 `trait X` 的 `impl` . {{ hot() }} {{ ref(page="") }}|
 
 <!-- | `#[derive(Eq)]` |  | xxx{{ ref(page="") }}|
 | `#[derive(PartialEq)]` | |  xxx|
@@ -6231,38 +6231,38 @@ Attributes related to the creation and use of macros:
 <label for="tab-preprocessing-5"><b><code>#[cfg]</code></b></label>
 <panel><div class="color-header undefined-color-3">
 
-Attributes governing conditional compilation:
+这些属性用于条件编译:
 
 <fixed-3-column class="color-header special_example extra-wide">
 
-| Config Attributes | On | Explanation |
+| 配置属性 | 作用 | 说明 |
 |-------|---|-------------|
-| `#[cfg(X)]` | `*` | Include item if configuration `X` holds. {{ ref(page="conditional-compilation.html#the-cfg-attribute") }}|
-| `#[cfg(all(X, Y, Z))]` | `*` | Include item if all options hold. {{ ref(page="conditional-compilation.html#conditional-compilation") }}|
-| `#[cfg(any(X, Y, Z))]` | `*` | Include item if at least one option holds. {{ ref(page="conditional-compilation.html#conditional-compilation") }}|
-| `#[cfg(not(X))]` | `*` | Include item if `X` does not hold. {{ ref(page="conditional-compilation.html#conditional-compilation") }}|
-| `#[cfg_attr(X, foo = "msg")]` | `*` | Apply `#[foo = "msg"]` if configuration `X` holds. {{ ref(page="conditional-compilation.html#the-cfg_attr-attribute") }}|
+| `#[cfg(X)]` | `*` | 如果提供了配置 `X` 则编译. {{ ref(page="conditional-compilation.html#the-cfg-attribute") }}|
+| `#[cfg(all(X, Y, Z))]` | `*` | 如果提供了所有配置则编译. {{ ref(page="conditional-compilation.html#conditional-compilation") }}|
+| `#[cfg(any(X, Y, Z))]` | `*` | 如果提供了任意配置则编译. {{ ref(page="conditional-compilation.html#conditional-compilation") }}|
+| `#[cfg(not(X))]` | `*` | 如果未提供 `X` 则编译. {{ ref(page="conditional-compilation.html#conditional-compilation") }}|
+| `#[cfg_attr(X, foo = "msg")]` | `*` | 如果提供了 `X` 则标记 `#[foo = "msg"]`. {{ ref(page="conditional-compilation.html#the-cfg_attr-attribute") }}|
 
 {{ tablesep() }}
 
-> ⚠️ Note, options can generally be set multiple times, i.e., the same key can show up with multiple values. One can expect `#[cfg(target_feature = "avx")]` **and** `#[cfg(target_feature = "avx2")]` to be true at the same time.
+> ⚠️ Note, options can generally be set multiple times, i.e., the same key can show up with multiple values. One can expect `#[cfg(target_feature = "avx")]` **和** `#[cfg(target_feature = "avx2")]` to be true at the same time.
 
 {{ tablesep() }}
 
-| Known Options | On | Explanation |
+| 已知选项 | 作用 | 说明 |
 |-------|---|-------------|
-| `#[cfg(target_arch = "x86_64")]` | `*` | The CPU architecture crate is compiled for. {{ ref(page="conditional-compilation.html#target_arch") }}|
-| `#[cfg(target_feature = "avx")]` | `*` | Whether a particular class of instructions is available. {{ ref(page="conditional-compilation.html#target_feature") }}|
-| `#[cfg(target_os = "macos")]` | `*` | Operating system your code will run on. {{ ref(page="conditional-compilation.html#target_os") }}|
-| `#[cfg(target_family = "unix")]` | `*` | Family operating system belongs to. {{ ref(page="conditional-compilation.html#target_family") }}|
-| `#[cfg(target_env = "msvc")]` | `*` | How DLLs and functions are interfaced with on OS. {{ ref(page="conditional-compilation.html#target_env") }}|
-| `#[cfg(target_endian = "little")]` | `*` | Main reason your cool new zero-cost protocol fails. {{ ref(page="conditional-compilation.html#target_endian") }}|
-| `#[cfg(target_pointer_width = "64")]` | `*` | How many bits pointers, `usize` and CPU words have. {{ ref(page="conditional-compilation.html#target_pointer_width") }}|
-| `#[cfg(target_vendor = "apple")]` | `*` |  Manufacturer of target. {{ ref(page="conditional-compilation.html#target_vendor") }}|
-| `#[cfg(debug_assertions)]` | `*` | Whether `debug_assert!()` and friends would panic. {{ ref(page="conditional-compilation.html#debug_assertions") }}|
-| `#[cfg(proc_macro)]` | `*` | Wheter crate compiled as proc macro. {{ ref(page="conditional-compilation.html#proc_macro") }}|
-| `#[cfg(test)]` | `*` | Whether compiled with `cargo test`. {{ hot() }} {{ ref(page="conditional-compilation.html#test") }}|
-| `#[cfg(feature = "serde")]` | `*` | When your crate was compiled with feature `serde`. {{ hot() }} {{ ref(page="conditional-compilation.html#conditional-compilation") }}|
+| `#[cfg(target_arch = "x86_64")]` | `*` | 指定编译目标 CPU 架构. {{ ref(page="conditional-compilation.html#target_arch") }}|
+| `#[cfg(target_feature = "avx")]` | `*` | 判断某类指令集是否可用. {{ ref(page="conditional-compilation.html#target_feature") }}|
+| `#[cfg(target_os = "macos")]` | `*` | 运行的目标操作系统. {{ ref(page="conditional-compilation.html#target_os") }}|
+| `#[cfg(target_family = "unix")]` | `*` | 运行的某一类目标操作系统. {{ ref(page="conditional-compilation.html#target_family") }}|
+| `#[cfg(target_env = "msvc")]` | `*` | 指定如何让操作系统链接 DLL 和函数. {{ ref(page="conditional-compilation.html#target_env") }}|
+| `#[cfg(target_endian = "little")]` | `*` | 你优秀的无开销自定义协议失败的主要原因. {{ ref(page="conditional-compilation.html#target_endian") }}|
+| `#[cfg(target_pointer_width = "64")]` | `*` | 指针位数, 即 `usize` 和 CPU 字长. {{ ref(page="conditional-compilation.html#target_pointer_width") }}|
+| `#[cfg(target_vendor = "apple")]` | `*` |  目标设备制造商. {{ ref(page="conditional-compilation.html#target_vendor") }}|
+| `#[cfg(debug_assertions)]` | `*` | 标记为 `debug_assert!()` 的和类似调试语句将会 panic. {{ ref(page="conditional-compilation.html#debug_assertions") }}|
+| `#[cfg(proc_macro)]` | `*` | 当 crate 编译为过程宏时. {{ ref(page="conditional-compilation.html#proc_macro") }}|
+| `#[cfg(test)]` | `*` | 当 `cargo test` 时编译. {{ hot() }} {{ ref(page="conditional-compilation.html#test") }}|
+| `#[cfg(feature = "serde")]` | `*` | 当 crate 启用了编译选项 `serde` 时. {{ hot() }} {{ ref(page="conditional-compilation.html#conditional-compilation") }}|
 
 </fixed-3-column>
 
@@ -6277,26 +6277,26 @@ Attributes governing conditional compilation:
 <label for="tab-preprocessing-6"><b><code>build.rs</code></b></label>
 <panel><div class="color-header undefined-color-3">
 
-Environment variables and outputs related to the pre-build script.
+预编译脚本可用的环境变量和输出配置.
 
 <fixed-2-column class="color-header special_example extra-wide">
 
-| Input Environment | Explanation {{ link(url="https://doc.rust-lang.org/cargo/reference/environment-variables.html") }} |
+| 输入环境 | 说明 {{ link(url="https://doc.rust-lang.org/cargo/reference/environment-variables.html") }} |
 |-------|-------------|
-| `CARGO_FEATURE_X` |  Environment variable set for each feature `x` activated.  |
-| {{ tab() }} `CARGO_FEATURE_SERDE` |  If feature `serde` were enabled. |
-| {{ tab() }} `CARGO_FEATURE_SOME_FEATURE` | If feature `some-feature` were enabled; dash `-` converted to `_`. |
+| `CARGO_FEATURE_X` |  每个启用的 `x` 都将设置一个这样的环境变量.  |
+| {{ tab() }} `CARGO_FEATURE_SERDE` |  如果启用了 `serde` 特性. |
+| {{ tab() }} `CARGO_FEATURE_SOME_FEATURE` | 如果启用了 `some-feature` 特性; 横线 `-` 会转为下划线 `_`. |
 | `CARGO_CFG_X` | Exposes cfg's; joins mult. opts. by `,` and converts `-` to `_`.|
-| {{ tab() }} `CARGO_CFG_TARGET_OS=macos` |  If `target_os` were set to `macos`. |
-| {{ tab() }} `CARGO_CFG_TARGET_FEATURE=avx,avx2` |  If `target_feature` were set to `avx` and `avx2`. |
-| `OUT_DIR` |  Where output should be placed. |
-| `TARGET` |  Target triple being compiled for. |
-| `HOST` |  Host triple (running this build script). |
-| `PROFILE` |  Can be `debug` or `release`. |
+| {{ tab() }} `CARGO_CFG_TARGET_OS=macos` |  如果 `target_os` 为 `macos`. |
+| {{ tab() }} `CARGO_CFG_TARGET_FEATURE=avx,avx2` |  如果 `target_feature` 设置为了 `avx` 和 `avx2`. |
+| `OUT_DIR` |  输出目录. |
+| `TARGET` |  编译结果目录. |
+| `HOST` |  指定运行该构建脚本的编译器. |
+| `PROFILE` |  可以是 `debug` 或者 `release`. |
 
 <footnotes>
 
-Available in `build.rs` via `env::var()?`. List not exhaustive.
+在 `build.rs` 通过 `env::var()?` 可以访问. 列表不完整.
 
 </footnotes>
 
@@ -6306,21 +6306,21 @@ Available in `build.rs` via `env::var()?`. List not exhaustive.
 
 {{ tablesep() }}
 
-| Output String | Explanation {{ link(url="https://doc.rust-lang.org/cargo/reference/build-scripts.html") }} |
+| 输出字符串 | 说明 {{ link(url="https://doc.rust-lang.org/cargo/reference/build-scripts.html") }} |
 |-------|-------------|
-| `cargo:rerun-if-changed=PATH` | (Only) run this `build.rs` again if `PATH` changed. |
-| `cargo:rerun-if-env-changed=VAR` | (Only) run this `build.rs` again if environment `VAR` changed. |
-| `cargo:rustc-link-lib=[KIND=]NAME` | Link native library as if via `-l` option. |
-| `cargo:rustc-link-search=[KIND=]PATH` | Search path for native library as if via `-L` option. |
-| `cargo:rustc-flags=FLAGS` | Add special flags to compiler. {{ todo() }} |
-| `cargo:rustc-cfg=KEY[="VALUE"]` | Emit given `cfg` option to be used for later compilation. |
-| `cargo:rustc-env=VAR=VALUE ` | Emit var accessible via `env!()` in crate during compilation. |
-| `cargo:rustc-cdylib-link-arg=FLAG ` | When building a `cdylib`, pass linker flag. |
-| `cargo:warning=MESSAGE` | Emit compiler warning. |
+| `cargo:rerun-if-changed=PATH` | (仅当) `PATH` 变化时运行 `build.rs`. |
+| `cargo:rerun-if-env-changed=VAR` | (仅当) 环境 `VAR` 变化时运行 `build.rs`. |
+| `cargo:rustc-link-lib=[KIND=]NAME` | 通过 `-l` 选项链接到本地库. |
+| `cargo:rustc-link-search=[KIND=]PATH` | 通过 `-L` 选项设置本地库搜索路径. |
+| `cargo:rustc-flags=FLAGS` | 为编译器添加自定义标识. {{ todo() }} |
+| `cargo:rustc-cfg=KEY[="VALUE"]` | 声明给定 `cfg` 选项以用于后续编译. |
+| `cargo:rustc-env=VAR=VALUE ` | 声明在 crate 编译期间可以通过 `env!()` 访问的变量. |
+| `cargo:rustc-cdylib-link-arg=FLAG ` | 当构建 `cdylib` 时的连接器标识. |
+| `cargo:warning=MESSAGE` | 产生编译器警告. |
 
 <footnotes>
 
-Emitted from `build.rs` via `println!()`. List not exhaustive.
+在 `build.rs` 通过 `println!()` 调用. 列表不完整.
 
 </footnotes>
 
@@ -6334,40 +6334,40 @@ Emitted from `build.rs` via `println!()`. List not exhaustive.
 
 <footnotes>
 
-For the _On_ column in attributes: <br>
-`C` means on crate level (usually given as `#![my_attr]` in the top level file). <br>
-`M` means on modules. <br>
-`F` means on functions. <br>
-`S` means on static. <br>
-`T` means on types. <br>
-`X` means something special. <br>
-`!` means on macros. <br>
-`*` means on almost any item. <br>
+表格列 _作用_ 说明如下: <br>
+`C` 标识作用在 crate 层级上 (常在顶级文件中声明作 `#![my_attr]`). <br>
+`M` 标识作用在模块上. <br>
+`F` 标识作用在函数上. <br>
+`S` 标识作用在静态区上. <br>
+`T` 标识作用在类型上. <br>
+`X` 标识某些特殊场景上. <br>
+`!` 标识作用在宏上. <br>
+`*` 标识作用在任意项上. <br>
 
 </footnotes>
 
 
 ---
 
-# Working with Types
+# 与类型打交道
 
 
-## Types, Traits, Generics
+## 类型, Trait, 泛型 {#types-traits-generics}
 
-Allowing users to _bring their own types_ and avoid code duplication.
+允许用户 _自定义类型_ 并减少代码重复.
 
 <tabs>
 
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-types-1" name="tab-group-types" checked>
-<label for="tab-types-1"><b>Types & Traits</b></label>
+<label for="tab-types-1"><b>类型 & Trait</b></label>
 <panel><div>
 
 
 <!-- Section -->
 <generics-section id="ttg-types">
-<header>Types</header>
+<header>类型</header>
 <description>
 
 <mini-zoo class="zoo">
@@ -6382,17 +6382,17 @@ Allowing users to _bring their own types_ and avoid code duplication.
     </entry>
 </mini-zoo>
 
-- Set of values with given semantics, layout, &hellip;
+- 以给定语句或布局设置值.
 
 <mini-table>
 
-| Type |   Values |
+| 类型 |   值 |
 | --- | --- |
 | `u8`  |  <code>{ 0<sub>u8</sub>, 1<sub>u8</sub>, ..., 255<sub>u8</sub> }</code> |
 | `char`  | `{ 'a', 'b', ... '🦀' }` |
 | `struct S(u8, char)`  | <code>{ (0<sub>u8</sub>, 'a'), ... (255<sub>u8</sub>, '🦀') }</code> |
 
-<subtitle>Sample types and sample values.</subtitle>
+<subtitle>样例类型和值</subtitle>
 
 </mini-table>
 
@@ -6402,7 +6402,7 @@ Allowing users to _bring their own types_ and avoid code duplication.
 
 <!-- Section -->
 <generics-section id="ttg-equivalence">
-<header>Type Equivalence and Conversions</header>
+<header>类型等价和转换</header>
 <description>
 
 <mini-zoo class="zoo">
@@ -6427,32 +6427,32 @@ Allowing users to _bring their own types_ and avoid code duplication.
 
 <!-- - Question: which of the types above is different from all others?
     - Trick question: all of these types are totally different -->
-- It may be obvious but &nbsp; `u8`, &nbsp;&nbsp; `&u8`, &nbsp;&nbsp; `&mut u8`, are entirely different from each other
-- Any `t: T` only accepts values from exactly `T`, e.g.,
-    - `f(0_u8)` can't be called with `f(&0_u8)`,
-    - `f(&mut my_u8)` can't be called with `f(&my_u8)`,
-    - `f(0_u8)` can't be called with `f(0_i8)`.
+- 看起来类似却完全不同的 &nbsp; `u8`, &nbsp;&nbsp; `&u8`, &nbsp;&nbsp; `&mut u8` 类型.
+- 任意 `t: T` 仅接受精确类型 `T` 的值, 如:
+    - `f(0_u8)` 不能以 `f(&0_u8)` 调用,
+    - `f(&mut my_u8)` 不能以 `f(&my_u8)` 调用,
+    - `f(0_u8)` 不能以 `f(0_i8)` 调用.
 
->  Yes, `0 != 0` (in a mathematical sense) when it comes to types! In a language sense, the operation  <code>==(0<sub>u8</sub>, 0<sub>u16</sub>)</code> just isn't defined to prevent happy little accidents.
+>  确实, 作为类型而言, `0 != 0` (在数学层面)! 在语言层面, 并没有为了你愉快地使用而定义了这样一个相等比较 <code>==(0<sub>u8</sub>, 0<sub>u16</sub>)</code>.
 
 <mini-table>
 
-| Type | Values |
+| 类型 | 值 |
 | --- | --- |
 | `u8`  | <code>{ 0<sub>u8</sub>, 1<sub>u8</sub>, ..., 255<sub>u8</sub> }</code> |
 | `u16`  | <code>{ 0<sub>u16</sub>, 1<sub>u16</sub>, ..., 65_535<sub>u16</sub> }</code> |
 | `&u8`  | <code>{ 0xffaa<sub>&u8</sub>, 0xffbb<sub>&u8</sub>, ... }</code> |
 | `&mut u8`  | <code>{ 0xffaa<sub>&mut u8</sub>, 0xffbb<sub>&mut u8</sub>, ... }</code> |
 
-<subtitle>How values differ between types.</subtitle>
+<subtitle>值和类型的不同</subtitle>
 
 </mini-table>
 
 
 
-- However, Rust might sometimes help to **convert between types**<sup>1</sup>
-    - **casts** manually convert values of types, `0_i8 as u8`
-    - **coercions**  {{ above(target="#language-sugar") }} automatically convert types if safe<sup>2</sup>, `let x: &u8 = &mut 0_u8;`
+- 不过在某些情况下, Rust 可能会进行 **类型转换**<sup>1</sup>
+    - **转换** 指的是手动进行类型转换, `0_i8 as u8`
+    - **强转** {{ above(target="#language-sugar") }} 将在安全的情况下自动转换 <sup>2</sup>, `let x: &u8 = &mut 0_u8;`
 
 
 
@@ -6472,7 +6472,7 @@ Allowing users to _bring their own types_ and avoid code duplication.
 
 <!-- Section -->
 <generics-section id="ttg-impl-s">
-<header>Implementations &mdash; <code>impl S { }</code></header>
+<header>实现 &mdash; <code>impl S { }</code></header>
 <description>
 
 <mini-zoo class="zoo">
@@ -6509,7 +6509,7 @@ impl Port {
 
 <!-- Section -->
 <generics-section id="ttg-traits">
-<header>Traits &mdash; <code>trait T { }</code></header>
+<header>Trait &mdash; <code>trait T { }</code></header>
 <description>
 
 <mini-zoo class="zoo">
