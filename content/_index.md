@@ -129,7 +129,7 @@ insert_anchor_links = "right"
 * [工具指令](#tooling-directives)
 
 
-**使用类型**
+**与类型打交道**
 * [类型, Trait, 泛型](#types-traits-generics)
 * [类型乐园](#type-zoo)
 * [类型转换](#type-conversions)
@@ -6459,9 +6459,9 @@ Rust 工具链利用这些属性提升代码质量:
 
 <footnotes>
 
-<sup>1</sup> Casts and coercions convert values from one set (e.g., `u8`) to another (e.g., `u16`), possibly adding CPU instructions to do so; and in such differ from **subtyping**, which would imply type and subtype are part of the same set (e.g., `u8` being subtype of `u16` and `0_u8` being the same as `0_u16`) where such a conversion would be purely a compile time check. Rust does not use subtyping for regular types (and `0_u8` _does_ differ from `0_u16`) but sort-of for lifetimes. {{ link(url = "https://featherweightmusings.blogspot.com/2014/03/subtyping-and-coercion-in-rust.html") }}
+<sup>1</sup> 从一类值 (如 `u8`) 转换和强转到另一类值 (如 `u16`) 时有可能会增加 CPU 指令以完成该操作; 一个类型是某一个类型一部分的叫做**子类型** (比如 `u8` 是 `u16` 的子类型所以 `0_u8` 和 `0_u16` 形式一致), 这种转换在编译期间就可以完成. Rust 并不为规则类型实现子类型转换 (`0_u8` _确实_ 不同于 `0_u16`), 但生命周期却是有的. {{ link(url = "https://featherweightmusings.blogspot.com/2014/03/subtyping-and-coercion-in-rust.html") }}
 
-<sup>2</sup> Safety here is not just physical concept (e.g., <code>&u8</code> can't be coerced to <code>&u128</code>), but also whether 'history has shown that such a conversion would lead to programming errors'.
+<sup>2</sup> 安全并不仅是简单的物理保证 (比如 <code>&u8</code> 无法变为 <code>&u128</code>), 并且告诉我们“历史经验表明这样转换确实会导致编程错误”.
 
 </footnotes>
 
@@ -6496,11 +6496,11 @@ impl Port {
 }
 ```
 
-- Types usually come with implementation, e.g., `impl Port {}`, behavior _related_ to type:
-    - **associated functions** `Port::new(80)`
-    - **methods** `port.close()`
+- 类型总要有对应的实现, 比如 `impl Port {}` 的类型 _关联_ 行为有:
+    - **关联函数** `Port::new(80)`
+    - **方法** `port.close()`
 
-> What's considered _related_ is more philosophical than technical, nothing (except good taste) would prevent a `u8::play_sound()` from happening.
+> 这里的 _关联_ 更像是一个哲学概念而非技术概念, 没什么能阻止你使用 `u8::play_sound()` (只要你乐意).
 
 
 </description>
@@ -6527,11 +6527,11 @@ impl Port {
     </entry>
 </mini-zoo>
 
-- **Traits** ...
-    - are way to "abstract" behavior,
-    - trait author declares semantically _this trait means X_,
-    - other can implement ("subscribe to") that behavior for their type.
-- Think about trait as "membership list" for types:
+- **Trait**
+    - 是一种“抽象”行为,
+    - trait 作者语义上声明了 _该 trait 意为 X_,
+    - 别人也可以为其他类型实现相关行为 (“特化”).
+- 可以认为 trait 是类型的一种“成员列表”:
 
 
 <mini-table>
@@ -6584,7 +6584,7 @@ impl Port {
 
 </mini-table>
 
-<subtitle>Traits as membership tables, <code>Self</code> refers to the type included.</subtitle>
+<subtitle>Traits 作为成员列表, <code>Self</code> 指向其包含的类型.</subtitle>
 
 </mini-table>
 
