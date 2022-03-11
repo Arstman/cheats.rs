@@ -6797,7 +6797,7 @@ Venison::new("rudolph").eat();
 
 <footnotes>
 
-<sup>*</sup> 为避免两个人实现不同的 `Eat`, Rust 限制了 Alice 和 Bob 能做的事情; 即, 一个 `impl Eat for Venison` 仅能在 `Venison` 所在的 crate 或 `Eat` 所在的 crate 中实现. {{todo()}}
+<sup>*</sup> 为避免两个人实现不同的 `Eat`, Rust 限制了 Alice 和 Bob 能做的事情; 即, 一个 `impl Eat for Venison` 仅能在 `Venison` 所在的 crate 或 `Eat` 所在的 crate 中实现. 这被称作 trait 实现的“孤儿原则”. {{todo()}}
 
 </footnotes>
 
@@ -7134,18 +7134,18 @@ impl<T> S<T> where T: Absolute + Dim + Mul {
 }
 ```
 可以读作:
-- here is an implementation recipe for any type `T` (the `impl <T>` part),
-- where<!--sup>*</sup--> that type must be member of the `Absolute + Dim + Mul` traits,
-- you may add an implementation block to `S<T>`,
-- containing the methods ...
+- 这里是对任意类型 `T` 一个实现 (即 `impl <T>` 部分),
+- 该类型必须同时满足 `Absolute + Dim + Mul` 这些 Trait 约束,
+- 可以添加一个实现块 `S<T>`,
+- 以及包含更多方法 ...
 
-You can think of such `impl<T> ... {} ` code as **abstractly implementing a family of behaviors**. Most notably, they allow 3<sup>rd</sup> parties to transparently materialize implementations similarly to how type constructors materialize types:
+可以将类如 `impl<T> ... {} ` 的代码看作**对一类行为的抽象实现**. 尤其使得第三方透明地实例化与类型构造器如何实例化类似:
 
 ```
-// If compiler encounters this, it will
-// - check `0` and `x` fulfill the membership requirements of `T`
-// - create two new version of `f`, one for `char`, another one for `u32`.
-// - based on "family implementation" provided
+// 当编译器遇到如下代码时将会
+// - 检查 `0` 和 `x` 是否满足 `T` 的要求
+// - 创建两个版本的 `f`, 一个给 `char`, 另一个给 `u32`.
+// - 并基于“一类实现”来提供
 s.f(0_u32);
 s.f('x');
 ```
@@ -7157,19 +7157,19 @@ s.f('x');
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>特化实现 &mdash; <code>impl&lt;T&gt X for T { ... }</code></header>
+<header>一揽子实现 &mdash; <code>impl&lt;T&gt X for T { ... }</code></header>
 <description>
 
 {{ tablesep() }}
 
-Can also write "family implementations" so they apply trait to many types:
+也可以针对多种类型编写针对某“一类的实现”:
 
 ```
-// Also implements Serialize for any type if that type already implements ToHex
+// 为任意已经实现过 ToHex 的类型实现 Serialize
 impl<T> Serialize for T where T: ToHex { ... }
 ```
 
-These are called **blanket implementations**.
+这称为**一揽子实现**.
 
 <mini-table>
 
@@ -7213,8 +7213,7 @@ These are called **blanket implementations**.
 
 </mini-table>
 
-
-They can be neat way to give foreign types functionality in a modular way if they just implement another interface.
+这样可以用一种模块化的方法为已经实现了其他接口的给定外部类型提供一种优雅的实现.
 
 </description>
 </generics-section>
@@ -7249,7 +7248,7 @@ They can be neat way to give foreign types functionality in a modular way if the
 
 {{ tablesep() }}
 
-Notice how some traits can be "attached" multiple times, but others just once?
+注意某些 Trait 会被“附加”多次, 而有些又只有一次?
 
 <mini-zoo class="zoo">
     <entry style="left:300px; top: 25px;">
@@ -7303,13 +7302,13 @@ Notice how some traits can be "attached" multiple times, but others just once?
 
 {{ tablesep() }}
 
-Why is that?
+为什么?
 
-- Traits themselves can be generic over two **kinds of parameters**:
+- Trait 本身通过两类 **参数类型** 实现泛型:
     - `trait From<I> {}`
     - `trait Deref { type O; }`
-- Remember we said traits are "membership lists" for types and called the list `Self`?
-- Turns out, parameters `I` (for **input**) and `O` (for **output**) are just more _columns_ to that trait's list:
+- 还记得我们说过 Trait 是类型的“成员列表”并且通过 `Self` 调用的吗?
+- 转到现在, 就可以认为参数 `I` (即**输入**) 和 `O` (即**输出**) 不过是该 Trait 列表的另外一 _列_ 罢了:
 
 ```
 impl From<u8> for u16 {}
@@ -7359,12 +7358,12 @@ impl Deref for String { type O = str; }
 </mini-table>
 
 
-Now here's the twist,
-- **any output `O` parameters must be uniquely determined by input parameters `I`**,
-- (in the same way as a relation `X Y` would represent a function),
-- `Self` counts as an input.
+这里会有点绕,
+- **任意输出 `O` 参数必须由输入参数 `I` 唯一确定**,
+- (同样地, 关系 `X Y` 会表现为一个函数),
+- `Self` 作为输入.
 
-A more complex example:
+一个更复杂的样例:
 
 ```
 trait Complex<I1, I2> {
@@ -7373,8 +7372,8 @@ trait Complex<I1, I2> {
 }
 ```
 
-- this creates a relation relation of types named `Complex`,
-- with 3 inputs (`Self` is always one) and 2 outputs, and it holds `(Self, I1, I2) => (O1, O2)`
+- 此处创建了一个具有关联类型的 `Complex`,
+- 它有 3 个输入 (`Self` 也是输入) 和 2 两个输出, 可以表示为 `(Self, I1, I2) => (O1, O2)`
 
 <mini-table>
 
@@ -7392,7 +7391,7 @@ trait Complex<I1, I2> {
     </tbody>
 </table>
 
-<subtitle>Various trait implementations. The last one is not valid as `(NiceMonster, u16, String)` has <br> already uniquely determined the outputs.</subtitle>
+<subtitle>各种 Trait 实现. 最后一个对 `(NiceMonster, u16, String)` 无效, <br> 因为已经由输出唯一确定了.</subtitle>
 
 </mini-table>
 
@@ -7403,7 +7402,7 @@ trait Complex<I1, I2> {
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Trait Authoring Considerations (Abstract)</header>
+<header>Trait 设计准则 (抽象)</header>
 <description>
 
 <mini-zoo class="zoo">
@@ -7472,21 +7471,21 @@ trait Complex<I1, I2> {
     </entry>
 </mini-zoo>
 
-- Parameter choice (input vs. output) also determines who may be allowed to add members:
-    - `I` parameters allow "familes of implementations" be forwarded to user (Santa),
-    - `O` parameters must be determined by trait implementor (Alice or Bob).
+- 参数的选择 (输入还是输出) 仍然决定了谁会被允许加入成员:
+    - `I` 参数允许“一类实现”转发给用户 (Santa),
+    - `O` 参数必须由 Trait 实现者确定 (Alice 或 Bob).
 
 ```
 trait A<I> { }
 trait B { type O; }
 
-// Implementor adds (X, u32) to A.
+// 实现者将 (X, u32) 添加到 A.
 impl A<u32> for X { }
 
-// Implementor adds family impl. (X, ...) to A, user can materialze.
+// 实现者将一类 impl (X, ...) 添加到 A, 用户则可以特化之.
 impl<T> A<T> for Y { }
 
-// Implementor must decide specific entry (X, O) added to B.
+// 实现者必须决定将指定入口 (X, O) 添加到 B.
 impl B for X { type O = u32; }
 ```
 
@@ -7507,7 +7506,7 @@ impl B for X { type O = u32; }
     </tbody>
 </table>
 
-<subtitle>Santa may add more members by providing his own type for <code>T</code>.</subtitle>
+<subtitle>Santa 通过提供他自己类型为 <code>T</code> 添加更多成员.</subtitle>
 
 </mini-table>
 
@@ -7525,7 +7524,7 @@ impl B for X { type O = u32; }
     </tbody>
 </table>
 
-<subtitle>For given set of inputs (here <code>Self</code>), implementor must pre-select <code>O</code>.</subtitle>
+<subtitle>给定输入集合 (此处为 <code>Self</code>), 实现者必须预先选择 <code>O</code>.</subtitle>
 
 </mini-table>
 
@@ -7538,7 +7537,7 @@ impl B for X { type O = u32; }
 
 <!-- Section -->
 <generics-section id="trait-authoring-examples">
-<header>Trait Authoring Considerations (Example)</header>
+<header>Trait 设计准则 (举例)</header>
 <description>
 
 <mini-zoo class="zoo">
@@ -7589,12 +7588,12 @@ impl B for X { type O = u32; }
 
 {{ tablesep() }}
 
-Choice of parameters goes along with purpose trait has to fill.
+参数选择取决于 Trait 的作用.
 
 <hr>
 
 
-**No Additional Parameters**
+**无额外参数**
 
 ```
 trait Query {
@@ -7637,14 +7636,14 @@ postgres.search("SELECT ...");
 
 {{ tablesep() }}
 
-Trait author assumes:
-- neither implementor nor user need to customize API.
+Trait 作者假设:
+- 实现者和用户都不允许自定义 API.
 
 {{ tablesep() }}
 
 <hr>
 
-**Input Parameters**
+**输入参数**
 
 ```
 trait Query<I> {
@@ -7693,9 +7692,9 @@ sled.search(file);
 
 {{ tablesep() }}
 
-Trait author assumes:
-- implementor would customize API in multiple ways for same `Self` type,
-- users may want ability to decide for which `I`-types behavior should be possible.
+Trait 作者假设:
+- 实现者可以为相同的 `Self` 类型提供多个自定义 API 实现,
+- 用户来决定哪种 `I` 类型行为可用.
 
 {{ tablesep() }}
 
@@ -7703,7 +7702,7 @@ Trait author assumes:
 <hr>
 
 
-**Output Parameters**
+**输出参数**
 
 ```
 trait Query {
@@ -7752,17 +7751,17 @@ sled.search(vec![0, 1, 2, 4]);
 
 {{ tablesep() }}
 
-Trait author assumes:
-- implementor would customize API for `Self` type (but in only one way),
-- users do not need, or should not have, ability to influence customization for specific `Self`.
+Trait 作者假设:
+- 实现者可以为 `Self` 类型自定义 API (但只有一种办法),
+- 用户不需要也不应该能够影响指定 `Self` 的自定义.
 
-> As you can see here, the term **input** or **output** does **not** (necessarily) have anything to do with whether `I` or `O` are inputs or outputs to an actual function!
+> 如你所见, 对于函数而言 **输入** 或 **输出** 项都 **不一定** (除非有必要) 是 `I` 或 `O`!
 
 {{ tablesep() }}
 
 <hr>
 
-**Multiple In- and Output Parameters**
+**多个输入输出参数**
 
 ```
 trait Query<I> {
@@ -7815,9 +7814,9 @@ sled.search(&[1, 2, 3, 4]).pop();
 
 {{ tablesep() }}
 
-Like examples above, in particular trait author assumes:
-- users may want ability to decide for which `I`-types ability should be possible,
-- for given inputs, implementor should determine resulting output type.
+如上例, 通常 Trait 作者假设:
+- 用户来决定哪种 `I` 类型行为可用,
+- 对于给定的输入, 实现者需要自己确定输出类型.
 
 
 </description>
@@ -7827,14 +7826,14 @@ Like examples above, in particular trait author assumes:
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Dynamic / Zero Sized Types</header>
+<header>动态大小 / 零大小类型</header>
 <description>
 
 <mini-zoo class="zoo" style="">
     <entry>
         <type class="composed"><code>MostTypes</code></type>
         <trait-impl>⌾ <code>Sized</code></trait-impl>
-        <note>Normal types.</note>
+        <note>普通类型</note>
     </entry>
 </mini-zoo>
 
@@ -7848,7 +7847,7 @@ Like examples above, in particular trait author assumes:
     <entry>
         <type class="zero"><code>Z</code></type>
         <trait-impl>⌾ <code>Sized</code></trait-impl>
-        <note>Zero sized.</note>
+        <note>零大小</note>
     </entry>
 </mini-zoo>
 
@@ -7863,7 +7862,7 @@ Like examples above, in particular trait author assumes:
     <entry>
         <type class="primitive"><code>str</code></type>
         <trait-impl class="grayed">⌾ <code style="text-decoration: line-through">Sized</code></trait-impl>
-        <note>Dynamically sized.</note>
+        <note>动态大小</note>
     </entry>
 </mini-zoo>
 
@@ -7889,23 +7888,23 @@ Like examples above, in particular trait author assumes:
 </mini-zoo>
 
 
-- A type `T` is **`Sized`** {{ std(page="std/marker/trait.Sized.html") }} if at compile time it is known how many bytes it occupies, `u8` and `&[u8]` are, `[u8]` isn't.
-- Being `Sized` means `impl Sized for T {}` holds. Happens automatically and cannot be user impl'ed.
-- Types not `Sized` are called **dynamically sized types** {{ book(page="ch19-04-advanced-types.html#dynamically-sized-types-and-the-sized-trait") }} {{ nom(page="exotic-sizes.html#dynamically-sized-types-dsts") }}  {{ ref(page="dynamically-sized-types.html#dynamically-sized-types") }} (DSTs), sometimes **unsized**.
-- Types without data are called **zero sized types** {{ nom(page="exotic-sizes.html#zero-sized-types-zsts") }} (ZSTs), do not occupy space.
+- 如果编译期能够知道用多少个字节表示, 那么类型 `T` 就是 **`Sized`** {{ std(page="std/marker/trait.Sized.html") }} 的, `u8` 和 `&[u8]` 是有大小的, `[u8]` 则不是.
+- 有大小 `Sized` 意味着存在 `impl Sized for T {}`. 这个会自动实现且也不能由用户实现.
+- 非 `Sized` 的类型称为 **动态大小类型** {{ book(page="ch19-04-advanced-types.html#dynamically-sized-types-and-the-sized-trait") }} {{ nom(page="exotic-sizes.html#dynamically-sized-types-dsts") }}  {{ ref(page="dynamically-sized-types.html#dynamically-sized-types") }} (DST), 有时是 **无大小的**.
+- 无数据的类型称为 **零大小类型** {{ nom(page="exotic-sizes.html#zero-sized-types-zsts") }} (ZST), 不分配空间.
 
 <div class="color-header sized cheats">
 
 | 示例 | 说明 |
 |---------|-------------|
-| `struct A { x: u8 }` | Type `A` is sized, i.e., `impl Sized for A` holds, this is a 'regular' type. |
-| `struct B { x: [u8] }` | Since `[u8]` is a DST, `B` in turn becomes DST, i.e., does not `impl Sized`. |
-| `struct C<T> { x: T }` | Type params **have** implicit `T: Sized` bound, e.g., `C<A>` is valid, `C<B>` is not. |
-| `struct D<T: ?Sized> { x: T }` | Using **`?Sized`** {{ ref(page="trait-bounds.html#sized") }} allows opt-out of that bound, i.e., `D<B>` is also valid. |
-| `struct E;` | Type `E` is zero-sized (and also sized) and will not consume memory. |
-| `trait F { fn f(&self); }` | Traits **do not have** an implicit `Sized` bound, i.e., `impl F for B {}` is valid.  |
-| {{ tab() }} `trait F: Sized {}` | Traits can however opt into `Sized` via supertraits.{{ above(target="#functions-behavior") }} |
-| `trait G { fn g(self); }` | For `Self`-like params DST `impl` may still fail as params can't go on stack.  |
+| `struct A { x: u8 }` | 类型 `A` 有大小, 即存在 `impl Sized for A`, 是最“规则”的类型. |
+| `struct B { x: [u8] }` | 因为 `[u8]` 是 DST, `B` 就会变成 DST, 即不存在 `impl Sized`. |
+| `struct C<T> { x: T }` | 类型参数 **具有** 隐式的 `T: Sized` 约束, 如 `C<A>` 有效, `C<B>` 无效. |
+| `struct D<T: ?Sized> { x: T }` | 使用 **`?Sized`** {{ ref(page="trait-bounds.html#sized") }} 会取消大小约束, 即 `D<B>` 也是有效的. |
+| `struct E;` | 类型 `E` 是零大小的 (也是有确定大小的 `Sized`) 且不会耗费内存. |
+| `trait F { fn f(&self); }` | Trait **没有** 隐式声明 `Sized` 约束, 即 `impl F for B {}` 有效.  |
+| {{ tab() }} `trait F: Sized {}` | Trait 具有 `Sized` 父 Trait.{{ above(target="#functions-behavior") }} |
+| `trait G { fn g(self); }` | 对 `Self` 类似参数 DST `impl` 仍无效, 因为参数不能进栈.  |
 
 </div>
 
@@ -7942,9 +7941,9 @@ Like examples above, in particular trait author assumes:
 struct S<T> { ... }
 ```
 
-- `T` can be any concrete type.
-- However, there exists invisible default bound `T: Sized`, so `S<str>` is not possible out of box.
-- Instead we have to add `T : ?Sized` to opt-out of that bound:
+- `T` 可为任意确定类型.
+- 然而这里存在隐式约束 `T: Sized`, 故 `S<str>` 不可用.
+- 可以改为 `T : ?Sized` 以取消该默认约束:
 
 <mini-zoo class="zoo">
     <entry>
@@ -7976,7 +7975,7 @@ struct S<T> where T: ?Sized { ... }
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Generics and Lifetimes &mdash; <code>&lt;'a&gt;</code></header>
+<header>泛型和生命周期 &mdash; <code>&lt;'a&gt;</code></header>
 <description>
 
 <mini-zoo class="zoo">
@@ -7991,10 +7990,10 @@ struct S<T> where T: ?Sized { ... }
     </entry>
 </mini-zoo>
 
-- Lifetimes act<sup>*</sup> like type parameters:
-    - user must provide specific `'a` to instantiate type (compiler will help within methods),
-    - as `Vec<f32>` and `Vec<u8>` are different types, so are `S<'p>` and `S<'q>`,
-    - meaning you can't just assign value of type `S<'a>` to variable expecting `S<'b>` (exception: "subtype" relationship for lifetimes, e.g. `'a` outliving `'b`).
+- 生命周期与类型参数使用方法<sup>*</sup>类似:
+    - 用户必须为特定类型指定 `'a` (编译器会在方法中提供帮助),
+    - 由于 `Vec<f32>` 和 `Vec<u8>` 是不同的类型, 故记为 `S<'p>` 和 `S<'q>`,
+    - 这意味着你不能仅分配类型 `S<'a>` 的值而不管 `S<'b>` (异常: 生命周期的“子类型”关系, 如 `'a` 长于 `'b`).
 
 
 <mini-zoo class="zoo">
@@ -8013,25 +8012,24 @@ struct S<T> where T: ?Sized { ... }
 </mini-zoo>
 
 
-- `'static` is only nameable instance of the _typespace_ lifetimes.
+- `'static` 是仅有的 _类型空间_ 中的具名生命周期.
 
 ```
-// `'a is free parameter here (user can pass any specific lifetime)
+// `'a 是这里的自由参数 (用户可以在任意生命周期上使用)
 struct S<'a> {
     x: &'a u32
 }
 
-// In non-generic code, 'static is the only nameable lifetime we can explicitly put in here.
+// 非泛型代码中, 'static 是这里仅有的能使用的具名声明周期.
 let a: S<'static>;
 
-// Alternatively, in non-generic code we can (often must) omit 'a and have Rust determine
-// the right value for 'a automatically.
+// 非泛型代码中我们无需指定 'a 并使得 Rust 通过右值自动推断出 'a.
 let b: S;
 ```
 
 <footnotes>
 
-<sup>*</sup> There are subtle differences, for example you can create an explicit instance `0` of a type `u32`, but with the exception of `'static` you can't really create a lifetime, e.g., "lines 80 - 100", the compiler will do that for you. {{ link(url="https://medium.com/nearprotocol/understanding-rust-lifetimes-e813bcd405fa" )}}
+<sup>*</sup> 这里有些微妙的不同, 比如显式地创建一个类型为 `u32` 的实例 `0`, 但由于 `'static` 的例外你并不能创建一个生命周期, 比如 "lines 80 - 100", 编译器会自动帮你完成这些工作. {{ link(url="https://medium.com/nearprotocol/understanding-rust-lifetimes-e813bcd405fa" )}}
 
 </footnotes>
 
@@ -8097,14 +8095,14 @@ let b: S;
 
 <footnotes>
 
-Examples expand by clicking.
+点击展开样例.
 
 </footnotes>
 
 
 
 
-## Type Zoo {#type-zoo}
+## 类型乐园 {#type-zoo}
 
 A visual overview of types and traits in crates.
 
