@@ -6584,20 +6584,20 @@ impl Port {
 
 </mini-table>
 
-<subtitle>Traits 作为成员列表, <code>Self</code> 指向其包含的类型.</subtitle>
+<subtitle>Trait 作为成员列表, <code>Self</code> 指向其包含的类型.</subtitle>
 
 </mini-table>
 
 
-- **Whoever is part of that membership list will adhere to behavior of list.**
-- Traits can also include associated methods, functions, ...
+- **无论谁是该成员列表的一部分, 都将遵守列表的行为.**
+- Trait 也可以包含关联方法和函数等.
 
 ```
 trait ShowHex {
-    // Must be implemented according to documentation.
+    // 要求按文档描述实现.
     fn as_hex() -> String;
 
-    // Provided by trait author.
+    // 由 trait 作者提供.
     fn print_hex() {}
 }
 ```
@@ -6612,8 +6612,8 @@ trait ShowHex {
 trait Copy { }
 ```
 
-- Traits without methods often called **marker traits**.
-- `Copy` is example marker trait, meaning _memory may be copied bitwise_.
+- 无方法 Trait 通常叫做 **标记 trait**.
+- `Copy` 是一种标记 trait, 表示 _内存可以被按位复制_.
 
 <mini-zoo class="zoo">
     <entry>
@@ -6622,8 +6622,8 @@ trait Copy { }
 </mini-zoo>
 
 
-- Some traits entirely outside explicit control
-- `Sized` provided by compiler for types with _known size_; either this is, or isn't
+- 某些 trait 完全脱离显式控制.
+- `Sized` 是由编译器提供用于 _已知大小_ 的类型; 类型大小要么已知, 要么未知.
 
 
 </description>
@@ -6632,15 +6632,15 @@ trait Copy { }
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Implementing Traits for Types &mdash; <code>impl T for S { }</code></header>
+<header>为类型实现 Trait &mdash; <code>impl T for S { }</code></header>
 <description>
 
 
 ```
 impl ShowHex for Port { ... }
 ```
-- Traits are implemented for types 'at some point'.
-- Implementation `impl A for B` add type `B` to the trait membership list:
+- 实现“某些”类型的 Trait.
+- 实现 `impl A for B` 将添加类型 `B` 到该 Trait 的成员列表:
 
 <mini-table>
 
@@ -6659,7 +6659,7 @@ impl ShowHex for Port { ... }
 </mini-table>
 </mini-table>
 
-- Visually, you can think of the type getting a "badge" for its membership:
+- 你可以认为类型被打上了不同的“标签”:
 
 <mini-zoo class="zoo">
     <entry>
@@ -6691,7 +6691,7 @@ impl ShowHex for Port { ... }
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Traits vs. Interfaces</header>
+<header>Trait vs. 接口</header>
 <description>
 
 
@@ -6727,15 +6727,15 @@ impl ShowHex for Port { ... }
 
 {{ tablesep() }}
 
-**Interfaces**
+**接口 (Interface)**
 
-- In **Java**, Alice creates interface `Eat`.
-- When Bob authors `Venison`, he must decide if `Venison` implements `Eat` or not.
-- In other words, all membership must be exhaustively declared during type definition.
-- When using `Venison`, Santa can make use of behavior provided by `Eat`:
+- 在 **Java** 中, Alice 创建了接口 `Eat`.
+- 当 Bob 实现 `Venison` 时, 他需要决定是否为 `Venison` 实现 `Eat`.
+- 换言之, 所有关系必须显式地在类型定义时就表明.
+- 当使用 `Venison` 时, Santa 才可以使用由 `Eat` 定义的行为:
 
 ```
-// Santa imports `Venison` to create it, can `eat()` if he wants.
+// Santa 导入 `Venison` 创建的对象可以 `eat()`.
 import food.Venison;
 
 new Venison("rudolph").eat();
@@ -6779,25 +6779,25 @@ new Venison("rudolph").eat();
 
 {{ tablesep() }}
 
-**Traits**
+**Trait**
 
-- In **Rust**, Alice creates trait `Eat`.
-- Bob creates type `Venison` and decides not to implement `Eat` (he might not even know about `Eat`).
-- Someone<sup>*</sup> later decides adding `Eat` to `Venison` would be a really good idea.
-- When using `Venison` Santa must import `Eat` separately:
+- 在 **Rust** 中, Alice 创建了 trait `Eat`.
+- Bob 创建了类型 `Venison` 并决定暂不实现 `Eat` (他甚至不知道有 `Eat` 这么个东西).
+- 某人<sup>*</sup> 后来觉得为 `Venison` 添加 `Eat` 是个好主意.
+- 那么当 Santa 使用 `Venison` 时需要另外导入 `Eat`:
 
 ```
-// Santa needs to import `Venison` to create it, and import `Eat` for trait method.
+// Santa 需要导入 `Venison` 用于创建, 并导入 `Eat` 用于调用 trait 方法.
 use food::Venison;
 use tasks::Eat;
 
-// Ho ho ho
+// 吼吼吼
 Venison::new("rudolph").eat();
 ```
 
 <footnotes>
 
-<sup>*</sup> To prevent two persons from implementing `Eat` differently Rust limits that choice to either Alice or Bob; that is, an `impl Eat for Venison` may only happen in the crate of `Venison` or in the crate of `Eat`. For details see coherence. {{todo()}}
+<sup>*</sup> 为避免两个人实现不同的 `Eat`, Rust 限制了 Alice 和 Bob 能做的事情; 即, 一个 `impl Eat for Venison` 仅能在 `Venison` 所在的 crate 或 `Eat` 所在的 crate 中实现. {{todo()}}
 
 </footnotes>
 
@@ -6813,13 +6813,13 @@ Venison::new("rudolph").eat();
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-types-2" name="tab-group-types">
-<label for="tab-types-2"><b>Generics</b></label>
+<label for="tab-types-2"><b>泛型</b></label>
 <panel><div>
 
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Type Constructors &mdash; <code>Vec&lt;&gt;</code></header>
+<header>类型构造 &mdash; <code>Vec&lt;&gt;</code></header>
 <description>
 
 <mini-zoo class="zoo">
@@ -6831,17 +6831,17 @@ Venison::new("rudolph").eat();
     </entry>
 </mini-zoo>
 
-- `Vec<u8>` is type "vector of bytes"; `Vec<char>` is type "vector of chars", but what is `Vec<>`?
+- `Vec<u8>` 是“字节向量”类型; `Vec<char>` 是“字符向量”类型, 但 `Vec<>` 是什么?
 
 <mini-table>
 
-| Construct |   Values |
+| 构造 |   值 |
 | --- | --- |
 | `Vec<u8>`  |  `{ [], [1], [1, 2, 3], ... }` |
 | `Vec<char>`  |  `{ [], ['a'], ['x', 'y', 'z'], ... }` |
 | `Vec<>`  |  - |
 
-<subtitle>Types vs type constructors.</subtitle>
+<subtitle>类型和类型构造</subtitle>
 
 </mini-table>
 
@@ -6853,10 +6853,10 @@ Venison::new("rudolph").eat();
     </entry>
 </mini-zoo>
 
-- `Vec<>` is no type, does not occupy memory, can't even be translated to code.
-- `Vec<>` is **type constructor**, a "template" or "recipe to create types"
-    - allows 3<sup>rd</sup> party to construct concrete type via parameter,
-    - only then would this `Vec<UserType>` become real type itself.
+- `Vec<>` 为非类型, 不占内存, 也不会生成代码.
+- `Vec<>` 为 **类型构造器**, 是“模板”或者“创建类型的表单”
+    - 允许第三方通过参数构造特定类型,
+    - 仅当声明 `Vec<UserType>` 时才成为真正的类型.
 
 </description>
 </generics-section>
@@ -6864,7 +6864,7 @@ Venison::new("rudolph").eat();
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Generic Parameters &mdash; <code>&lt;T&gt;</code></header>
+<header>泛型参数 &mdash; <code>&lt;T&gt;</code></header>
 <description>
 
 <mini-zoo class="zoo">
@@ -6885,30 +6885,30 @@ Venison::new("rudolph").eat();
     </entry>
 </mini-zoo>
 
-- Parameter for `Vec<>` often named `T` therefore `Vec<T>`.
-- `T` "variable name for type" for user to plug in something specfic, `Vec<f32>`, `S<u8>`, &hellip;
+- `Vec<>` 的参数常作 `T` 故有 `Vec<T>`.
+- `T` “类型的变量名”可以特化为 `Vec<f32>`, `S<u8>`, &hellip;
 
 
 <mini-table>
 
-| Type Constructor |  Produces Family |
+| 类型构造器 |  产生一类 |
 | --- | --- |
 | `struct Vec<T> {}`  |  `Vec<u8>`, `Vec<f32>`, `Vec<Vec<u8>>`, ... |
 | `[T; 128]`  |  `[u8; 128]`, `[char; 128]`, `[Port; 128]` ... |
 | `&T`  |  `&u8`, `&u16`, `&str`,  ... |
 
-<subtitle>Type vs type constructors.</subtitle>
+<subtitle>类型和类型构造器</subtitle>
 
 </mini-table>
 
 
 ```
-// S<> is type constructor with parameter T; user can supply any concrete type for T.
+// S<> 是个带有参数 T 的类型构造器; 用户可以提供 T 的任意实际类型.
 struct S<T> {
     x: T
 }
 
-// Within 'concrete' code an existing type must be given for T.
+// 实际使用中必须为 T 指定实际类型.
 fn f() {
     let x: S<f32> = S::new(0_f32);
 }
@@ -6921,7 +6921,7 @@ fn f() {
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Const Generics &mdash; <code>[T; N]</code> and <code>S&lt;const N: usize&gt;</code></header>
+<header>常量泛型 &mdash; <code>[T; N]</code> and <code>S&lt;const N: usize&gt;</code></header>
 <description>
 
 <mini-zoo class="zoo">
@@ -6933,28 +6933,27 @@ fn f() {
     </entry>
 </mini-zoo>
 
-- Some type constructors not only accept specific type, but also **specific constant**.
-- `[T; n]` constructs array type holding `T` type `n` times.
-- For custom types declared as `MyArray<T, const N: usize>`.
+- 某些类型构造器不仅接受指定类型, 还接受 **指定常量**.
+- `[T; n]` 构造出一个有 `n` 个 `T` 类型元素的数组.
+- 自定义类型可声明为 `MyArray<T, const N: usize>`.
 
 <mini-table>
 
-| Type Constructor |  Produces Family |
+| 类型构造器 |  产生一类 |
 | --- | --- |
 | `[u8; N]`  |  `[u8; 0]`, `[u8; 1]`, `[u8; 2]`, ... |
 | `struct S<const N: usize> {}`  |  `S<1>`, `S<6>`, `S<123>`,  ... |
 
-<subtitle>Type constructors based on constant.</subtitle>
+<subtitle>基于常量的类型构造器</subtitle>
 
 </mini-table>
 
 
 ```
-let x: [u8; 4]; // "array of 4 bytes"
-let y: [f32; 16]; // "array of 16 floats"
+let x: [u8; 4]; // "4 字节数组"
+let y: [f32; 16]; // "16 浮点数组"
 
-// `MyArray` is type constructor requiring concrete type `T` and
-// concrete usize `N` to construct specific type.
+// `MyArray` 是个需要特定类型 `T` 和特定大小 `N` 的类型构造器.
 struct MyArray<T, const N: usize> {
     data: [T; N],
 }
@@ -6977,7 +6976,7 @@ struct MyArray<T, const N: usize> {
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Bounds (Simple) &mdash; <code>where T: X</code></header>
+<header>约束 (简单) &mdash; <code>where T: X</code></header>
 <description>
 
 <mini-zoo class="zoo">
@@ -7014,19 +7013,18 @@ struct MyArray<T, const N: usize> {
     </entry>
 </mini-zoo>
 
-- If `T` can be any type, how can we _reason_ about (write code) for such a `Num<T>`?
-- Parameter **bounds**:
-    - limit what types (**trait bound**) or values (**const bound** {{ todo() }}) allowed,
-    - we now can make use of these limits!
-- Trait bounds act as "membership check":
+- 如果 `T` 可以为任意类型, 那我们怎么确定能为它实现这么一个 `Num<T>`?
+- 参数**约束**:
+    - 限制了允许什么样的类型 (**trait 约束**) 或值 (**常量约束** {{ todo() }}),
+    - 然后就可以应用这些限制了!
+- Trait 约束像是一种“行为检查”:
 
 <mini-table>
 
 <div style="display: inline-block;">
 
 ```
-// Type can only be constructed for some `T` if that
-// T is part of `Absolute` membership list.
+// 类型仅能由某些实现了 `Absolute` 的 `T` 实现.
 struct Num<T> where T: Absolute {
     ...
 }
@@ -7062,7 +7060,7 @@ struct Arrayf32<const N: usize> {
 
 <footnotes>
 
-We add bounds to the struct here. In practice it's nicer add bounds to the respective impl blocks instead, see later this section.
+此处我们为该结构体添加了约束. 实践中则最好在 impl 块中添加约束, 详见下文.
 
 </footnotes>
 
@@ -7074,7 +7072,7 @@ We add bounds to the struct here. In practice it's nicer add bounds to the respe
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Bounds (Compound) &mdash; <code>where T: X + Y</code></header>
+<header>约束 (计算) &mdash; <code>where T: X + Y</code></header>
 <description>
 
 <mini-zoo class="zoo">
@@ -7115,8 +7113,8 @@ where
 { ... }
 ```
 
-- Long trait bounds can look intimidating.
-- In practice, each `+ X` addition to a bound merely cuts down space of eligible types.
+- 过长的 trait 约束像是一种威胁.
+- 实践中, 每个 `+ X` 声明都会减少这里能用的类型.
 
 </description>
 </generics-section>
@@ -7125,18 +7123,17 @@ where
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Implementing Families &mdash; <code>impl&lt;&gt;</code></header>
+<header>实现一类 &mdash; <code>impl&lt;&gt;</code></header>
 <description>
 
 {{ tablesep() }}
 
-When we write:
 ```
 impl<T> S<T> where T: Absolute + Dim + Mul {
     fn f(&self, x: T) { ... };
 }
 ```
-It can be read as:
+可以读作:
 - here is an implementation recipe for any type `T` (the `impl <T>` part),
 - where<!--sup>*</sup--> that type must be member of the `Absolute + Dim + Mul` traits,
 - you may add an implementation block to `S<T>`,
@@ -7160,7 +7157,7 @@ s.f('x');
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Blanket Implementations &mdash; <code>impl&lt;T&gt X for T { ... }</code></header>
+<header>特化实现 &mdash; <code>impl&lt;T&gt X for T { ... }</code></header>
 <description>
 
 {{ tablesep() }}
@@ -7194,7 +7191,7 @@ These are called **blanket implementations**.
 
 <div style="display: inline-block; width: 100px;">
 
-→  Whatever was in left table, may be added to right table, based on the following recipe (`impl`) →
+→  左边的类型总能根据该 `impl` 实现到右边 →
 
 </div>
 
@@ -7230,7 +7227,7 @@ They can be neat way to give foreign types functionality in a modular way if the
 <!-- NEW TAB -->
 <tab>
 <input type="radio" id="tab-types-3" name="tab-group-types">
-<label for="tab-types-3"><b>Advanced Concepts</b>{{ esoteric() }}</label>
+<label for="tab-types-3"><b>进阶概念</b>{{ esoteric() }}</label>
 <panel><div>
 
 
@@ -7247,7 +7244,7 @@ They can be neat way to give foreign types functionality in a modular way if the
 
 <!-- Section -->
 <generics-section id="xxx">
-<header>Trait Parameters &mdash; <code>Trait&lt;In&gt; { type Out; } </code></header>
+<header>Trait 参数 &mdash; <code>Trait&lt;In&gt; { type Out; } </code></header>
 <description>
 
 {{ tablesep() }}
@@ -7357,7 +7354,7 @@ impl Deref for String { type O = str; }
 
 </mini-table>
 
-<subtitle>Input and output parameters.</subtitle>
+<subtitle>输入和输出参数</subtitle>
 
 </mini-table>
 
